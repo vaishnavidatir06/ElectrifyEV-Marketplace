@@ -49,7 +49,7 @@ const BuyPopup = ({ isOpen, onClose }) => {
     <>
       <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center z-50">
       <div className="wrapper" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <div className={`p-10 border border-green-400 rounded-lg shadow-md w-4/5 ${calculateHeight()} relative z-10`} style={{ backgroundImage: "url('/images/bg/whitebg.jpeg')" }}>
+        <div className={`p-10 border border-green-400 rounded-lg shadow-md w-4/5 ${calculateHeight()} relative z-10`} style={{ backgroundImage: "url('/images/bg/whitebg.jfif')" }}>
          
             <button
               className="absolute top-2 right-2 px-3 py-1 text-xl font-bold text-gray-600 hover:text-gray-800 btn-blue"
