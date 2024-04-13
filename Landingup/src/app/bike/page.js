@@ -1,84 +1,75 @@
 'use client'; 
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { BikeDetails } from "../data/data"; 
 import Navbar from "../componants/navbar";
 import Switcher from "../componants/switcher";
 import Footer from "../componants/footer";
-
-
+import Link from 'next/link'; // Import Link from Next.js
 
 import { MdDirectionsCar, MdSettingsInputComponent, MdTune, FiChevronLeft, FiChevronRight } from '../assets/icons/vander'
 
-
 export default function Grid() {
-    
-    const [filterType, setFilterType] = useState("");
+    const [filteredEcycles, setFilteredEcycles] = useState([]);
+    const [error, setError] = useState(null);
     const [filterBrand, setFilterBrand] = useState("");
     const [filterLocation, setFilterLocation] = useState("");
-    const [filterbodytype, setFilterbodytype] = useState("");
-    const [filtercolour, setFiltercolour] = useState("");
-    const [filterprice, setFilterprice] = useState("");
-        const [searchQuery, setSearchQuery] = useState("");
-        const [filteredProperties, setFilteredProperties] = useState([]);
+    const [filterColor, setFilterColor] = useState("");
+    const [filterPrice, setFilterPrice] = useState("");
+    const [searchQuery, setSearchQuery] = useState("");
 
-        useEffect(() => {
-            filterProperties();
-        }, [searchQuery, filterType, filterBrand, filterLocation, filterbodytype, filtercolour, filterprice]);
+    useEffect(() => {
+        fetchEcycleDetails();
+    }, [searchQuery, filterBrand, filterLocation, filterColor, filterPrice]);
 
-        const handleSearchInputChange = (e) => {
-            setSearchQuery(e.target.value);
-        };
+    const fetchEcycleDetails = async () => {
+        try {
+            const response = await fetch("http://localhost:5000/api/vehicles/ecycle");
+            if (!response.ok) {
+                throw new Error('Failed to fetch e-cycle details');
+            }
+            const data = await response.json();
+            setFilteredEcycles(data);
+        } catch (error) {
+            setError("Error fetching e-cycle details");
+        }
+    };
 
-
-    const handleTypeChange = (e) => {
-        setFilterType(e.target.value);
-    }
+    const handleSearchInputChange = (e) => {
+        setSearchQuery(e.target.value);
+    };
 
     const handleBrandChange = (e) => {
         setFilterBrand(e.target.value);
-    }
+    };
+
     const handleLocationChange = (e) => {
         setFilterLocation(e.target.value);
-    }
-    const handlebodytypeChange = (e) => {
-        setFilterbodytype(e.target.value);
-    }
-
-    const handlecolourChange = (e) => {
-        setFiltercolour(e.target.value);
-    }
-
-    const handlepriceChange = (e) => {
-        setFilterprice(e.target.value);
-    }
-
-
-    const filterProperties = () => {
-        const filtered = BikeDetails.filter((property) => {
-            // Filter logic based on search query and filter selections
-            const matchesSearchQuery =
-                property.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                property.Type.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                property.bodytype.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                property.colour.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                property.Location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                property.price.toString().includes(searchQuery);
-            const matchesFilters =
-                (!filterType || property.Type.toLowerCase() === filterType.toLowerCase()) &&
-                (!filterBrand || property.name.toLowerCase() === filterBrand.toLowerCase())&&
-                (!filterLocation || property.Location.toLowerCase() === filterLocation.toLowerCase())&&
-                (!filterbodytype || property.bodytype.toLowerCase() === filterbodytype.toLowerCase())&&
-                (!filtercolour|| property.colour.toLowerCase() === filtercolour.toLowerCase())&&
-                (!filterprice || property.price <= parseInt(filterprice));
-            // Add more filter conditions as needed
-
-            return matchesSearchQuery && matchesFilters;
-        });
-        setFilteredProperties(filtered);
     };
-    
+
+    const handleColorChange = (e) => {
+        setFilterColor(e.target.value);
+    };
+
+    const handlePriceChange = (e) => {
+        setFilterPrice(e.target.value);
+    };
+
+    // Apply additional filters
+    let filtered = filteredEcycles;
+
+    if (filterBrand) {
+        filtered = filtered.filter(ecycle => ecycle.brand && ecycle.brand.toLowerCase() === filterBrand.toLowerCase());
+    }
+    if (filterLocation) {
+        filtered = filtered.filter(ecycle => ecycle.location && ecycle.location.toLowerCase() === filterLocation.toLowerCase());
+    }
+    if (filterColor) {
+        filtered = filtered.filter(ecycle => ecycle.color && ecycle.color.toLowerCase() === filterColor.toLowerCase());
+    }
+
+    if (filterPrice) {
+        filtered = filtered.filter(ecycle => ecycle.price && ecycle.price.value <= parseInt(filterPrice));
+    }
+
    
   
     return(
@@ -118,127 +109,81 @@ export default function Grid() {
 
                  {/* Filter Sidebar */}
                  <div className="mb-20"></div>
-                  <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap">
-                {/* Type Filter */}
-                <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                    <label htmlFor="type" className="font-semibold mb-1 mr-2">
-                        Type:
-                    </label>
-                    <select
-                        name="type"
-                        id="type"
-                        value={filterType}
-                        onChange={handleTypeChange}
-                        className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
-                    >
-                        <option value="">All</option>
-                        <option value="Automatic">Automatic</option>
-                        <option value="Manual">Manual</option>
-                        {/* Add more options */}
-                    </select>
-                </div>
+                 <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap">
+                        <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
+                            <label htmlFor="brand" className="font-semibold mb-1 mr-2">
+                                Brand:
+                            </label>
+                            <select
+                                name="brand"
+                                id="brand"
+                                value={filterBrand}
+                                onChange={handleBrandChange}
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                            >
+                                <option value="">All</option>
+                                <option value="Hero">Hero</option>
+                                <option value="Triumph">Triumph</option>
+                                <option value="Scott">Scott</option>
+                                <option value="Kona">Kona</option>
+                            </select>
+                        </div>
 
-                {/* Brand Filter */}
-                <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                    <label htmlFor="brand" className="font-semibold mb-1 mr-2">
-                        Brand:
-                    </label>
-                    <select
-                        name="brand"
-                        id="brand"
-                        value={filterBrand}
-                        onChange={handleBrandChange}
-                        className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
-                    >
-                                    <option value="">All</option>
-                                    <option value="Hero">Hero</option>
-                                    <option value="Triumph">Triumph</option>
-                                    <option value="Scott">Scott</option>
-                                    <option value="Kona">Kona</option>
-                               
-                        {/* Add more options */}
-                    </select>
-                </div>
-                {/* Location */}
-                <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                    <label htmlFor="Location" className="font-semibold mb-1 mr-2">
-                        Location:
-                    </label>
-                    <select
-                        name="Location"
-                        id="Location"
-                        value={filterLocation}
-                        onChange={handleLocationChange}
-                        className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
-                    >
-                        <option value="">All</option>
-                        <option value="Mumbai">Mumbai</option>
-                        <option value="Pune">Pune</option>
-                        <option value="Delhi">Delhi</option>
-                        <option value="Bangalore">Bangalore</option>
-                        {/* Add more options */}
-                    </select>
-                </div>
-                    
-                {/* bodytype */}
-                <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                    <label htmlFor="bodytype" className="font-semibold mb-1 mr-2">
-                        Body Type:
-                    </label>
-                    <select
-                        name="bodytype"
-                        id="bodytype"
-                        value={filterbodytype}
-                        onChange={handlebodytypeChange}
-                        className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
-                    >
-                        <option value="">All</option>
-                        <option value="Mountain">Mountain</option>
-                        <option value="Folding">Folding</option>
-                        <option value="Sports">Sports</option>
-                        {/* Add more options */}
-                    </select>
-                </div>
-                {/* colour */}
-                <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                    <label htmlFor="colour" className="font-semibold mb-1 mr-2">
-                        Colour:
-                    </label>
-                    <select
-                        name="colour"
-                        id="colour"
-                        value={filtercolour}
-                        onChange={handlecolourChange}
-                        className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
-                    >
-                        <option value="">All</option>
-                        <option value="Green">Green</option>
-                        <option value="Silver">Silver</option>
-                       <option value="Orange">Orange</option>
-                       <option value="White">White</option>
-                       <option value="Black">Black</option>
-                        {/* Add more options */}
-                    </select>
-                </div>
-                
-                {/* price */}
-                <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                    <label htmlFor="price" className="font-semibold mb-1 mr-2">
-                        Price:
-                    </label>
-                    <input
-        type="range"
-        id="price"
-        min="0"
-        max="1000000" // Adjust the max value according to your maximum price
-        value={filterprice} // Make sure you have a state variable named filterPrice
-        onChange={handlepriceChange} // Make sure you have a corresponding handlePriceChange function
-        className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
-    />
-    <span className="ml-2">${filterprice}</span>
+                        <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
+                            <label htmlFor="location" className="font-semibold mb-1 mr-2">
+                                Location:
+                            </label>
+                            <select
+                                name="location"
+                                id="location"
+                                value={filterLocation}
+                                onChange={handleLocationChange}
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                            >
+                                <option value="">All</option>
+                                <option value="Mumbai">Mumbai</option>
+                                <option value="Pune">Pune</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Bangalore">Bangalore</option>
+                            </select>
+                        </div>
 
+                        <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
+                            <label htmlFor="color" className="font-semibold mb-1 mr-2">
+                                Color:
+                            </label>
+                            <select
+                                name="color"
+                                id="color"
+                                value={filterColor}
+                                onChange={handleColorChange}
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                            >
+                                <option value="">All</option>
+                                <option value="Green">Green</option>
+                                <option value="Silver">Silver</option>
+                                <option value="Orange">Orange</option>
+                                <option value="White">White</option>
+                                <option value="Black">Black</option>
+                            </select>
+                        </div>
+
+                        <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
+                            <label htmlFor="price" className="font-semibold mb-1 mr-2">
+                                Price:
+                            </label>
+                            <input
+                                type="range"
+                                id="price"
+                                min="0"
+                                max="1000000"
+                                value={filterPrice}
+                                onChange={handlePriceChange}
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                            />
+                            <span className="ml-2">${filterPrice}</span>
+                        </div>
                     </div>
-            </div>
             {/* End of Filter Sidebar */}
 
 
@@ -247,24 +192,9 @@ export default function Grid() {
 
            {/* Searched Car Display */}
            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[0px]">
-                {filteredProperties.map((item, index) => (
+           {filtered.map((ecycle, index) => (
                     <div key={index} className="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500">
-                        {/* Render each property item here */}
-                         {/* <div className="p-4">
-        <Image
-            src={item.image}
-            alt=""
-            width={400}
-            height={200}
-            className="object-cover"
-        />
-        <h3 className="text-xl font-semibold mt-2">{item.name}</h3>
-        <p className="text-gray-600">Model: {item.Model}</p>
-        <p className="text-gray-600">Type: {item.Type}</p>
-        <p className="text-gray-600">Range: {item.Range}</p>
-        <p className="text-gray-600">Price: ${item.price}</p>
-        {/* Add more details as needed */}
-    {/* </div> */}
+                       
                         
                     </div>
                 ))}
@@ -277,8 +207,8 @@ export default function Grid() {
                 <div className="container">
                 <div className="lg:col-span-9 md:col-span-10 col-span-11">
                     <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[30px]">
-                    {filteredProperties.map((item, index) => (
-                         <Link href={`/property-detail/${item.id}`} key={index}>
+                    {filtered.map((ecycle, index) => (
+                         <div key={index} className="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500">
                             <div className="group relative rounded-xl bg-white dark:bg-slate-900 overflow-hidden transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl">
                                 <div className="relative">
                                 <Image src={item.image}alt=""width={0}  height={0} sizes="100vw" style={{ width: '400px', height: '200px', objectFit: 'cover' }}priority/>
@@ -294,72 +224,34 @@ export default function Grid() {
 
                                 <div className="p-6 group-hover:bg-gray-100 dark:group-hover:bg-slate-800">
                                     <div className="pb-6">
-                                    <p className="text-lg hover:text-green-600 font-medium ease-in-out duration-500">{item.name}</p>
+                                    <p className="text-lg hover:text-green-600 font-medium ease-in-out duration-500">{ecycle.name}</p>
 
                                     </div>
 
                                     <ul className="py-6 border-y border-slate-100 dark:border-gray-800 flex items-center list-none">
                                         <li className="flex items-center me-4">
                                             <MdDirectionsCar width={20}  className="me-2 text-green-600"/>
-                                            <span>{item.Model}</span>
+                                            <span>{ecycle.brand}</span>
                                         </li>
 
-                                        <li className="flex items-center me-4">
-                                            <MdSettingsInputComponent width={20}  className="me-2 text-green-600"/>
-                                            <span>{item.Type}</span>
-                                        </li>
-
-                                        <li className="flex items-center">
-                                            <MdTune width={20}  className="me-2 text-green-600"/>
-                                            <span>{item.Range}</span>
-                                        </li>
+                                        
                                     </ul>
 
                                     <ul className="pt-6 flex justify-between items-center list-none">
                                         <li>
                                             <span className="text-slate-400">Price</span>
-                                            <p className="text-lg font-medium">${item.price}</p>
+                                            <p className="text-lg font-medium">${ecycle.price && ecycle.price.value}</p>
                                         </li>
 
                                         
                                     </ul>
                                 </div>
                             </div>
-                            </Link>
+                           </div>
                         ))}
                     </div>
                     </div>
-                    <div className="grid md:grid-cols-12 grid-cols-1 mt-8">
-                        <div className="md:col-span-12 text-center">
-                            <nav>
-                                <ul className="inline-flex items-center -space-x-px">
-                                    <li>
-                                        <Link href="#" className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 bg-white dark:bg-slate-900 hover:text-white shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">
-                                            <FiChevronLeft className="text-[20px]"/>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link href="#" aria-current="page" className="z-10 w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-white bg-green-600 shadow-sm dark:shadow-gray-700">1</Link>
-                                    </li>
-                                    <li>
-                                        <Link href="#" className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">2</Link>
-                                    </li>
-                                    <li>
-                                        <Link href="#" className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">3</Link>
-                                    </li>
-                                
-                                    <li>
-                                        <Link href="#" className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">3</Link>
-                                    </li>
-                                    <li>
-                                        <Link href="#" className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 bg-white dark:bg-slate-900 hover:text-white shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">
-                                            <FiChevronRight className="text-[20px]"/>
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
+                    
                 </div>
             </section>
             <Footer />

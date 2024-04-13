@@ -1,9 +1,9 @@
-// /pages/car-service.js
 import React from 'react';
 import Head from 'next/head';
 import Navbar from "../componants/navbar";
 import Switcher from "../componants/switcher";
 import Footer from "../componants/footer";
+import ServiceCard from "../componants/serviceCard"; // Importing the ServiceCard component
 
 const CarServicePage = () => {
   return (
@@ -15,15 +15,30 @@ const CarServicePage = () => {
 
       <Navbar />
       <div className="bg-cover bg-center bg-opacity-20 min-h-screen" style={{backgroundImage: "url('/images/bg/b17.jpg')"}}>
-      <div className="bg-gray-100 min-h-screen">
-        <div className="flex justify-center items-center min-h-screen">
-          <div className="bg-white shadow-md rounded-lg p-6">
-            <h1 className="text-3xl font-bold mb-4">Emergency Assistance Services For Car</h1>
-            <p>Add your car service content here...</p>
+        <div className="bg-gray-100 min-h-screen">
+          <div className="flex justify-center items-center min-h-screen">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"> {/* Using CSS grid for layout */}
+              {/* Adding Service Cards */}
+              <ServiceCard 
+                title="Towing Service"
+                description="We provide 24/7 towing service for your car in case of emergencies."
+                imageUrl="/images/towing.jpg"
+              />
+              <ServiceCard 
+                title="Battery Replacement"
+                description="Need a battery replacement? We offer quick and reliable service to get you back on the road."
+                imageUrl="/images/battery.jpg"
+              />
+              <ServiceCard 
+                title="Emergency Repairs"
+                description="Facing a breakdown? Our team of mechanics will provide on-the-spot repairs to get you going."
+                imageUrl="/images/repairs.jpg"
+              />
+              {/* Add more ServiceCards here */}
+            </div>
           </div>
         </div>
       </div>
-</div>
       <Footer />
       <Switcher />
     </div>

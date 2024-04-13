@@ -271,7 +271,16 @@ export default function Grid() {
              
                 </div>
                 
+             {/* Searched Car Display */}
+           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[0px]">
+           {filteredEcarVehicles.map((vehicles, index) => (
+                    <div key={index} className="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500">
 
+                        
+                    </div>
+                ))}
+            </div>
+            {/* End of Searched Car Display */}
 
 
                 
