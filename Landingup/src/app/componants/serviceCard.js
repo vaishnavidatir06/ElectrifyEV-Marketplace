@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 
 
-const ServiceCard = ({ title, description, onHelpUsClick }) => {
+const ServiceCard = ({ title, description, onHelpUsClick,imageUrl }) => {
   const [showHelpUsPopup, setShowHelpUsPopup] = useState(false);
   const [showOTPPopup, setShowOTPPopup] = useState(false);
 
@@ -26,7 +26,7 @@ const ServiceCard = ({ title, description, onHelpUsClick }) => {
 
   return (
     <div className="bg-white shadow-md rounded-lg p-6 relative">
-      <img src={'/images/bg/b17.jpg'} alt={title} className="w-full mb-4 rounded-lg" />
+      <img src={imageUrl} alt={title} className="w-full h-48 object-cover"/>
       <h2 className="text-xl font-bold mb-2">{title}</h2>
       <p>{description}</p>
       <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" onClick={handleBookServiceClick}>

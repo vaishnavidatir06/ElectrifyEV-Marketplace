@@ -22,17 +22,17 @@ const CarServicePage = () => {
               <ServiceCard 
                 title="Towing Service"
                 description="We provide 24/7 towing service for your car in case of emergencies."
-                imageUrl="/images/towing.jpg"
+                imageUrl="/images/popup/db6.jfif"
               />
               <ServiceCard 
                 title="Battery Replacement"
                 description="Need a battery replacement? We offer quick and reliable service to get you back on the road."
-                imageUrl="/images/battery.jpg"
+                imageUrl="/images/popup/db5.jfif"
               />
               <ServiceCard 
                 title="Emergency Repairs"
                 description="Facing a breakdown? Our team of mechanics will provide on-the-spot repairs to get you going."
-                imageUrl="/images/repairs.jpg"
+                imageUrl="/images/popup/db4.jfif"
               />
               {/* Add more ServiceCards here */}
             </div>

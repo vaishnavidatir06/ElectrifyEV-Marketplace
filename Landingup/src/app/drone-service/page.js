@@ -22,17 +22,17 @@ const DroneServicePage = () => {
               <ServiceCard 
                 title="Emergency Landing"
                 description="We provide emergency landing assistance for your drone in case of technical issues or low battery."
-                imageUrl="/images/drone-landing.jpg"
+                imageUrl="/images/popup/db3.jfif"
               />
               <ServiceCard 
                 title="Battery Replacement"
                 description="Need a battery replacement? We offer high-quality drone batteries to keep you flying."
-                imageUrl="/images/drone-battery.jpg"
+                imageUrl="/images/popup/battery.jfif"
               />
               <ServiceCard 
                 title="Drone Repair"
                 description="Facing technical issues with your drone? Our skilled technicians will diagnose and repair it for you."
-                imageUrl="/images/drone-repair.jpg"
+                imageUrl="/images/popup/db2.jfif"
               />
               {/* Add more ServiceCards here */}
             </div>

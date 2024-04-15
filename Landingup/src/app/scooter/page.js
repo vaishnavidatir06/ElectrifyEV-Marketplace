@@ -290,13 +290,11 @@ export default function Grid() {
                         <div key={index} className="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500">
                         <div className="group relative rounded-xl bg-white dark:bg-slate-900 overflow-hidden transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl">
                             <div className="relative">
-                            <Image
-                                    src={`/images/${ebike.frontImages[0]}`} // Assuming frontImages contains image URLs
-                                    alt=""
-                                    width={400}
-                                    height={200}
-                                    className="object-cover"
-                                />
+                            <div className="p-4">
+            {ebike.frontImagesBase64 && ebike.frontImagesBase64.length > 0 && (
+                <img src={`data:image/jpeg;base64,${ebike.frontImagesBase64[0]}`} alt="Front View" className="h-40 w-auto" />
+            )}
+            </div>
                                 <div className="absolute top-4 end-4">
                                 <button class="flex-none flex items-center justify-center w-9 h-9 rounded-md bg-white border text-black-300 hover:text-red-500" type="button" aria-label="Like">
         <svg width="20" height="20" fill="currentColor" aria-hidden="true">

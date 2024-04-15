@@ -211,7 +211,17 @@ export default function Grid() {
                          <div key={index} className="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500">
                             <div className="group relative rounded-xl bg-white dark:bg-slate-900 overflow-hidden transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl">
                                 <div className="relative">
-                                <Image src={item.image}alt=""width={0}  height={0} sizes="100vw" style={{ width: '400px', height: '200px', objectFit: 'cover' }}priority/>
+                                <div className="p-4">
+                {/* Display the image */}
+                {ecycle.frontImagesBase64 && ecycle.frontImagesBase64.length > 0 && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                        src={`data:image/jpeg;base64,${ecycle.frontImagesBase64[0]}`} // Assuming the first image is the front image
+                        alt={ecycle.name}
+                        className="h-40 w-auto"
+                    />
+                )}
+                </div>
 
                                     <div className="absolute top-4 end-4">
                                     <button class="flex-none flex items-center justify-center w-9 h-9 rounded-md bg-white border text-black-300 hover:text-red-500" type="button" aria-label="Like">

@@ -167,7 +167,6 @@ export default function Navbar(props) {
                                             <li className={manu === "/batteryswap" ? 'active' : ''}><Link href="/batteryswap" className="sub-menu-item">Battery Swap</Link></li>
                                             <li className={manu === "/BatteryCharge" ? 'active' : ''}><Link href="/BatteryCharge" className="sub-menu-item">Battery Charge</Link></li>
                                             <li className={manu === "/Emergencyassistance" ? 'active' : ''}><Link href="/Emergencyassistance" className="sub-menu-item">Emergency Assistence</Link></li>
-                                            <li className={manu === "/Repair" ? 'active' : ''}><Link href="/Repair" className="sub-menu-item">Repair</Link></li>
                                             <li className={manu === "/carwash" ? 'active' : ''}><Link href="/carwash" className="sub-menu-item">Vehicle Wash</Link></li>
                                         </ul>
                                     </li>

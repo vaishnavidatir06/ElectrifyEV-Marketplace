@@ -1,40 +1,79 @@
+// Import React and other necessary modules
+'use client'
+import React from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
-import Navbar from "../componants/navbar";
-import Switcher from "../componants/switcher";
-import Footer from "../componants/footer";
+import Navbar from "../componants/navbar"; // Assuming you have a "navbar.js" file in the "components" folder
+import Switcher from "../componants/switcher"; // Assuming you have a "switcher.js" file in the "components" folder
+import Footer from "../componants/footer"; // Assuming you have a "footer.js" file in the "components" folder
+import { TypeAnimation } from 'react-type-animation';
 
-
-export default function BatteryCharge() {
-  return (
-    <div>
-      <Head>
-        <title>Battery Charge | Electrify eCharge</title>
-        <meta name="description" content="Battery charging services for electric vehicles" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <Navbar />
-
-      <main className="container mx-auto mt-8 text-center">
-        <h1 className="text-3xl font-bold mb-4">Battery Charging Services</h1>
-        <div className="mb-8">
-          <Image src="/images/bg/b16.jpg" alt="Battery Charging" width={800} height={400} />
-        </div>
-        <p className="text-lg mb-4">At Electrify eCharge, we provide efficient and eco-friendly battery charging solutions for electric vehicles (EVs)!</p>
-        <p className="text-lg mb-4">Our services include:</p>
-        <ul className="text-left mb-4">
-          <li>Fast charging stations</li>
-          <li>24/7 availability</li>
-          <li>Compatible with all EV models</li>
-          <li>Convenient locations</li>
-        </ul>
-        <p className="text-lg mb-4">Charge up your EV with us and drive worry-free!</p>
-      </main>
-
-      <Footer />
-
-      <Switcher />
-    </div>
-  );
+// Define the TextAnimation component
+export default function TextAnimation(){
+    return(
+        <>
+            <Head>
+                <title>Electric Battery Charging | Your Company Name</title>
+                {/* Additional meta tags, stylesheets, etc. */}
+            </Head>
+            <Navbar />
+            <Switcher />
+            <div className="container mx-auto px-4 py-8 pt-20">
+                <h1 className="font-semibold text-gray-800 text-4xl mb-6">Mechanic Lane: Electric Battery Charging</h1>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="bg-white rounded-lg shadow-lg p-6">
+                        <h2 className="font-semibold text-gray-800 text-2xl mb-4">Standard Charging</h2>
+                        <p className="text-gray-600 mb-4">Fast and reliable charging for everyday use.</p>
+                        <TypeAnimation
+                            sequence={[
+                                'Electric Cars',
+                                1000,
+                                'Electric Bikes',
+                                1000
+                            ]}
+                            wrapper="span"
+                            speed={40}
+                            style={{ fontSize: '1rem', display: 'inline-block' }}
+                            repeat={Infinity}
+                            cursor={false}
+                        />
+                    </div>
+                    <div className="bg-white rounded-lg shadow-lg p-6">
+                        <h2 className="font-semibold text-gray-800 text-2xl mb-4">Fast Charging</h2>
+                        <p className="text-gray-600 mb-4">Quick charging for when you're on the go.</p>
+                        <TypeAnimation
+                            sequence={[
+                                'Electric Scooters',
+                                1000,
+                                'Electric Autos',
+                                1000
+                            ]}
+                            wrapper="span"
+                            speed={40}
+                            style={{ fontSize: '1rem', display: 'inline-block' }}
+                            repeat={Infinity}
+                            cursor={false}
+                        />
+                    </div>
+                    <div className="bg-white rounded-lg shadow-lg p-6">
+                        <h2 className="font-semibold text-gray-800 text-2xl mb-4">Rapid Charging</h2>
+                        <p className="text-gray-600 mb-4">Ultra-fast charging for commercial and heavy-duty vehicles.</p>
+                        <TypeAnimation
+                            sequence={[
+                                'Electric Tractors',
+                                1000,
+                                'Electric Drones',
+                                1000
+                            ]}
+                            wrapper="span"
+                            speed={40}
+                            style={{ fontSize: '1rem', display: 'inline-block' }}
+                            repeat={Infinity}
+                            cursor={false}
+                        />
+                    </div>
+                </div>
+            </div>
+            <Footer />
+        </>
+    )
 }

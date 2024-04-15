@@ -22,17 +22,17 @@ const TractorServicePage = () => {
               <ServiceCard 
                 title="Towing Service"
                 description="We provide 24/7 towing service for your tractor in case of emergencies."
-                imageUrl="/images/tractor-towing.jpg"
+                imageUrl="/images/popup/towing.jfif"
               />
               <ServiceCard 
                 title="Engine Repair"
                 description="Having issues with your tractor engine? Our experienced mechanics will diagnose and repair it for you."
-                imageUrl="/images/tractor-engine.jpg"
+                imageUrl="/images/popup/mechanic.jfif"
               />
               <ServiceCard 
                 title="Tire Replacement"
                 description="Need to replace a flat tire on your tractor? We offer quick and efficient tire replacement services."
-                imageUrl="/images/tractor-tire.jpg"
+                imageUrl="/images/popup/tyre.jfif"
               />
               {/* Add more ServiceCards here */}
             </div>
