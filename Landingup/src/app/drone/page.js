@@ -1,37 +1,34 @@
 'use client'; 
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
+import Link from "next/link"; // Import NextLink instead of Link
 import Image from "next/image";
-import {droneDetails} from "../data/data";
 import Navbar from "../componants/navbar";
 import Switcher from "../componants/switcher";
 import Footer from "../componants/footer";
 
 
 
-import { MdBatteryFull, MdPhotoCamera, MdFlight, FiChevronLeft, FiChevronRight } from '../assets/icons/vander'
+import { MdBatteryFull, MdSettingsInputComponent, MdFlight, FiChevronLeft, FiChevronRight } from '../assets/icons/vander'
 
 
 export default function Grid() {
-      
-    
     const [filterBattery, setFilterBattery] = useState("");
     const [filterBrand, setFilterBrand] = useState("");
     const [filterLocation, setFilterLocation] = useState("");
-    const [filtercolour, setFiltercolour] = useState("");
-    const [filterprice, setFilterprice] = useState("");
-        const [searchQuery, setSearchQuery] = useState("");
-        const [filteredProperties, setFilteredProperties] = useState([]);
+    const [filterColor, setFilterColor] = useState("");
+    const [filterPrice, setFilterPrice] = useState("");
+    const [searchQuery, setSearchQuery] = useState("");
+    const [filteredDrones, setFilteredDrones] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [dronesPerPage] = useState(6);
 
-        useEffect(() => {
-            filterProperties();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        }, [searchQuery, filterBattery, filterBrand, filterLocation, filtercolour,  filterprice]);
+    useEffect(() => {
+        filterDrones();
+    }, [searchQuery, filterBattery, filterBrand, filterLocation, filterColor, filterPrice]);
 
-        const handleSearchInputChange = (e) => {
-            setSearchQuery(e.target.value);
-        };
-
+    const handleSearchInputChange = (e) => {
+        setSearchQuery(e.target.value);
+    };
 
     const handleBatteryChange = (e) => {
         setFilterBattery(e.target.value);
@@ -40,45 +37,56 @@ export default function Grid() {
     const handleBrandChange = (e) => {
         setFilterBrand(e.target.value);
     }
+
     const handleLocationChange = (e) => {
         setFilterLocation(e.target.value);
     }
 
-    const handlecolourChange = (e) => {
-        setFiltercolour(e.target.value);
+    const handleColorChange = (e) => {
+        setFilterColor(e.target.value);
     }
 
-
-    const handlepriceChange = (e) => {
-        setFilterprice(e.target.value);
+    const handlePriceChange = (e) => {
+        setFilterPrice(e.target.value);
     }
+    
+    const filterDrones = async () => {
+        try {
+            const response = await fetch('http://localhost:5000/api/vehicles/edrone');
+            const data = await response.json();
+            console.log("Fetched data:", data); // Log the fetched data
 
+            const filtered = data.filter((edrone) => {
+                const matchesSearchQuery =
+                    edrone.ownerName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    edrone.batteryPower.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    edrone.color.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    edrone.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    edrone.price.value.toString().includes(searchQuery);
+                const matchesFilters =
+                    (!filterBattery || edrone.batteryPower.toLowerCase() === filterBattery.toLowerCase()) &&
+                    (!filterBrand || edrone.brand.toLowerCase() === filterBrand.toLowerCase()) &&
+                    (!filterLocation || edrone.location.toLowerCase() === filterLocation.toLowerCase()) &&
+                    (!filterColor || edrone.color.toLowerCase() === filterColor.toLowerCase()) &&
+                    (!filterPrice || edrone.price.value <= parseInt(filterPrice));
+                return matchesSearchQuery && matchesFilters;
+            });
 
-    const filterProperties = () => {
-        const filtered = droneDetails.filter((property) => {
-            // Filter logic based on search query and filter selections
-            const matchesSearchQuery =
-                property.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                property.Battery.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                property.colour.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                property.Location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                property.price.toString().includes(searchQuery);
-            const matchesFilters =
-                (!filterBattery || property.Battery.toLowerCase() === filterBattery.toLowerCase()) &&
-                (!filterBrand || property.name.toLowerCase() === filterBrand.toLowerCase())&&
-                (!filterLocation || property.Location.toLowerCase() === filterLocation.toLowerCase())&&
-                (!filtercolour|| property.colour.toLowerCase() === filtercolour.toLowerCase())&&
-                (!filterprice || property.price <= parseInt(filterprice));
-            // Add more filter conditions as needed
-
-            return matchesSearchQuery && matchesFilters;
-        });
-        setFilteredProperties(filtered);
+            setFilteredDrones(filtered);
+        } catch (error) {
+            console.error("Error fetching drone data:", error);
+        }
     };
-    function handleClick() {
-        // Add your logic here for what happens when the heart is clicked
-        console.log('Heart clicked!');
-      }
+    
+    useEffect(() => {
+        filterDrones();
+    }, []);
+    
+    const indexOfLastDrone = currentPage * dronesPerPage;
+    const indexOfFirstDrone = indexOfLastDrone - dronesPerPage;
+    const currentDrones = filteredDrones.slice(indexOfFirstDrone, indexOfLastDrone);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
     
    
   
@@ -127,102 +135,102 @@ export default function Grid() {
                
 
                 {/* Brand Filter */}
-                <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                    <label htmlFor="brand" className="font-semibold mb-1 mr-2">
-                        Brand:
-                    </label>
-                    <select
-                        name="brand"
-                        id="brand"
-                        value={filterBrand}
-                        onChange={handleBrandChange}
-                        className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
-                    >
-                        <option value="">All</option>
-                        <option value="Garuda">Garuda</option>
+                <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap">
+                        <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
+                            <label htmlFor="Battery" className="font-semibold mb-1 mr-2">
+                                Battery:
+                            </label>
+                            <input
+                                type="range"
+                                id="Battery"
+                                min="0"
+                                max="100000"
+                                value={filterBattery}
+                                onChange={handleBatteryChange}
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                            />
+                            <span className="ml-2">{filterBattery}mAh</span>
+                        </div>
+
+                        {/* Add more filter options here */}
+                        <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
+                            <label htmlFor="Brand" className="font-semibold mb-1 mr-2">
+                                Brand:
+                            </label>
+                            <select
+                                name="Brand"
+                                id="Brand"
+                                value={filterBrand}
+                                onChange={handleBrandChange}
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                            >
+                                <option value="">All</option>
+                                <option value="Garuda">Garuda</option>
                         <option value="Ideaforge">Ideaforge</option>
                         <option value="Marut">Marut</option>
                         <option value="IG">IG</option>
                         <option value="Tsaw">Tsaw</option>
-                        <option value="Riyal">Riyal</option>
-                        {/* Add more options */}
-                    </select>
-                </div>
-                <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-    <label htmlFor="Battery" className="font-semibold mb-1 mr-2">
-        Battery:
-    </label>
-    <input
-        type="range"
-        id="Battery"
-        min="0"
-        max="500"
-        value={filterBattery}
-        onChange={handleBatteryChange}
-        className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
-    />
-</div>
-                
+                        <option value="Riyal">Riyal</option>ss
+                                {/* Add more options */}
+                            </select>
+                        </div>
 
-                {/* Location */}
-                <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                    <label htmlFor="Location" className="font-semibold mb-1 mr-2">
-                        Location:
-                    </label>
-                    <select
-                        name="Location"
-                        id="Location"
-                        value={filterLocation}
-                        onChange={handleLocationChange}
-                        className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
-                    >
-                        <option value="">All</option>
-                        <option value="Mumbai">Mumbai</option>
+                        <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
+                            <label htmlFor="Location" className="font-semibold mb-1 mr-2">
+                                Location:
+                            </label>
+                            <select
+                                name="Location"
+                                id="Location"
+                                value={filterLocation}
+                                onChange={handleLocationChange}
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                            >
+                                <option value="">All</option>
+                                <option value="Mumbai">Mumbai</option>
                         <option value="Pune">Pune</option>
                         <option value="Delhi">Delhi</option>
                         <option value="Bangalore">Bangalore</option>
-                        {/* Add more options */}
-                    </select>
-                </div>
-                    
-                {/* colour */}
-                <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                    <label htmlFor="colour" className="font-semibold mb-1 mr-2">
-                        Colour:
-                    </label>
-                    <select
-                        name="colour"
-                        id="colour"
-                        value={filtercolour}
-                        onChange={handlecolourChange}
-                        className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
-                    >
-                        <option value="">All</option>
-                        <option value="Multicolour">Multicolour</option>
+                                {/* Add more options */}
+                            </select>
+                        </div>
+
+                        <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
+                            <label htmlFor="Color" className="font-semibold mb-1 mr-2">
+                                Color:
+                            </label>
+                            <select
+                                name="Color"
+                                id="Color"
+                                value={filterColor}
+                                onChange={handleColorChange}
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                            >
+                                <option value="">All</option>
+                                <option value="Multicolour">Multicolour</option>
                         <option value="Blue">Blue</option>
                         <option value="Grey">Grey</option>
-                        {/* Add more options */}
-                    </select>
-                </div>
-        
-                {/* price */}
-                <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                    <label htmlFor="price" className="font-semibold mb-1 mr-2">
-                        Price:
-                    </label>
-                    <input
-        type="range"
-        id="price"
-        min="0"
-        max="1000000" // Adjust the max value according to your maximum price
-        value={filterprice} // Make sure you have a state variable named filterPrice
-        onChange={handlepriceChange} // Make sure you have a corresponding handlePriceChange function
-        className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
-    />
-    <span className="ml-2">${filterprice}</span>
+                                {/* Add more options */}
+                            </select>
+                        </div>
 
-                    </div>
-            </div>
+                        <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
+                            <label htmlFor="Price" className="font-semibold mb-1 mr-2">
+                                Price:
+                            </label>
+                            <input
+                                type="range"
+                                id="Price"
+                                min="0"
+                                max="1000000"
+                                value={filterPrice}
+                                onChange={handlePriceChange}
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                            />
+                            <span className="ml-2">${filterPrice}</span>
+                        </div>
+                        </div>
+                        </div>
             {/* End of Filter Sidebar */}
 
 
@@ -231,8 +239,8 @@ export default function Grid() {
 
            {/* Searched Car Display */}
            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[30px]">
-                {filteredProperties.map((item, index) => (
-                    <div key={index} className="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500">
+           {currentDrones.map((edrone, index) => (
+                            <div key={index} className="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500">
                         {/* Render each property item here */}
                          {/* <div className="p-4">
         <Image
@@ -264,10 +272,10 @@ export default function Grid() {
                 <div className="container">
                 <div className="lg:col-span-9 md:col-span-10 col-span-11">
                     <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[30px]">
-                    {filteredProperties.map((item, index) => (
-                            <div key={index} className="group relative rounded-xl bg-white dark:bg-slate-900 overflow-hidden transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl">
+                    {currentDrones.map((edrone, index) => (
+                            <div key={index} className="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500">
                                 <div className="relative">
-                                <Image src={item.image}alt=""width={0}  height={0} sizes="100vw" style={{ width: '400px', height: '200px', objectFit: 'cover' }}priority/>
+                                <Image src={edrone.image}alt=""width={0}  height={0} sizes="100vw" style={{ width: '400px', height: '200px', objectFit: 'cover' }}priority/>
 
                                     <div className="absolute top-4 end-4">
                                     <button class="flex-none flex items-center justify-center w-9 h-9 rounded-md bg-white border text-black-300 hover:text-red-500" type="button" aria-label="Like">
@@ -280,31 +288,31 @@ export default function Grid() {
 
                                 <div className="p-6 group-hover:bg-gray-100 dark:group-hover:bg-slate-800">
                                     <div className="pb-6 ">
-                                    <p className="text-lg hover:text-green-600 font-medium ease-in-out duration-500">{item.name}</p>
+                                    <p className="text-lg hover:text-green-600 font-medium ease-in-out duration-500">{edrone.name}</p>
 
                                     </div>
 
                                     <ul className="py-6 border-y border-slate-100 dark:border-gray-800 flex items-center list-none">
                                         <li className="flex items-center me-4">
                                             <MdFlight width={20}  className="me-2 text-green-600"/>
-                                            <span>{item.Model}</span>
+                                            <span>{edrone.model}</span>
                                         </li>
 
                                         <li className="flex items-center me-4">
-                                            <MdPhotoCamera width={20}  className="me-2 text-green-600"/>
-                                            <span>{item.Camera}</span>
+                                            <MdSettingsInputComponent width={20}  className="me-2 text-green-600"/>
+                                            <span>{edrone.brand}</span>
                                         </li>
 
                                         <li className="flex items-center">
                                             <MdBatteryFull width={20}  className="me-2 text-green-600"/>
-                                            <span>{item.Battery}</span>
+                                            <span>{edrone.batteryPower}</span>
                                         </li>
                                     </ul>
 
                                     <ul className="pt-6 flex justify-between items-center list-none">
                                         <li>
                                             <span className="text-slate-400">Price</span>
-                                            <p className="text-lg font-medium">${item.price}</p>
+                                            <p className="text-lg font-medium">${edrone.price}</p>
                                         </li>
 
                                         
@@ -345,6 +353,40 @@ export default function Grid() {
                             </nav>
                         </div>
                     </div>
+                    <div className="grid md:grid-cols-12 grid-cols-1 mt-8">
+                        <div className="md:col-span-12 text-center">
+                            <nav>
+                                <ul className="inline-flex items-center -space-x-px">
+                                    <li>
+                                        <Link href="#" className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 bg-white dark:bg-slate-900 hover:text-white shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">
+                                            <FiChevronLeft className="text-[20px]"/>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href="#" aria-current="page" className="z-10 w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-white bg-green-600 shadow-sm dark:shadow-gray-700">1</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="#" className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">2</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="#" className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">3</Link>
+                                    </li>
+                                
+                                    <li>
+                                        <Link href="#" className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">3</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="#" className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 bg-white dark:bg-slate-900 hover:text-white shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">
+                                            <FiChevronRight className="text-[20px]"/>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
+
+
                 </div>
             </section>
             <Footer />

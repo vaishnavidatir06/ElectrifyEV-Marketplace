@@ -251,7 +251,42 @@ export default function Grid() {
                         ))}
                     </div>
                     </div>
+                        
+                    <div className="grid md:grid-cols-12 grid-cols-1 mt-8">
+                        <div className="md:col-span-12 text-center">
+                            <nav>
+                                <ul className="inline-flex items-center -space-x-px">
+                                    <li>
+                                        <Link href="#" className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 bg-white dark:bg-slate-900 hover:text-white shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">
+                                            <FiChevronLeft className="text-[20px]"/>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href="#" aria-current="page" className="z-10 w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-white bg-green-600 shadow-sm dark:shadow-gray-700">1</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="#" className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">2</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="#" className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">3</Link>
+                                    </li>
+                                
+                                    <li>
+                                        <Link href="#" className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">3</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="#" className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 bg-white dark:bg-slate-900 hover:text-white shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">
+                                            <FiChevronRight className="text-[20px]"/>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
                     
+
+
+
                 </div>
             </section>
             <Footer />
