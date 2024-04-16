@@ -47,9 +47,9 @@ export default function RentEV() {
                 // Handle success, e.g., show a success message or redirect the user
                 toast.success('Form submitted successfully!');
                 router.push('/ev');
-                // Redirect to the review page with name as a query parameter
                 
-                // After redirection, fetch data again to populate the required fields
+                
+                
                 await fetchData();
             } else {
                 console.error('Failed to submit form');

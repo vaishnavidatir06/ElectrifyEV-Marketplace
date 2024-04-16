@@ -65,9 +65,9 @@ const EmergencyPage = () => {
   };
 
   const handleVerifyOTP = () => {
-    // Handle OTP verification
+    
     console.log('OTP verified');
-    // Close the OTP popup
+    
     setShowOTP(false);
   };
 

@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Navbar from "../componants/navbar"; // Corrected import statement
-import Switcher from "../componants/switcher"; // Corrected import statement
-import Footer from "../componants/footer"; // Corrected import statement
+import Navbar from "../componants/navbar"; 
+import Switcher from "../componants/switcher"; 
+import Footer from "../componants/footer"; 
 
 
 
@@ -272,13 +272,6 @@ export default function Grid() {
                         </div>
                     </div>
                     {/* End of Filter Sidebar */}
-
-
-
-
-
-           
-             
                 </div>
             </div>
 
@@ -361,12 +354,6 @@ export default function Grid() {
                             </nav>
                         </div>
                     </div>
-
-
-
-
-
-
     </div>
 </section>
 
