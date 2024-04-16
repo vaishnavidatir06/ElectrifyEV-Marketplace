@@ -24,6 +24,7 @@ export default function Grid() {
 
     useEffect(() => {
         filterDrones();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchQuery, filterBattery, filterBrand, filterLocation, filterColor, filterPrice]);
 
     const handleSearchInputChange = (e) => {
@@ -80,7 +81,7 @@ export default function Grid() {
     
     useEffect(() => {
         filterDrones();
-    }, []);
+    }, [filterDrones]);
     
     const indexOfLastDrone = currentPage * dronesPerPage;
     const indexOfFirstDrone = indexOfLastDrone - dronesPerPage;

@@ -162,14 +162,16 @@ export default function Navbar(props) {
                                 <ul className={`submenu ${["/grid", "/grid-sidebar", "/grid-map", "/list", "/list-sidebar", "/list-map", "/property-detail/1", "/list-item", "/grid-item", "/list-view-item", "/property-item"].includes(subManu) ? 'open' : ''}`}>
                                     <li className="has-submenu parent-menu-item"><Link href="grid-map"> Rentals </Link></li>
                                     <li className={`has-submenu parent-menu-item ${["/list", "/list-sidebar", "/list-map"].includes(manu) ? 'active' : ''}`}><Link href="/list" onClick={() => { setSubManu(subManu === "/list-view-item" ? "" : "/list-view-item") }}> Rent Your eV </Link></li>
+                                    <li className="has-submenu parent-menu-item"><Link href="services"> Emergency Assistance </Link></li>
                                     <li className={`has-submenu parent-menu-item ${["/batteryswap"].includes(manu) ? 'active' : ''}`}><Link href="#" onClick={() => { setSubManu(subManu === "/property-item" ? "" : "/property-item") }}> eVServices </Link><span className="submenu-arrow"></span>
                                         <ul className={`submenu ${["/batteryswap", "/property-item", "/carwash", "/BatteryCharge", "/Emergencyassistance", "/Repair"].includes(subManu) ? 'open' : ''}`}>
                                             <li className={manu === "/batteryswap" ? 'active' : ''}><Link href="/batteryswap" className="sub-menu-item">Battery Swap</Link></li>
                                             <li className={manu === "/BatteryCharge" ? 'active' : ''}><Link href="/BatteryCharge" className="sub-menu-item">Battery Charge</Link></li>
-                                            <li className={manu === "/Emergencyassistance" ? 'active' : ''}><Link href="/Emergencyassistance" className="sub-menu-item">Emergency Assistence</Link></li>
+                                           
                                             <li className={manu === "/carwash" ? 'active' : ''}><Link href="/carwash" className="sub-menu-item">Vehicle Wash</Link></li>
                                         </ul>
                                     </li>
+                                    
                                 </ul>
                             </li>
                             <li className={`has-submenu parent-parent-menu-item ${["/aboutus", "/features", "/pricing", "/faqs", "/auth-login", "/auth-signup", "/auth-reset-password", "/terms", "/privacy", "/blogs", "/blog-sidebar", "/blog-detail", "/comingsoon", "/maintenance", "/404"].includes(manu) ? 'active' : ''}`}>
