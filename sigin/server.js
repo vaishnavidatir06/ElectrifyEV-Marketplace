@@ -7,6 +7,7 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const nodemailer = require('nodemailer');
+const fs = require('fs');
 
 // Import User, Vehicle, and Contact models
 const User = require('./models/user');
@@ -267,7 +268,6 @@ app.get('/api/vehicles/ecar', async (req, res) => {
         // Extract filter parameters from request query
         const { brand, location, transmissionType, color, kilometresDriven, price, filterBodyType } = req.query;
 
-
         // Construct query based on filter parameters
         let query = { vehicleType: 'ecar' };
         if (brand) query.brand = brand;
@@ -286,19 +286,28 @@ app.get('/api/vehicles/ecar', async (req, res) => {
         }
         if (filterBodyType) query.bodyType = filterBodyType;
 
-
-
         // Query database with filters
-        const filteredECars = await Vehicle.find(query);
+        const ecars = await Vehicle.find(query);
 
-        // Return filtered results
-        res.json(filteredECars);
+        // Convert images to Base64 strings
+        const ecarsWithBase64 = ecars.map((ecar) => {
+            const frontImagesBase64 = ecar.frontImages.map((imagePath) => {
+                const image = fs.readFileSync(imagePath);
+                return Buffer.from(image).toString('base64');
+            });
+
+            // Repeat the process for other image fields (sideImages, backImages, etc.)
+
+            return { ...ecar._doc, frontImagesBase64 /*, otherImageFields */ };
+        });
+
+        // Return filtered results with Base64 encoded images
+        res.json(ecarsWithBase64);
     } catch (error) {
         console.error('Error fetching filtered eCar vehicles:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
-
 
 
 
@@ -313,13 +322,26 @@ app.get('/api/vehicles/ebike', async (req, res) => {
             return res.status(404).json({ message: 'No ebike vehicles found' });
         }
 
-        // If ebikes found, return the details
-        res.status(200).json(ebikes);
+        // Convert images to Base64 strings
+        const ebikesWithBase64 = ebikes.map((ebike) => {
+            const frontImagesBase64 = ebike.frontImages.map((imagePath) => {
+                const image = fs.readFileSync(imagePath);
+                return Buffer.from(image).toString('base64');
+            });
+
+            // Repeat the process for other image fields (sideImages, backImages, etc.)
+
+            return { ...ebike._doc, frontImagesBase64 /*, otherImageFields */ };
+        });
+
+        // If ebikes found, return the details with Base64 images
+        res.status(200).json(ebikesWithBase64);
     } catch (error) {
         console.error('Error fetching ebikes:', error);
         res.status(500).json({ message: 'Server Error' });
     }
 });
+
 
 // Endpoint to fetch ecycle details
 app.get('/api/vehicles/ecycle', async (req, res) => {
@@ -331,14 +353,26 @@ app.get('/api/vehicles/ecycle', async (req, res) => {
         if (!ecycles || ecycles.length === 0) {
             return res.status(404).json({ message: 'No ecycle vehicles found' });
         }
+        // Convert images to Base64 strings
+        const ecyclesWithBase64 = ecycles.map((ecycle) => {
+            const frontImagesBase64 = ecycle.frontImages.map((imagePath) => {
+                const image = fs.readFileSync(imagePath);
+                return Buffer.from(image).toString('base64');
+            });
+
+            // Repeat the process for other image fields (sideImages, backImages, etc.)
+
+            return { ...ecycle._doc, frontImagesBase64 /*, otherImageFields */ };
+        });
 
         // If ecycles found, return the details
-        res.status(200).json(ecycles);
+        res.status(200).json(ecyclesWithBase64);
     } catch (error) {
         console.error('Error fetching ecycles:', error);
         res.status(500).json({ message: 'Server Error' });
     }
 });
+
 
 // Endpoint to fetch edrone details
 app.get('/api/vehicles/edrone', async (req, res) => {
@@ -351,8 +385,20 @@ app.get('/api/vehicles/edrone', async (req, res) => {
             return res.status(404).json({ message: 'No edrone vehicles found' });
         }
 
+        // Convert images to Base64 strings
+        const edronesWithBase64 = edrones.map((edrone) => {
+            const frontImagesBase64 = edrone.frontImages.map((imagePath) => {
+                const image = fs.readFileSync(imagePath);
+                return Buffer.from(image).toString('base64');
+            });
+
+            // Repeat the process for other image fields (sideImages, backImages, etc.)
+
+            return { ...edrone._doc, frontImagesBase64 /*, otherImageFields */ };
+        });
+
         // If edrones found, return the details
-        res.status(200).json(edrones);
+        res.status(200).json(edronesWithBase64);
     } catch (error) {
         console.error('Error fetching edrones:', error);
         res.status(500).json({ message: 'Server Error' });
@@ -370,14 +416,25 @@ app.get('/api/vehicles/etractor', async (req, res) => {
             return res.status(404).json({ message: 'No etractor vehicles found' });
         }
 
+        // Convert images to Base64 strings
+        const etractorsWithBase64 = etractors.map((tractor) => {
+            const frontImagesBase64 = tractor.frontImages.map((imagePath) => {
+                const image = fs.readFileSync(imagePath);
+                return Buffer.from(image).toString('base64');
+            });
+
+            // Repeat the process for other image fields (sideImages, backImages, etc.)
+
+            return { ...tractor._doc, frontImagesBase64 /*, otherImageFields */ };
+        });
+
         // If etractors found, return the details
-        res.status(200).json(etractors);
+        res.status(200).json(etractorsWithBase64);
     } catch (error) {
         console.error('Error fetching etractors:', error);
         res.status(500).json({ message: 'Server Error' });
     }
 });
-
 // Endpoint to fetch eauto details
 app.get('/api/vehicles/eauto', async (req, res) => {
     try {
@@ -389,11 +446,23 @@ app.get('/api/vehicles/eauto', async (req, res) => {
             return res.status(404).json({ message: 'No eauto vehicles found' });
         }
 
-        // If eautos found, return the details
-        res.status(200).json(eautos);
+        // Convert images to Base64 strings
+        const eautosWithBase64 = eautos.map((eauto) => {
+            const frontImagesBase64 = eauto.frontImages.map((imagePath) => {
+                const image = fs.readFileSync(imagePath);
+                return Buffer.from(image).toString('base64');
+            });
+
+            // Repeat the process for other image fields (sideImages, backImages, etc.)
+
+            return { ...eauto._doc, frontImagesBase64 /*, otherImageFields */ };
+        });
+
+        // Send the response with eauto details including Base64 images
+        res.status(200).json(eautosWithBase64);
     } catch (error) {
-        console.error('Error fetching eautos:', error);
-        res.status(500).json({ message: 'Server Error' });
+        console.error('Error fetching eauto vehicles:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
     }
 });
 
