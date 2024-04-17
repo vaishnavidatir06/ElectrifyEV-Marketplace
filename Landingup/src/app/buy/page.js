@@ -34,23 +34,22 @@ const BuyPopup = ({ isOpen, onClose }) => {
     const numRows = Math.ceil(numVehicles / 3); // Calculate number of rows needed
     const minHeight = 'h-3/4'; // Minimum height for the popup
     
-    // Determine the height class based on the number of rows
+    
     switch (numRows) {
       case 1:
-        return minHeight; // Minimum height if there's only one row
+        return minHeight; 
       case 2:
-        return 'h-4/5'; // Adjust height for two rows
+        return 'h-4/5'; 
       default:
-        return 'h-full'; // Full height for more than two rows
+        return 'h-full'; 
     }
   };
 
   return (
     <>
       <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center z-50">
-      <div className="wrapper" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <div className={`p-10 border border-green-400 rounded-lg shadow-md w-4/5 ${calculateHeight()} relative z-10`} style={{ backgroundImage: "url('/images/bg/whitebg.jfif')" }}>
-         
+        <div className="wrapper" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <div className={`p-10 border border-green-400 rounded-lg shadow-md w-4/5 md:w-3/4 lg:w-2/3 xl:w-1/2 ${calculateHeight()} relative z-10`} style={{ backgroundImage: "url('/images/bg/whitebg.jfif')" }}>
             <button
               className="absolute top-2 right-2 px-3 py-1 text-xl font-bold text-gray-600 hover:text-gray-800 btn-blue"
               onClick={onClose}
@@ -58,7 +57,7 @@ const BuyPopup = ({ isOpen, onClose }) => {
               X
             </button>
             <h2 className="font-bold text-xl text-black dark:text-black-500">Buy on Electrify EVM</h2>
-            <div className="grid grid-cols-3 gap-4 mt-5">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5"> {/* Adjusted grid for responsiveness */}
               <button
                 className="flex flex-col items-center m-2 p-0 border border-black-500 square-full overflow-hidden"
                 onClick={() => handleBuyOption('Car')}
@@ -129,7 +128,6 @@ const BuyPopup = ({ isOpen, onClose }) => {
           </div>
         </div>
       </div>
-      
     </>
   );
 };

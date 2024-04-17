@@ -1,4 +1,5 @@
-'use client' 
+/* eslint-disable @next/next/no-img-element */
+'use client'
 import React, { useState } from "react";
 import Link from "next/link";
 
@@ -9,25 +10,27 @@ import Footer from '../../componants/footer'
 import Switcher from '../../componants/switcher'
 import PropertyImage from '../../componants/propertyImage';
 
-
 import { MdDirectionsCar, MdTune, MdSettingsInputComponent, FiPhone } from '../../assets/icons/vander'
 
 export default function PropertiesDetail(props) {
     const property = propertiesDetails.find((user) => user?.id === parseInt(props?.params?.id || 0));
 
-
     const [isTestDrivePopupOpen, setIsTestDrivePopupOpen] = useState(false);
     const [isOfferPopupOpen, setIsOfferPopupOpen] = useState(false);
     const [isBuyNowPopupOpen, setIsBuyNowPopupOpen] = useState(false);
-  
+    const [isPaymentPopupOpen, setIsPaymentPopupOpen] = useState(false);
+
     const openTestDrivePopup = () => setIsTestDrivePopupOpen(true);
     const closeTestDrivePopup = () => setIsTestDrivePopupOpen(false);
-  
+
     const openOfferPopup = () => setIsOfferPopupOpen(true);
     const closeOfferPopup = () => setIsOfferPopupOpen(false);
-  
+
     const openBuyNowPopup = () => setIsBuyNowPopupOpen(true);
     const closeBuyNowPopup = () => setIsBuyNowPopupOpen(false);
+
+    const openPaymentPopup = () => setIsPaymentPopupOpen(true);
+    const closePaymentPopup = () => setIsPaymentPopupOpen(false);
 
     return (
         <>
@@ -154,195 +157,202 @@ export default function PropertiesDetail(props) {
             </div>
 
             {isTestDrivePopupOpen && (
-  <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center z-50 bg-black bg-opacity-50">
-    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-      <div className="bg-white p-10 border border-green-400 rounded-lg shadow-md w-4/5 relative z-10">
+              <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center z-50 bg-black bg-opacity-50">
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  <div className="bg-white p-10 border border-green-400 rounded-lg shadow-md w-4/5 relative z-10">
+                    <button onClick={closeTestDrivePopup} className="absolute top-3 right-3 p-2 text-red-600 rounded-full bg-white">X</button>
+                    <div className="modal">
+                      <div className="modal-content">
+                        <h2 className="text-xl font-semibold mb-4">Book a Test Drive</h2>
+                        <p className="text-sm mb-4 text-gray-600">Please fill out the form below to book a test drive:</p>
+                        <form>
+                          <div className="mb-4">
+                            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                              Name
+                            </label>
+                            <input
+                              type="text"
+                              id="name"
+                              name="name"
+                              className="mt-1 p-2 block w-full border border-gray-300 rounded-md focus:outline-none focus:border-green-500"
+                            />
+                          </div>
+                          <div className="mb-4">
+                            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                              Email
+                            </label>
+                            <input
+                              type="email"
+                              id="email"
+                              name="email"
+                              className="mt-1 p-2 block w-full border border-gray-300 rounded-md focus:outline-none focus:border-green-500"
+                            />
+                          </div>
+                          <div className="mb-4">
+                            <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+                              Phone Number
+                            </label>
+                            <input
+                              type="tel"
+                              id="phone"
+                              name="phone"
+                              className="mt-1 p-2 block w-full border border-gray-300 rounded-md focus:outline-none focus:border-green-500"
+                            />
+                          </div>
+                          <div className="mb-4">
+                            <label htmlFor="message" className="block text-sm font-medium text-gray-700">
+                              Additional Message (optional)
+                            </label>
+                            <textarea
+                              id="message"
+                              name="message"
+                              rows="4"
+                              className="mt-1 p-2 block w-full border border-gray-300 rounded-md focus:outline-none focus:border-green-500"
+                            ></textarea>
+                          </div>
+                          <div className="text-center">
+                            <button
+                              type="submit"
+                              className="inline-block bg-green-600 hover:bg-green-700 text-white py-2 px-6 rounded-md transition duration-300 ease-in-out"
+                              onClick={openPaymentPopup}
+                            >
+                              Submit
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
-        <button onClick={closeTestDrivePopup} className="absolute top-3 right-3 p-2 text-red-600 rounded-full bg-white">X</button>
-        <div className="modal">
-          <div className="modal-content">
-            <h2 className="text-xl font-semibold mb-4">Book a Test Drive</h2>
-            <p className="text-sm mb-4 text-gray-600">Please fill out the form below to book a test drive:</p>
-            <form>
-              <div className="mb-4">
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  className="mt-1 p-2 block w-full border border-gray-300 rounded-md focus:outline-none focus:border-green-500"
-                />
+            {/* Offer Popup */}
+            {isOfferPopupOpen && (
+              <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center z-50 bg-black bg-opacity-50">
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  <div className={`bg-white p-10 border border-green-400 rounded-lg shadow-md w-4/5 relative z-10`}>
+                    <button onClick={closeOfferPopup} className="absolute top-0 right-0 p-2">X</button>
+                    <div className="modal">
+                      <div className="modal-content">
+                        <h2>Make an Offer</h2>
+                        <form>
+                          <div>
+                            <label htmlFor="amount" className="block text-sm font-medium text-gray-700">
+                              Offer Amount
+                            </label>
+                            <input
+                              type="number"
+                              id="amount"
+                              name="amount"
+                              className="mt-1 p-2 w-full border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
+                            />
+                          </div>
+                          <div>
+                            <label htmlFor="message" className="block text-sm font-medium text-gray-700">
+                              Message (optional)
+                            </label>
+                            <textarea
+                              id="message"
+                              name="message"
+                              className="mt-1 p-2 w-full border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
+                            ></textarea>
+                          </div>
+                          <div className="text-center">
+                            <button
+                              type="submit"
+                              className="inline-block bg-green-600 hover:bg-green-700 text-white py-2 px-6 rounded-md transition duration-300 ease-in-out"
+                              onClick={openPaymentPopup}
+                            >
+                              Submit Offer
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="mb-4">
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  className="mt-1 p-2 block w-full border border-gray-300 rounded-md focus:outline-none focus:border-green-500"
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                  Phone Number
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  className="mt-1 p-2 block w-full border border-gray-300 rounded-md focus:outline-none focus:border-green-500"
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700">
-                  Additional Message (optional)
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="4"
-                  className="mt-1 p-2 block w-full border border-gray-300 rounded-md focus:outline-none focus:border-green-500"
-                ></textarea>
-              </div>
-              <div className="text-center">
-                <button
-                  type="submit"
-                  className="inline-block bg-green-600 hover:bg-green-700 text-white py-2 px-6 rounded-md transition duration-300 ease-in-out"
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-)}
+            )}
 
-
-      {/* Offer Popup */}
-      {isOfferPopupOpen && (
-      
-      <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center z-50 bg-black bg-opacity-50">
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <div className={`bg-white p-10 border border-green-400 rounded-lg shadow-md w-4/5 relative z-10`}>
-                <button onClick={closeOfferPopup } className="absolute top-0 right-0 p-2">X</button>
-        <div className="modal">
-          <div className="modal-content">
-            <h2>Make an Offer</h2>
-           
-            <form>
-              <div>
-                <label htmlFor="amount" className="block text-sm font-medium text-gray-700">
-                  Offer Amount
-                </label>
-                <input
-                  type="number"
-                  id="amount"
-                  name="amount"
-                  className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
-                />
+            {/* Buy Now Popup */}
+            {isBuyNowPopupOpen && (
+              <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center z-50 bg-black bg-opacity-50">
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  <div className={`bg-white p-10 border border-green-400 rounded-lg shadow-md w-4/5 relative z-10`}>
+                    <button onClick={closeBuyNowPopup} className="absolute top-0 right-0 p-2">X</button>
+                    <div className="modal">
+                      <div className="modal-content">
+                        <p className="mb-4">Fill out the form below to purchase the electric vehicle:</p>
+                        <form className="max-w-md">
+                          <div className="mb-4">
+                            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                              Name
+                            </label>
+                            <input
+                              type="text"
+                              id="name"
+                              name="name"
+                              className="mt-1 p-2 block w-full border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
+                            />
+                          </div>
+                          <div className="mb-4">
+                            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                              Email
+                            </label>
+                            <input
+                              type="email"
+                              id="email"
+                              name="email"
+                              className="mt-1 p-2 block w-full border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
+                            />
+                          </div>
+                          <div className="mb-4">
+                            <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+                              Phone Number
+                            </label>
+                            <input
+                              type="tel"
+                              id="phone"
+                              name="phone"
+                              className="mt-1 p-2 block w-full border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
+                            />
+                          </div>
+                          <div className="text-center">
+                            <button
+                              type="submit"
+                              className="inline-block bg-green-600 hover:bg-green-700 text-white py-2 px-6 rounded-md transition duration-300 ease-in-out"
+                              onClick={openPaymentPopup}
+                            >
+                              Buy Now
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700">
-                  Message (optional)
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
-                ></textarea>
+            )}
+
+            {/* Payment Popup */}
+            {isPaymentPopupOpen && (
+              <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center z-50 bg-black bg-opacity-50">
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  <div className={`bg-white p-10 border border-green-400 rounded-lg shadow-md w-4/5 relative z-10`}>
+                    <h2 className="text-lg font-bold mb-4">Payment Successfull</h2>
+                    <div className="flex justify-center items-center">
+                      <div className="bg-green-500 rounded-full h-16 w-16 flex justify-center items-center text-white text-4xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="text-center">
-                <button
-                  type="submit"
-                  className="inline-block bg-green-600 hover:bg-green-700 text-white py-2 px-6 rounded-md transition duration-300 ease-in-out"
-                >
-                  Submit Offer
-                </button>
-              </div>
-            </form>
+            )}
 
-            {/* Form for making an offer */}
-            {/* You can include your form component here */}
-            
-          </div>
-          </div>
-          </div>
-          </div>
-        </div>
-      )}
-
-      {/* Buy Now Popup */}
-      {isBuyNowPopupOpen && (
-       
-       <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center z-50 bg-black bg-opacity-50">
-       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                 <div className={`bg-white p-10 border border-green-400 rounded-lg shadow-md w-4/5 relative z-10`}>
-                 <button onClick={closeBuyNowPopup} className="absolute top-0 right-0 p-2">X</button>
-
-        <div className="modal">
-          <div className="modal-content">
-         
-            <p className="mb-4">Fill out the form below to purchase the electric vehicle:</p>
-        <form className="max-w-md">
-          <div className="mb-4">
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              className="mt-1 p-2 block w-full border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="mt-1 p-2 block w-full border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-              Phone Number
-            </label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              className="mt-1 p-2 block w-full border-gray-300 rounded-md focus:ring-green-500 focus:border-green-500"
-            />
-          </div>
-          <div className="text-center">
-            <button
-              type="submit"
-              className="inline-block bg-green-600 hover:bg-green-700 text-white py-2 px-6 rounded-md transition duration-300 ease-in-out"
-            >
-              Buy Now
-            </button>
-          </div>
-        </form>
-
-            {/* Form for buying now */}
-            {/* You can include your form component here */}
-            
-          </div>
-        </div>
-        </div>
-        </div>
-        </div>
-      )}
             <Footer />
             <Switcher />
         </>
