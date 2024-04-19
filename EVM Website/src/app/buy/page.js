@@ -9,8 +9,8 @@ const BuyPopup = ({ isOpen, onClose }) => {
       case 'Car':
         window.location.href = '/Car';
         break;
-      case 'Bike':
-        window.location.href = '/bike';
+      case 'cycle':
+        window.location.href = '/cycle';
         break;
       case 'Scooter':
         window.location.href = '/scooter';
@@ -71,7 +71,7 @@ const BuyPopup = ({ isOpen, onClose }) => {
               </button>
               <button
                 className="flex flex-col items-center m-2 p-0 border border-black-500 square-full overflow-hidden"
-                onClick={() => handleBuyOption('Bike')}
+                onClick={() => handleBuyOption('cycle')}
               >
                 <img
                   src="/images/popup/b1.jpeg"

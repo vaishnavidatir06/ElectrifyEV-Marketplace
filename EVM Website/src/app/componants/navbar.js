@@ -175,18 +175,12 @@ export default function Navbar(props) {
                                     
                                 </ul>
                             </li>
+                            
                             <li className={`has-submenu parent-parent-menu-item ${["/aboutus", "/features", "/pricing", "/faqs", "/auth-login", "/auth-signup", "/auth-reset-password", "/terms", "/privacy", "/blogs", "/blog-sidebar", "/blog-detail", "/comingsoon", "/maintenance", "/404"].includes(manu) ? 'active' : ''}`}>
-                                <Link href="#" onClick={() => { setSubManu(subManu === "/page-item" ? '' : "/page-item") }}>Pages</Link><span className="menu-arrow"></span>
+                                <Link href="#" onClick={() => { setSubManu(subManu === "/page-item" ? '' : "/page-item") }}>About</Link><span className="menu-arrow"></span>
                                 <ul className={`submenu ${["/aboutus", "/features", "/pricing", "/faqs", "/auth-login", "/auth-signup", "/auth-reset-password", "/terms", "/privacy", "/blogs", "/blog-sidebar", "/blog-detail", "/comingsoon", "/maintenance", "/404", "/page-item", "/auth-item", "/term-item", "/blog-item", "/special-item"].includes(subManu) ? 'open' : ''}`}>
                                     <li className={manu === "/aboutus" ? "active" : ''}><Link href="/aboutus" className="sub-menu-item">About Us</Link></li>
-                                    <li className={`has-submenu parent-menu-item ${["/auth-login", "/auth-signup", "/auth-reset-password"].includes(manu) ? 'active' : ''}`}><Link href="#" onClick={() => { setSubManu(subManu === "/auth-item" ? '' : "/auth-item") }}> Auth Pages </Link><span className="submenu-arrow"></span>
-                                        <ul className={`submenu ${["/auth-login", "/auth-signup", "/auth-reset-password", "/auth-item"].includes(subManu) ? 'open' : ''}`}>
-                                            <li className={manu === "/auth-login" ? "active" : ''}><Link href="/auth-login" className="sub-menu-item">Login</Link></li>
-                                            <li className={manu === "/auth-signup" ? "active" : ''}><Link href="/auth-signup" className="sub-menu-item">Signup</Link></li>
-                                            <li className={manu === "/auth-reset-password" ? "active" : ''}><Link href="/auth-reset-password" className="sub-menu-item">Reset Password</Link></li>
-                                        </ul>
-                                    </li>
-                                    <li className={`has-submenu parent-menu-item ${["/terms", "/privacy"].includes(manu) ? 'active' : ''}`}><Link href="#" onClick={() => { setSubManu(subManu === "/term-item" ? '' : "/term-item") }}> Utility </Link><span className="submenu-arrow"></span>
+                                    <li className={`has-submenu parent-menu-item ${["/terms", "/privacy"].includes(manu) ? 'active' : ''}`}><Link href="#" onClick={() => { setSubManu(subManu === "/term-item" ? '' : "/term-item") }}> Utility</Link><span className="submenu-arrow"></span>
                                         <ul className={`submenu ${["/terms", "/privacy", "/term-item"].includes(subManu) ? 'open' : ''}`}>
                                             <li className={manu === "/terms" ? "active" : ''}><Link href="/terms" className="sub-menu-item">Terms of Services</Link></li>
                                             <li className={manu === "/privacy" ? "active" : ''}><Link href="/privacy" className="sub-menu-item">Privacy Policy</Link></li>
