@@ -264,10 +264,10 @@ export default function ListSidebar() {
         <div className="max-w-lg mx-auto bg-gray-200 rounded-lg shadow-lg p-2 mt-4">
             <div className="pt-16 flex justify-center items-center min-h-screen mt-0">
                 <div className="w-full sm:max-w-md mt-0">
-                    <h1 className="text-center text-2xl mb-4 mt-0"><b>Enter Vehicle details you want to sell</b></h1>
+                    <h1 className="text-center text-2xl mb-4 mt-0 text-gray-800 "><b>Enter Vehicle details you want to sell</b></h1>
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <fieldset>
-                            <legend><b>Vehicle Details</b></legend>
+                            <legend className="text-gray-800 "><b>Vehicle Details</b></legend>
                             <label className="text-gray-950">
                                 <b>Vehicle Type:</b>
                                 <select value={vehicleType} onChange={(e) => setVehicleType(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2">
@@ -330,14 +330,14 @@ export default function ListSidebar() {
     value={price.currency} // Use price.currency instead of price
     onChange={(e) => setPrice({ ...price, currency: e.target.value })} // Update the currency field of price
     required 
-    className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2"
+    className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2 text-gray-950"
 >
-                                        <option value="">Select Currency</option>
-                                        <option value="USD">USD</option>
-                                        <option value="EUR">EUR</option>
-                                        <option value="SGD">SGD</option> {/* Singapore Dollar */}
-                                        <option value="INR">INR</option> {/* Indian Rupee */}
-                                        <option value="SAR">SAR</option> 
+                                        <option className="text-gray-950" value="" >Select Currency</option>
+                                        <option className="text-gray-950" value="USD">USD</option>
+                                        <option className="text-gray-950" value="EUR">EUR</option>
+                                        <option className="text-gray-950" value="SGD">SGD</option> {/* Singapore Dollar */}
+                                        <option className="text-gray-950" value="INR">INR</option> {/* Indian Rupee */}
+                                        <option className="text-gray-950" value="SAR">SAR</option> 
                                         </select>
 
                                 <label className="text-gray-950">
@@ -348,7 +348,7 @@ export default function ListSidebar() {
 
 
                         <fieldset>
-                            <legend>Upload Images:</legend>
+                            <legend className="text-gray-950">Upload Images:</legend>
                             <label className="text-gray-950">
                             <b>Add Image Of Front-side:</b>
                             <input type="file" name="image" accept="image/*" onChange={(e) => handleImageChange(e, 'front')} multiple required className="w-full border rounded-sm py-1 px-2" />
@@ -403,7 +403,7 @@ export default function ListSidebar() {
                             <br/>
                         </fieldset>
                         <fieldset>
-                            <legend>Enter your Details</legend>
+                            <legend className="text-gray-950" >Enter your Details</legend>
                             <label className="text-gray-950">
                                 <b>Your Name:</b>
                                 <input type="text" value={ownerName} onChange={(e) => setOwnerName(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />

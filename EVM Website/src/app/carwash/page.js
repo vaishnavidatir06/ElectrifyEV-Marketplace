@@ -83,7 +83,7 @@ const CarWashServices = () => {
               <div className="flex justify-center space-x-4 mt-4">
                 <div className="group relative rounded-xl bg-slate-200 dark:bg-slate-900 overflow-hidden transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl">
                   <div className="p-6">
-                    <h4 className="text-xl font-semibold mb-2">Basic Wash</h4>
+                    <h4 className="text-xl font-semibold mb-2 text-gray-950 dark:text-white">Basic Wash</h4>
                     <p className="text-gray-600">Basic cleaning service</p>
                     <p className="text-green-600 font-semibold">$10</p>
                     
@@ -131,7 +131,7 @@ const CarWashServices = () => {
                 {/* Similar structure for Standard Wash */}
                 <div className="group relative rounded-xl bg-slate-200 dark:bg-slate-900 overflow-hidden transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl">
                   <div className="p-6">
-                    <h4 className="text-xl font-semibold mb-2">Standard Wash</h4>
+                    <h4 className="text-xl font-semibold mb-2 text-gray-950 dark:text-white">Standard Wash</h4>
                     <p className="text-gray-600">Standard cleaning service</p>
                     <p className="text-green-600 font-semibold">$20</p>
                     <button onClick={handleToggleStandardWashPopup} className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">
@@ -166,7 +166,7 @@ const CarWashServices = () => {
                 </svg>
               </button>
             </div>
-            <h2 className="text-lg font-bold mb-4">Contacting our management team , we will reachout to you</h2>
+            <h2 className="text-lg font-bold mb-4 text-black dark:text-black">Contacting our management team , we will reachout to you</h2>
            
           </div>
         </div>
@@ -176,7 +176,7 @@ const CarWashServices = () => {
                 {/* Similar structure for Comprehensive Wash */}
                 <div className="group relative rounded-xl bg-slate-200 dark:bg-slate-900 overflow-hidden transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl">
                   <div className="p-6">
-                    <h4 className="text-xl font-semibold mb-2">Comprehensive Wash</h4>
+                    <h4 className="text-xl font-semibold mb-2 text-gray-950 dark:text-white">Comprehensive Wash</h4>
                     <p className="text-gray-600">Comprehensive cleaning service</p>
                     <p className="text-green-600 font-semibold">$30</p>
                     <button onClick={handleToggleComprehensiveWashPopup} className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">

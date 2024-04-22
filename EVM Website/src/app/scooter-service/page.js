@@ -22,17 +22,17 @@ const ScooterServicePage = () => {
               <ServiceCard 
                 title="Towing Service"
                 description="We provide 24/7 towing service for your scooter in case of emergencies."
-                imageUrl="/images/scooter-towing.jpg"
+                imageUrl="/images/bg/scootertow.jfif"
               />
               <ServiceCard 
                 title="Battery Replacement"
                 description="Need a battery replacement? We offer quick and reliable service to get you back on the road."
-                imageUrl="/images/scooter-battery.jpg"
+                imageUrl="/images/bg/scooter charge.jfif"
               />
               <ServiceCard 
                 title="Emergency Repairs"
                 description="Facing a breakdown? Our team of mechanics will provide on-the-spot repairs to get you going."
-                imageUrl="/images/scooter-repairs.jpg"
+                imageUrl="/images/bg/repair.jfif"
               />
               {/* Add more ServiceCards here */}
             </div>

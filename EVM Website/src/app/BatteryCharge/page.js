@@ -86,14 +86,14 @@ const EmergencyPage = () => {
         <div className="flex items-center justify-center mb-8">
           <img src="/images/bg/charge.jfif" alt="Car Battery" className="w-64 h-auto mr-4" />
           <div>
-            <h2 className="text-3xl font-bold mb-4 text-center text-black-900 dark:text-black">Battery Recharge Service</h2>
+            <h2 className="text-3xl font-bold mb-4 text-center text-gray-950 dark:text-gray-950">Battery Recharge Service</h2>
             <p className="text-gray-800 mb-6 leading-relaxed">Our technicians will come to your location, uninstall the battery, take it to our store, and charge it using our advanced charging machines. After charging, we'll observe the battery to ensure it holds the voltage. If everything is fine, we'll reinstall it in your vehicle.</p>
             <ul className="list-disc pl-6 mb-8">
               <li className="text-gray-800 mb-2">Trained Professionals</li>
               <li className="text-gray-800 mb-2">100% Customer Satisfaction</li>
               <li className="text-gray-800 mb-2">Fastest & Professional Service</li>
             </ul>
-            <h3 className="text-lg font-bold mb-2 text-black-900 dark:text-black">Service Prices</h3>
+            <h3 className="text-lg font-bold mb-2 text-gray-950 dark:text-gray-950">Service Prices</h3>
             <ul className="list-disc pl-6 mb-6">
               <li className="text-gray-800 mb-2">At Doorstep (Within City limits): $40</li>
               <li className="text-gray-800 mb-2">At Service Station: $25</li>
@@ -105,8 +105,8 @@ const EmergencyPage = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {vehicles.map(vehicle => (
-            <div key={vehicle.id} className="bg-white border border-gray-200 rounded-lg p-6">
-              <h1 className="text-xl font-bold mb-2 text-black-900 dark:text-black">{vehicle.name}</h1>
+            <div key={vehicle.id} className="bg-white border border-gray-200 rounded-lg p-6 hover:bg-gray-100">
+              <h1 className="text-xl font-bold mb-2 text-gray-950 dark:text-gray-950">{vehicle.name}</h1>
               <p className="text-gray-800 mb-4">{vehicle.description}</p>
               {selectedVehicle === vehicle && (
                 <select

@@ -19,20 +19,19 @@ export default function Property() {
                 <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-8 gap-[30px]">
                     {properties.map((item, index) => (
                         <Link href={`/property-detail/${item.id}`} key={index}>
-                        <div className="group relative rounded-xl text-white-900 dark:text-white overflow-hidden transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl">
+                        <div className="group relative rounded-xl text-black dark:text-white overflow-hidden transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl">
                             <div className="relative">
                             <Image src={item.image}alt=""width={0}  height={0} sizes="100vw" style={{ width: '400px', height: '200px', objectFit: 'cover' }}priority/>
                               <div className="absolute top-4 end-4">
-                              <button class="flex-none flex items-center justify-center w-9 h-9 rounded-md bg-white border text-black-300 hover:text-red-500" type="button" aria-label="Like">
-        <svg width="20" height="20" fill="currentColor" aria-hidden="true">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-        </svg>
-      </button>
-
+                              <button class="flex-none flex items-center justify-center w-9 h-9 rounded-md bg-black border  text-white-300 dark:text-white hover:text-red-500 hover:dark:text-red-500" type="button" aria-label="Like">
+  <svg width="20" height="20" fill="currentColor" aria-hidden="true">
+    <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+  </svg>
+</button>
                                 </div>
                             </div>
 
-                            <div className="p-6 group-hover:bg-gray-100 dark:group-hover:bg-slate-800">
+                            <div className="p-6 group-hover:bg-black-100 dark:group-hover:bg-black-100">
                                 <div className="pb-6">
                                     <p className="text-lg hover:text-green-600 font-medium ease-in-out duration-500">{item.name}</p>
                                 </div>
@@ -97,4 +96,3 @@ export default function Property() {
     );
 
 }
-

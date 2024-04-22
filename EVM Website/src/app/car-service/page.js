@@ -7,6 +7,7 @@ import ServiceCard from "../componants/serviceCard"; // Importing the ServiceCar
 
 const CarServicePage = () => {
   return (
+    <>
     <div>
       <Head>
         <title>Emergency Assistance Services For Car</title>
@@ -14,9 +15,9 @@ const CarServicePage = () => {
       </Head>
 
       <Navbar />
-      <div className="bg-cover bg-center bg-opacity-20 min-h-screen" style={{backgroundImage: "url('/images/bg/b17.jpg')"}}>
-        <div className="bg-gray-100 min-h-screen">
-          <div className="flex justify-center items-center min-h-screen">
+      <div className="bg-white dark:bg-gray-950 bg-center bg-opacity-20 min-h-screen">
+        <div className="bg-gray-100  dark:bg-gray-950 min-h-screen">
+          <div className="flex justify-center items-center min-h-screen bg-gray-100 dark:bg-gray-950">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"> {/* Using CSS grid for layout */}
               {/* Adding Service Cards */}
               <ServiceCard 
@@ -42,6 +43,7 @@ const CarServicePage = () => {
       <Footer />
       <Switcher />
     </div>
+    </>
   );
 };
 

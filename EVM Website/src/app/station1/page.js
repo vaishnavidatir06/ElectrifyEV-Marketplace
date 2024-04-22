@@ -20,7 +20,7 @@ const Station1Page = () => {
     <Link href="/at-your-doorstep">
       <div className="bg-gray-100 border border-gray-200 rounded-lg p-0 text-center transition duration-300 ease-in-out hover:bg-gray-200  h-80 w-80 ">
         <img src="/images/bg/bs1.jpeg" alt="At Your Doorstep Image" className="mx-auto mb-4 h-56 w-100" />
-        <h2 className="text-xl font-semibold mb-4">At your door step</h2>
+        <h2 className="text-xl font-semibold mb-4 text-gray-950 dark:text-gray-950">At your door step</h2>
         <p className="text-gray-600">Get the battery swapped at your doorstep.</p>
       </div>
     </Link>
@@ -30,7 +30,7 @@ const Station1Page = () => {
          
             <div className="bg-gray-100 border border-gray-200 rounded-lg p-0 text-center transition duration-300 ease-in-out hover:bg-gray-200 h-80 w-80">
             <img src="/images/bg/bs2.jpeg" alt="At Your Doorstep Image" className="mx-auto mb-4 h-56 w-100" /> 
-            <h2 className="text-xl font-semibold mb-4">Store</h2>
+            <h2 className="text-xl font-semibold mb-4 text-gray-950 dark:text-gray-950">Store</h2>
               <p className="text-gray-600">Visit our store to swap the battery.</p>
             </div>
           </Link>
@@ -40,7 +40,7 @@ const Station1Page = () => {
 
             <div className="bg-gray-100 border border-gray-200 rounded-lg p-0 text-center transition duration-300 ease-in-out hover:bg-gray-200 h-80 w-80">
             <img src="/images/bg/bs3.jpeg" alt="At Your Doorstep Image" className="mx-auto mb-4 h-56 w-100" />
-              <h2 className="text-xl font-semibold mb-4">Buy Battery</h2>
+              <h2 className="text-xl font-semibold mb-4 text-gray-950 dark:text-gray-950">Buy Battery</h2>
               <p className="text-gray-600">Purchase a new battery.</p>
             </div>
           </Link>
@@ -50,7 +50,7 @@ const Station1Page = () => {
 
             <div className="bg-gray-100 border border-gray-200 rounded-lg p-0 text-center transition duration-300 ease-in-out hover:bg-gray-200 h-80 w-80">
             <img src="/images/bg/bs4.jpeg" alt="At Your Doorstep Image" className="mx-auto mb-4 h-56 w-300" />
-              <h2 className="text-xl font-semibold mb-4">Replacement</h2>
+              <h2 className="text-xl font-semibold mb-4 text-gray-950 dark:text-gray-950">Replacement</h2>
               <p className="text-gray-600">Get the battery replaced.</p>
             </div>
           </Link>

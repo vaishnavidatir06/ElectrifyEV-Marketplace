@@ -76,10 +76,10 @@ export default function RentEV() {
             
             <div className="pt-16 flex justify-center items-center min-h-screen">
                 <div className="w-full sm:max-w-md">
-                    <h1 className="text-center text-2xl mb-4">Enter Vehicle details you want to Rent</h1>
+                    <h1 className="text-center text-2xl mb-4 text-gray-700 dark:text-gray-700">Enter Vehicle details you want to Rent</h1>
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <fieldset>
-                            <legend>Owner Details</legend>
+                            <legend className="text-gray-700 dark:text-gray-700">Owner Details</legend>
                             <label className="text-green-500">
                                 Owner Name:
                                 <input type="text" value={ownerName} onChange={(e) => setOwnerName(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
@@ -99,7 +99,7 @@ export default function RentEV() {
                         </fieldset>
 
                         <fieldset>
-                            <legend>Vehicle Details</legend>
+                            <legend className="text-gray-700 dark:text-gray-700">Vehicle Details</legend>
                             <label className="text-green-500" >
                                 Vehicle Type:
                                 <input type="text" value={vehicleType} onChange={(e) => setVehicleType(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />

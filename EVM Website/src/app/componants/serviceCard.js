@@ -25,10 +25,10 @@ const ServiceCard = ({ title, description, onHelpUsClick,imageUrl }) => {
   };
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-6 relative">
-      <img src={imageUrl} alt={title} className="w-full h-48 object-cover"/>
-      <h2 className="text-xl font-bold mb-2">{title}</h2>
-      <p>{description}</p>
+    <div className="bg-white dark:bg-gray-950 shadow-md rounded-lg p-6 relative">
+      <img src={imageUrl} alt={title} className="w-full h-48 object-cover "/>
+      <h2 className="text-xl font-bold mb-2 text-gray-950 dark:text-gray-950">{title}</h2>
+      <p className="text-gray-950 dark:text-gary-950">{description}</p>
       <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" onClick={handleBookServiceClick}>
         Book a Service
       </button>

@@ -1,9 +1,21 @@
 'use client'
 import React, { useState } from "react"
 import Link from "next/link";
+import BuyPopup from '/src/app/buy/page.js';
 import { FaMapMarkerAlt, MdDirectionsCar, LuCircleDollarSign } from '../assets/icons/vander'
 
 export default function FormThree() {
+    const [isOpen, setIsOpen] = useState(false); // State for managing the visibility of the popup
+
+    // Function to open the popup
+    const openPopup = () => {
+        setIsOpen(true);
+    };
+
+    // Function to close the popup
+    const closePopup = () => {
+        setIsOpen(false);
+    };
     let [activeTabIndex, setActiveTabIndex] = useState(0);
 
     let handleTabClick = (tabIndex) => {
@@ -13,12 +25,13 @@ export default function FormThree() {
     return (
         <div className="grid grid-cols-1">
             <ul className="inline-block sm:w-fit w-full flex-wrap justify-center text-center p-4 bg-white dark:bg-slate-900 rounded-t-xl border-b dark:border-gray-800" id="myTab" data-tabs-toggle="#StarterContent" role="tablist">
-                <li role="presentation" className="inline-block mr-2">
-                <Link href="/buy" className="btn bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-md">Buy</Link>
-                </li>
                 <li  role="presentation" className="inline-block mr-2">
                         <Link href="/sell" className="btn bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-md">Sell</Link>
                      </li>
+                     <li role="presentation" className="inline-block mr-2">
+                         <Link href="#" className="btn bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-md" onClick={openPopup}>Buy</Link>
+                     </li>
+                    {isOpen && <BuyPopup isOpen={isOpen} onClose={closePopup} />}
                      <li  role="presentation" className="inline-block mr-2">
                         <Link href="/grid-map" className="btn bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-md">Rentals</Link>
                      </li>

@@ -95,10 +95,10 @@ export default function IndexFour() {
   return (
     <>
       <Navbar />
-      <section className="py-20 bg-gray-100" style={{ backgroundImage: "url('/images/bg/rentals.jpg')" }}>
+      <section className=" relative py-20  md:pb-24 pb-16" style={{ backgroundImage: "url('/images/bg/rentals.jpg')" }}>
         <div className="container mx-auto px-4">
           <div className="max-w-lg mx-auto bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-2xl font-bold mb-4 text-black-900 dark:text-black">Select Pickup Date and Time</h2>
+            <h2 className="text-2xl font-bold mb-4 text-gray-950 dark:text-gray-950">Select Pickup Date and Time</h2>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">Start Date</label>
               <input 
@@ -106,7 +106,7 @@ export default function IndexFour() {
                 value={startDate}
                 min={new Date().toISOString().split('T')[0]}
                 onChange={handleStartDateChange}
-                className="w-full border border-gray-300 rounded px-4 py-2 mb-2"
+                className="w-full border border-gray-300 rounded px-4 py-2 mb-2 text-gray-700 dark:text-gray-700"
               />
               <label className="block text-gray-700 text-sm font-bold mb-2">Start Time</label>
               <div className="flex">
@@ -117,9 +117,9 @@ export default function IndexFour() {
                   min="1"
                   max="12"
                   onChange={handleStartTimeChange}
-                  className="w-1/4 border border-gray-300 rounded-l px-4 py-2 mb-4 mr-1"
+                  className="w-1/4 border border-gray-300 rounded-l px-4 py-2 mb-4 mr-1 text-gray-700 dark:text-gray-700"
                 />
-                <span className="flex items-center border border-gray-300 rounded-r px-4 mb-4">:</span>
+                <span className="flex items-center border border-gray-300 rounded-r px-4 mb-4 text-gray-700 dark:text-gray-700">:</span>
                 <input 
                   type="number" 
                   name="minute"
@@ -127,13 +127,13 @@ export default function IndexFour() {
                   min="0"
                   max="59"
                   onChange={handleStartTimeChange}
-                  className="w-1/4 border border-gray-300 rounded-l px-4 py-2 mb-4 mr-1"
+                  className="w-1/4 border border-gray-300 rounded-l px-4 py-2 mb-4 mr-1 text-gray-700 dark:text-gray-700"
                 />
                 <select
                   name="period"
                   value={startTime.period}
                   onChange={handleStartTimeChange}
-                  className="w-1/4 border border-gray-300 rounded-l px-4 py-2 mb-4"
+                  className="w-1/4 border border-gray-300 rounded-l px-4 py-2 mb-4 text-gray-700 dark:text-gray-700"
                 >
                   <option value="AM">AM</option>
                   <option value="PM">PM</option>
@@ -158,7 +158,7 @@ export default function IndexFour() {
                     value={endDate}
                     min={startDate} // Set min date to the start date
                     onChange={handleEndDateChange}
-                    className="w-full border border-gray-300 rounded px-4 py-2 mb-4"
+                    className="w-full border border-gray-300 rounded px-4 py-2 mb-4 text-gray-700 dark:text-gray-700"
                   />
                 </div>
               )}
@@ -176,7 +176,7 @@ export default function IndexFour() {
                 </label>
                 {enableHours && (
                   <div className="flex items-center mb-4">
-                    <button onClick={decrementHours} className="px-2 py-1 bg-gray-200 rounded-full mr-2">-</button>
+                    <button onClick={decrementHours} className="px-2 py-1 bg-gray-200 rounded-full mr-2 text-gray-700 dark:text-gray-700">-</button>
                     <input
                       type="range"
                       min="1"
@@ -188,7 +188,7 @@ export default function IndexFour() {
                         background: 'linear-gradient(to right, #68d391 0%, #68d391 ' + ((hours / 24) * 100) + '%, #e2e8f0 ' + ((hours / 24) * 100) + '%, #e2e8f0 100%)'
                       }}
                     />
-                    <button onClick={incrementHours} className="px-2 py-1 bg-gray-200 rounded-full ml-2">+</button>
+                    <button onClick={incrementHours} className="px-2 py-1 bg-gray-200 rounded-full ml-2 text-gray-700 dark:text-gray-700">+</button>
                     <div className="w-12 text-center ml-4 text-slate-900 dark:text-slate">{hours} Hours</div>
                   </div>
                 )}
@@ -198,7 +198,7 @@ export default function IndexFour() {
             <select
               value={location}
               onChange={handleLocationChange}
-              className="w-full border border-gray-300 rounded px-4 py-2 mb-4"
+              className="w-full border border-gray-300 rounded px-4 py-2 mb-4 text-gray-700 dark:text-gray-700"
             >
               <option value="">Select location</option>
               {locationOptions.map((option, index) => (
@@ -219,7 +219,7 @@ export default function IndexFour() {
                 id="bodyType"
                 value={filterBodyType}
                 onChange={handleBodyTypeChange}
-                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-gray-700 dark:text-gray-700"
               >
                 <option value="">All</option>
                 <option value="SUV">SUV</option>

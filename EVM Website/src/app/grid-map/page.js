@@ -18,13 +18,14 @@ export default function Rent() {
         </div>
       </section>
       <div className="relative">
-        <div className="shape overflow-hidden z-1 text-white dark:text-white-900">
+        <div className="shape overflow-hidden z-1 text-white  dark:text-white ">
           <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
           </svg>
         </div>
       </div>
-      <section className="relative md:pb-24 pb-16 bg-black dark:bg-black-900">
+      <section className="relative md:pb-24 pb-16 pt-0 ">
+        
         <div className="container lg:mt-24 mt-16 flex flex-col items-center">
           <h3 className="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold text-green-600">How it works?</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

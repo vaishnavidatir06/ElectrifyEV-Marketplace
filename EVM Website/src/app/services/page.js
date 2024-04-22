@@ -1,6 +1,5 @@
-"use client";
+'use client'
 import React, { useState } from 'react';
-import Head from 'next/head';
 import Navbar from "../componants/navbar";
 import Switcher from "../componants/switcher";
 import Footer from "../componants/footer";
@@ -87,41 +86,41 @@ const EmergencyPage = () => {
     <>
       <Navbar />
       <section className="relative mt-20">
-  <div className="container-fluid md:mx-4 mx-2">
-    <div style={{ backgroundImage: `url('/images/popup/services.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center', height: '20vh' }} className="relative pt-20 pb-40 table w-full rounded-xl shadow-md overflow-hidden bg-no-repeat" id="home">
-      <div className="container mx-auto pt-20 pb-12 grid grid-cols-2 gap-8">
-        <div className="col-span-1">
-          <div className="md:text-start text-center">
-            <p className="text-6xl font-semibold mb-8 text-white-900 dark:text-white pt-20">Most trusted solution for roadside emergency</p>
+        <div className="container-fluid md:mx-4 mx-2">
+          <div style={{ backgroundImage: `url('/images/popup/services.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center', height: '20vh' }} className="relative pt-20 pb-40 table w-full rounded-xl shadow-md overflow-hidden bg-no-repeat" id="home">
+            <div className="container mx-auto pt-20 pb-12 grid grid-cols-2 gap-8">
+              <div className="col-span-1">
+                <div className="md:text-start text-center">
+                  <p className="text-6xl font-semibold mb-8 text-white dark:text-white pt-20">Most trusted solution for roadside emergency</p>
+                </div>
+              </div>
+              <div className="col-span-1">
+                <div className="max-w-md mx-auto bg-gray-200 rounded-lg shadow-lg pt-10 px-8 pb-8">
+                  <p className="text-xl font-semibold mb-8 text-gray-950 dark:text-gray-950 ">For emergency</p>
+                  <form className="grid gap-4">
+                    <div>
+                      <label htmlFor="location" className="block text-sm font-medium text-gray-700">Location</label>
+                      <input type="text" id="location" name="location" className="w-full h-8 border rounded-sm py-1 px-2" />
+                    </div>
+                    <div>
+                      <label htmlFor="mobile" className="block text-sm font-medium text-gray-700">Mobile Number</label>
+                      <input type="text" id="mobile" name="mobile" className="w-full h-8 border rounded-sm py-1 px-2" />
+                    </div>
+                    <div>
+                      <label htmlFor="registration" className="block text-sm font-medium text-gray-700">Vehicle Registration Number</label>
+                      <input type="text" id="registration" name="registration" className="w-full h-8 border rounded-sm py-1 px-2" />
+                    </div>
+                    <div className="flex justify-end">
+                      <button type="submit" onClick={handleFormSubmit} className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">
+                        Submit
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="col-span-1">
-          <div className="max-w-md mx-auto bg-gray-200 rounded-lg shadow-lg pt-10 px-8 pb-8">
-            <p className="text-xl font-semibold mb-8 text-black-600 dark:text-black ">For emergency</p>
-            <form className="grid gap-4">
-              <div>
-                <label htmlFor="location" className="block text-sm font-medium text-gray-700">Location</label>
-                <input type="text" id="location" name="location" className="w-full h-8 border rounded-sm py-1 px-2" />
-              </div>
-              <div>
-                <label htmlFor="mobile" className="block text-sm font-medium text-gray-700">Mobile Number</label>
-                <input type="text" id="mobile" name="mobile" className="w-full h-8 border rounded-sm py-1 px-2" />
-              </div>
-              <div>
-                <label htmlFor="registration" className="block text-sm font-medium text-gray-700">Vehicle Registration Number</label>
-                <input type="text" id="registration" name="registration" className="w-full h-8 border rounded-sm py-1 px-2" />
-              </div>
-              <div className="flex justify-end">
-                <button type="submit" onClick={handleFormSubmit} className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">
-                  Submit
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      </div>
-      </div>
       </section>
 
 
@@ -130,10 +129,10 @@ const EmergencyPage = () => {
         <div className="flex flex-wrap justify-center">
           {vehicles.map(vehicle => (
             <div key={vehicle.id} className="max-w-sm rounded overflow-hidden shadow-lg m-4">
-              <div className="bg-gray-200 bg-opacity-50 p-8">
-                <h1 className="text-3xl font-bold text-black mb-6">{vehicle.name}</h1>
-                <img src={vehicle.image} alt={vehicle.name} className="w-full" />
-                <p className="text-lg text-black mb-4 mt-4">{vehicle.description}</p>
+              <div className="bg-gray-200 dark:bg-zinc-500 bg-opacity-50 p-8 h-full">
+                <h1 className="text-3xl font-bold text-black dark:text-white mb-6">{vehicle.name}</h1>
+                <img src={vehicle.image} alt={vehicle.name} className="w-full h-40 object-cover" />
+                <p className="text-lg text-black dark:text-white mb-4 mt-4">{vehicle.description}</p>
                 <div className="flex justify-center">
                   <button onClick={() => handleBookService(vehicle.name)} className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700">
                     Book a Service
@@ -155,7 +154,6 @@ const EmergencyPage = () => {
               </button>
             </div>
             <h2 className="text-lg font-bold mb-4">Contacting our management team , we will reachout to you</h2>
-           
           </div>
         </div>
       )}

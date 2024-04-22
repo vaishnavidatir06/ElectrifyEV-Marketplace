@@ -33,7 +33,7 @@ export default function Sell(){
                 
                 <div className="container lg:mt-24 mt-16">
                     <div className="grid grid-cols-1 pt-10 text-center">
-                        <h3 className="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold text-white dark:text-white">Would you like to sell your eV?</h3>
+                        <h3 className="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold text-gray-800 dark:text-white">Would you like to sell your eV?</h3>
                         <div className="flex justify-center"> {/* Add this wrapper div */}
                         <li className="sm:inline ps-1 mb-0 hidden">
                             <Link href="/sell-form" className="btn bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-full">Sell</Link>
