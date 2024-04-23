@@ -80,6 +80,12 @@ export default function Grid() {
     const handleBodyTypeChange = (e) => {
         setFilterBodyType(e.target.value);
     };
+     const handleVehicleClick = (vehicleId, e) => {
+        // Add your click handling logic here
+        console.log(`Vehicle clicked: ${vehicleId}`);
+        // Prevent default behavior if needed
+       
+    };
 
 
     // Declare filterEcarVehicles function here
@@ -328,9 +334,9 @@ export default function Grid() {
                     <div className="container">
                         <div className="lg:col-span-9 md:col-span-10 col-span-11">
                             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[30px]">
-                                {filteredEcarVehicles.map((vehicles, index) => (
-                                    <Link href={`/Car`} key=
-                                        {vehicles._id} >
+                                {filteredEcarVehicles.map((vehicle) => (
+                        <div key={vehicle._id} onClick={() => handleVehicleClick(vehicle._id)}>
+                            <Link href={`/vehicle-detail?${vehicle._id}`}>
                                         <div className="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500">
                                             <div className="group relative rounded-xl bg-white dark:bg-slate-900 overflow-hidden transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl">
                                                 <div className="relative">
