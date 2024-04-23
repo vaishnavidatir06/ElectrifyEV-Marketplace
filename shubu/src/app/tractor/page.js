@@ -1,50 +1,35 @@
-'use client';
-import React, { useState, useEffect } from "react";
+'use client'; 
+import Image from "next/image";
 import Link from "next/link";
-import Navbar from "../componants/navbar";
-import Switcher from "../componants/switcher";
-import Footer from "../componants/footer";
+import { useEffect, useState } from "react";
+import Footer from "../componants/footer"; // Corrected import statement
+import Navbar from "../componants/navbar"; // Corrected import statement
+import Switcher from "../componants/switcher"; // Corrected import statement
 
 
-
-
-import { MdDirectionsCar, MdSettingsInputComponent, MdTune, FiChevronLeft, FiChevronRight } from '../assets/icons/vander'
+import { FiChevronLeft, FiChevronRight, MdDirectionsCar } from '../assets/icons/vander';
 
 
 export default function Grid() {
-    const [ecarVehicles, setEcarVehicles] = useState([]);
-    const [filteredEcarVehicles, setFilteredEcarVehicles] = useState([]);
+    const [filteredTractors, setFilteredTractors] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
+   
     const [filterBrand, setFilterBrand] = useState("");
     const [filterLocation, setFilterLocation] = useState("");
-    const [filterTransmissionType, setFilterTransmissionType] = useState("");
+    const [filterBatteryPower, setFilterBatteryPower] = useState("");
     const [filterColor, setFilterColor] = useState("");
     const [filterKilometresDriven, setFilterKilometresDriven] = useState("");
     const [filterPrice, setFilterPrice] = useState("");
-    const [filterBodyType, setFilterBodyType] = useState(""); // Add this state
 
     useEffect(() => {
-        fetchEcarVehicles().catch(error => console.error('Error fetching eCar vehicles:', error));
-    }, []);
-
-    useEffect(() => {
-        filterEcarVehicles();
-    }, [searchQuery, filterBrand, filterLocation, filterTransmissionType, filterColor, filterKilometresDriven, filterPrice, filterBodyType, ecarVehicles]); // Add filterBodyType here
-
-    const fetchEcarVehicles = async () => {
-        try {
-            const response = await fetch('http://localhost:5000/api/vehicles/ecar');
-            const data = await response.json();
-            setEcarVehicles(data);
-            setFilteredEcarVehicles(data);
-        } catch (error) {
-            console.error('Error fetching eCar vehicles:', error);
-        }
-    };
+        filterTractors();
+    }, [searchQuery,  filterBrand, filterLocation, filterBatteryPower, filterColor, filterKilometresDriven, filterPrice]);
 
     const handleSearchInputChange = (e) => {
         setSearchQuery(e.target.value);
     };
+
+    
 
     const handleBrandChange = (e) => {
         setFilterBrand(e.target.value);
@@ -54,8 +39,8 @@ export default function Grid() {
         setFilterLocation(e.target.value);
     };
 
-    const handleTransmissionTypeChange = (e) => {
-        setFilterTransmissionType(e.target.value);
+    const handleBatteryPowerChange = (e) => {
+        setFilterBatteryPower(e.target.value);
     };
 
     const handleColorChange = (e) => {
@@ -70,33 +55,42 @@ export default function Grid() {
         setFilterPrice(e.target.value);
     };
 
-    const handleBodyTypeChange = (e) => {
-        setFilterBodyType(e.target.value);
+    const filterTractors = async () => {
+        try {
+            const response = await fetch('http://51.79.225.217:5001/api/vehicles/etractor');
+            const data = await response.json();
+            setFilteredTractors(data);
+        } catch (error) {
+            console.error('Error fetching etractors:', error);
+        }
     };
 
+    const applyFilters = () => {
+        const filtered = filteredTractors.filter((tractor) => {
+            const matchesSearchQuery =
+                tractor.ownerName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                
+                tractor.kilometresDriven.toString().includes(searchQuery) ||
+                tractor.batteryPower.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                tractor.color.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                tractor.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                tractor.price.value.toString().includes(searchQuery);
 
-    // Declare filterEcarVehicles function here
-    const filterEcarVehicles = () => {
-        const filtered = ecarVehicles.filter((vehicle) => {
-            const matchesSearchQuery = vehicle.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                vehicle.model.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                vehicle.variant.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                vehicle.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                vehicle.color.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                vehicle.kilometresDriven.toString().includes(searchQuery);
-
-            const matchesFilters = (!filterBrand || vehicle.brand.toLowerCase() === filterBrand.toLowerCase()) &&
-                (!filterLocation || vehicle.location.toLowerCase() === filterLocation.toLowerCase()) &&
-                (!filterTransmissionType || (vehicle.transmissionType && vehicle.transmissionType.toLowerCase() === filterTransmissionType.toLowerCase())) &&
-                (!filterColor || vehicle.color.toLowerCase() === filterColor.toLowerCase()) &&
-                (!filterKilometresDriven || vehicle.kilometresDriven <= parseInt(filterKilometresDriven)) &&
-                (!filterPrice || vehicle.price.value <= parseInt(filterPrice)); // Access the value property of price
+            const matchesFilters =
+               
+                (!filterBrand || tractor.brand.toLowerCase() === filterBrand.toLowerCase()) &&
+                (!filterLocation || tractor.location.toLowerCase() === filterLocation.toLowerCase()) &&
+                (!filterBatteryPower || tractor.batteryPower.toLowerCase() === filterBatteryPower.toLowerCase()) &&
+                (!filterColor || tractor.color.toLowerCase() === filterColor.toLowerCase()) &&
+                (!filterKilometresDriven || tractor.kilometresDriven <= parseInt(filterKilometresDriven)) &&
+                (!filterPrice || tractor.price.value <= parseInt(filterPrice));
 
             return matchesSearchQuery && matchesFilters;
         });
-        setFilteredEcarVehicles(filtered);
+
+        setFilteredTractors(filtered);
     };
-    
+
    
   
     return(
@@ -104,12 +98,12 @@ export default function Grid() {
           <Navbar navClass="navbar-white"/>
           
           <section
-                style={{ backgroundImage: "url('/images/bg/b17.jpg')" }}
+                style={{ backgroundImage: "url('/images/bg/mahindra.jpeg')" }}
                 className="relative table w-full py-32 lg:py-36 bg-no-repeat bg-center bg-cover">
                 <div className="absolute inset-0 bg-black opacity-80"></div>
                 <div className="container">
                     <div className="grid grid-cols-1 text-center mt-10">
-                        <h3 className="md:text-4xl text-3xl md:leading-normal leading-normal font-medium text-white">Find Your Dream eCar</h3>
+                        <h3 className="md:text-4xl text-3xl md:leading-normal leading-normal font-medium text-white">Find Your Dream e-Tractor</h3>
                     </div>
                 </div>
             </section>
@@ -135,11 +129,10 @@ export default function Grid() {
             {/* End of Search Bar */}
 
                  {/* Filter Sidebar */}
-                 <div className="mb-20"></div>
                   <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap">
-                {/* Type Filter */}
+                {/* Brand Filter */}
                 <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                <label htmlFor="brand" className="font-semibold mb-1 mr-2 text-gray-950 dark:text-gray-950">
+                            <label htmlFor="brand" className="font-semibold mb-1 mr-2">
                                 Brand:
                             </label>
                             <select
@@ -147,20 +140,17 @@ export default function Grid() {
                                 id="brand"
                                 value={filterBrand}
                                 onChange={handleBrandChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-gray-950 dark:text-gray-950"
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
                             >
                                 <option value="">All</option>
-                                <option value="Audi">Audi</option>
-                                <option value="BMW">BMW</option>
-                                <option value="Honda">Honda</option>
-                                <option value="Toyota">Toyota</option>
-                                <option value="Nissan">Nissan</option>
+                                <option value="sdfwedfv">sdfwedfv</option>
+                                {/* Add more options */}
                             </select>
                         </div>
-                        
 
+                        {/* Location */}
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="Location" className="font-semibold mb-1 mr-2 text-gray-950 dark:text-gray-950">
+                            <label htmlFor="Location" className="font-semibold mb-1 mr-2">
                                 Location:
                             </label>
                             <select
@@ -168,90 +158,67 @@ export default function Grid() {
                                 id="Location"
                                 value={filterLocation}
                                 onChange={handleLocationChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-gray-950 dark:text-gray-950"
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
                             >
                                 <option value="">All</option>
-                                <option value="Mumbai">Mumbai</option>
                                 <option value="Pune">Pune</option>
-                                <option value="Delhi">Delhi</option>
-                                <option value="Bangalore">Bangalore</option>
+                                {/* Add more options */}
                             </select>
                         </div>
 
+                        {/* Color */}
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="transmissionType" className="font-semibold mb-1 mr-2 text-gray-950 dark:text-gray-950">
-                                Transmission Type:
+                            <label htmlFor="color" className="font-semibold mb-1 mr-2">
+                                Color:
                             </label>
                             <select
-                                name="transmissionType"
-                                id="transmissionType"
-                                value={filterTransmissionType}
-                                onChange={handleTransmissionTypeChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-gray-950 dark:text-gray-950"
-                            >
-                                <option value="">All</option>
-                                <option value="Automatic">Automatic</option>
-                                <option value="Manual">Manual</option>
-                            </select>
-                        </div>
-
-                        <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="colour" className="font-semibold mb-1 mr-2 text-gray-950 dark:text-gray-950">
-                                Colour:
-                            </label>
-                            <select
-                                name="colour"
-                                id="colour"
+                                name="color"
+                                id="color"
                                 value={filterColor}
                                 onChange={handleColorChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-gray-950 dark:text-gray-950"
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
                             >
                                 <option value="">All</option>
-                                <option value="Red">Red</option>
-                                <option value="Silver">Silver</option>
-                                <option value="Gold">Gold</option>
-                                <option value="Blue">Blue</option>
-                                <option value="Black">Black</option>
+                                <option value="black">Black</option>
+                                {/* Add more options */}
                             </select>
                         </div>
+
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="bodytype" className="font-semibold mb-1 mr-2 text-gray-950 dark:text-gray-950">
-                                Body Type:
+                            <label htmlFor="Battery" className="font-semibold mb-1 mr-2">
+                                Battery:
                             </label>
-                            <select
-                                name="bodytype"
-                                id="bodytype"
-                                value={filterBodyType}
-                                onChange={handleBodyTypeChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-gray-950 dark:text-gray-950"
-                            >
-                                <option value="">All</option>
-                                <option value="SUV">SUV</option>
-                                <option value="Hatchback">Hatchback</option>
-                                <option value="Sedan">Sedan</option>
-                                <option value="Coupe">Coupe</option>
-                                <option value="MUV">MUV</option>
-                            </select>
+                            <input
+                                type="range"
+                                id="Battery"
+                                min="0"
+                                max="500"
+                                value={filterBatteryPower}
+                                onChange={handleBatteryPowerChange}
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                            />
                         </div>
 
-
+                        {/* Kilometres Driven */}
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="kilometresDriven" className="font-semibold mb-1 mr-2 text-gray-950 dark:text-gray-950">
+                            <label htmlFor="kilometresDriven" className="font-semibold mb-1 mr-2">
                                 Kilometres Driven:
                             </label>
                             <input
                                 type="range"
-                                id="kilometers"
+                                id="kilometresDriven"
                                 min="0"
                                 max="100000"
                                 value={filterKilometresDriven}
                                 onChange={handleKilometresDrivenChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-gray-950 dark:text-gray-950" />
-                            <span className="ml-2 text-gray-950 dark:text-gray-950">{filterKilometresDriven} km</span>
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                            />
+                            <span className="ml-2">{filterKilometresDriven} km</span>
                         </div>
 
+                        {/* Price */}
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="price" className="font-semibold mb-1 mr-2 text-gray-950 dark:text-gray-950">
+                            <label htmlFor="price" className="font-semibold mb-1 mr-2">
                                 Price:
                             </label>
                             <input
@@ -261,36 +228,38 @@ export default function Grid() {
                                 max="1000000"
                                 value={filterPrice}
                                 onChange={handlePriceChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-gray-950 dark:text-gray-950" />
-                            <span className="ml-2 text-gray-950 dark:text-gray-950">${filterPrice}</span>
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                            />
+                            <span className="ml-2">${filterPrice}</span>
                         </div>
-                    
+                    </div>
+                    {/* End of Filter Sidebar */}
 
-            </div>
-            </div>
-            {/* End of Filter Sidebar */}
+
+
+
+          
              
                 </div>
-                
-             {/* Searched Car Display */}
-           
-            {/* End of Searched Car Display */}
+            </div>
 
 
-                
-                <section className="relative lg:py-24 py-16">
+
+
+            <section className="relative lg:py-24 py-16">
     <div className="container">
         <div className="lg:col-span-9 md:col-span-10 col-span-11">
             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[30px]">
-                {filteredEcarVehicles.map((vehicles, index) => (
-                   <div key={index} className="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500">
+            {filteredTractors.map((tractor, index) => (
+                            <div key={index} className="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500">
                         <div className="group relative rounded-xl bg-white dark:bg-slate-900 overflow-hidden transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl">
                             <div className="relative">
-                            <div className="relative">
-            {ecar.frontImagesBase64 && ecar.frontImagesBase64.length > 0 && (
-                <img src={`data:image/jpeg;base64,${ecar.frontImagesBase64[0]}`} alt="Front View" className="h-40 w-auto" />
-            )}
-            </div>
+                            <div className="flex justify-center py-2">
+                                    {/* Display only the first image */}
+                                    {tractor.frontImagesBase64.length > 0 && (
+                                        <Image src={`data:image/jpeg;base64,${tractor.frontImagesBase64[0]}`} alt="Front View" className="h-40 w-auto" />
+                                    )}
+                                </div>
                                 <div className="absolute top-4 end-4">
                                 <button class="flex-none flex items-center justify-center w-9 h-9 rounded-md bg-white border text-black-300 hover:text-red-500" type="button" aria-label="Like">
         <svg width="20" height="20" fill="currentColor" aria-hidden="true">
@@ -299,37 +268,28 @@ export default function Grid() {
       </button>
                                 </div>
                             </div>
-                            </div>
                             <div className="p-6 group-hover:bg-gray-100 dark:group-hover:bg-slate-800">
                                 <div className="pb-6">
-                                    <p className="text-lg hover:text-green-600 font-medium ease-in-out duration-500">{vehicles.brand}</p>
+                                    <p className="text-lg hover:text-green-600 font-medium ease-in-out duration-500">{tractor.brand}</p>
                                 </div>
                                 <ul className="py-6 border-y border-slate-100 dark:border-gray-800 flex items-center list-none">
                                     <li className="flex items-center me-4">
                                         <MdDirectionsCar width={20} className="me-2 text-green-600" />
-                                        <span>{vehicles.model}</span>
+                                        <span>{tractor.model}</span>
                                     </li>
-                                    <li className="flex items-center me-4">
-                                        <MdSettingsInputComponent width={20} className="me-2 text-green-600" />
-                                        <span>{vehicles.transmissionType}</span>
-                                    </li>
-                                    <li className="flex items-center">
-                                        <MdTune width={20} className="me-2 text-green-600" />
-                                        <span>{vehicles.kilometresDriven}</span>
-                                    </li>
+                                    
                                 </ul>
                                 <ul className="pt-6 flex justify-between items-center list-none">
                                     <li>
                                         <span className="text-slate-400">Price</span>
-                                        <p className="text-lg font-medium">${vehicles.price && vehicles.price.value}</p>
+                                        <p className="text-lg font-medium">${tractor.price.value}</p>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-                    
+                    </div>
                 ))}
             </div>
-            
         </div>
 
         <div className="grid md:grid-cols-12 grid-cols-1 mt-8">
@@ -363,8 +323,6 @@ export default function Grid() {
                             </nav>
                         </div>
                     </div>
-
-
 
 
 
