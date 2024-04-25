@@ -93,14 +93,24 @@ export default function Profile() {
                     <h6 className="text-green-600 dark:text-white font-medium">Mobile Number</h6>
                     <p className="text-slate-400">9867452387</p>
                   </div>
-                </div>
+                  </div>
+                  <div>
+                  <div  className="flex items-start">
+                        {session ? (
+                            <>
+                                <Link href="/api/auth/signout?callbackUrl=/" className="btn bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-full">Logout</Link>
+                            </>
+                        ) : null}
+                    </div>
+                    </div>
+                
               </div>
             </div>
           
 
           <div className="md:col-span-9 ">
             <div className="p-10 mt-20 rounded-md shadow bg-white dark:bg-slate-900 shadow-md">
-                                    <h5 className="text-xl font-semibold">My EVs :</h5>
+                                    <h5 className="text-xl font-semibold">Wishlist</h5>
 
                                     <ul className="mt-4 space-y-2 shadow-md">
                                         {wishlistItems.map((item, index) => (

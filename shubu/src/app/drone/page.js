@@ -102,10 +102,8 @@ export default function Grid() {
                 <div className="absolute inset-0 bg-black opacity-80"></div>
                 <div className="container">
                     <div className="grid grid-cols-1 text-center mt-10">
-                        <h3 className="md:text-4xl text-3xl md:leading-normal leading-normal font-medium text-white">Find Your Dream Drone</h3>
-                        <Link href="#" className="btn btn-icon bg-white dark:bg-slate-900 shadow dark:shadow-gray-500 rounded-full text-slate-100 dark:text-slate-700 focus:text-red-600 dark:focus:text-red-600">
-      <i className="mdi mdi-heart mdi-18px text-gray-700 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-600" style={{fontSize: '24px'}}></i>
-    </Link>
+                        <h3 className="md:text-4xl text-3xl md:leading-normal leading-normal font-medium text-white">Find Your Dream eDrone</h3>
+                        
   
                     </div>
                 </div>
@@ -139,7 +137,7 @@ export default function Grid() {
                 {/* Brand Filter */}
                 <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap">
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="Battery" className="font-semibold mb-1 mr-2">
+                            <label htmlFor="Battery" className="font-semibold mb-1 mr-2 text-black">
                                 Battery:
                             </label>
                             <input
@@ -149,14 +147,14 @@ export default function Grid() {
                                 max="100000"
                                 value={filterBattery}
                                 onChange={handleBatteryChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black"
                             />
-                            <span className="ml-2">{filterBattery}mAh</span>
+                            <span className="ml-2 text-black">{filterBattery}mAh</span>
                         </div>
 
                         {/* Add more filter options here */}
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="Brand" className="font-semibold mb-1 mr-2">
+                            <label htmlFor="Brand" className="font-semibold mb-1 mr-2 text-black">
                                 Brand:
                             </label>
                             <select
@@ -164,21 +162,21 @@ export default function Grid() {
                                 id="Brand"
                                 value={filterBrand}
                                 onChange={handleBrandChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black"
                             >
-                                <option value="">All</option>
-                                <option value="Garuda">Garuda</option>
-                        <option value="Ideaforge">Ideaforge</option>
-                        <option value="Marut">Marut</option>
-                        <option value="IG">IG</option>
-                        <option value="Tsaw">Tsaw</option>
-                        <option value="Riyal">Riyal</option>ss
+                                <option value="" className="text-black">All</option>
+                                <option value="Garuda" className="text-black">Garuda</option>
+                        <option value="Ideaforge" className="text-black">Ideaforge</option>
+                        <option value="Marut" className="text-black">Marut</option>
+                        <option value="IG" className="text-black">IG</option>
+                        <option value="Tsaw" className="text-black">Tsaw</option>
+                        <option value="Riyal" className="text-black">Riyal</option>ss
                                 {/* Add more options */}
                             </select>
                         </div>
 
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="Location" className="font-semibold mb-1 mr-2">
+                            <label htmlFor="Location" className="font-semibold mb-1 mr-2 text-black">
                                 Location:
                             </label>
                             <select
@@ -186,19 +184,19 @@ export default function Grid() {
                                 id="Location"
                                 value={filterLocation}
                                 onChange={handleLocationChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black"
                             >
-                                <option value="">All</option>
-                                <option value="Mumbai">Mumbai</option>
-                        <option value="Pune">Pune</option>
-                        <option value="Delhi">Delhi</option>
-                        <option value="Bangalore">Bangalore</option>
+                                <option value="" className="text-black">All</option>
+                                <option value="Mumbai" className="text-black">Mumbai</option>
+                        <option value="Pune" className="text-black">Pune</option>
+                        <option value="Delhi" className="text-black">Delhi</option>
+                        <option value="Bangalore" className="text-black">Bangalore</option>
                                 {/* Add more options */}
                             </select>
                         </div>
 
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="Color" className="font-semibold mb-1 mr-2">
+                            <label htmlFor="Color" className="font-semibold mb-1 mr-2 text-black">
                                 Color:
                             </label>
                             <select
@@ -206,18 +204,18 @@ export default function Grid() {
                                 id="Color"
                                 value={filterColor}
                                 onChange={handleColorChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black"
                             >
-                                <option value="">All</option>
-                                <option value="Multicolour">Multicolour</option>
-                        <option value="Blue">Blue</option>
-                        <option value="Grey">Grey</option>
+                                <option value="" className="text-black">All</option>
+                                <option value="Multicolour" className="text-black">Multicolour</option>
+                        <option value="Blue" className="text-black">Blue</option>
+                        <option value="Grey" className="text-black">Grey</option>
                                 {/* Add more options */}
                             </select>
                         </div>
 
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="Price" className="font-semibold mb-1 mr-2">
+                            <label htmlFor="Price" className="font-semibold mb-1 mr-2 text-black">
                                 Price:
                             </label>
                             <input
@@ -227,9 +225,9 @@ export default function Grid() {
                                 max="1000000"
                                 value={filterPrice}
                                 onChange={handlePriceChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black"
                             />
-                            <span className="ml-2">${filterPrice}</span>
+                            <span className="ml-2 text-black">${filterPrice}</span>
                         </div>
                         </div>
                         </div>
@@ -283,16 +281,17 @@ export default function Grid() {
                 )}
                 </div>
 
-                                    <div className="absolute top-4 end-4">
-                                    <button class="flex-none flex items-center justify-center w-9 h-9 rounded-md bg-white border text-black-300 hover:text-red-500" type="button" aria-label="Like">
-        <svg width="20" height="20" fill="currentColor" aria-hidden="true">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-        </svg>
-      </button>
-                                    </div>
+                <div  onClick={() => handleAddToWishlist(vehicles)}
+                                                className="absolute top-4 end-4">
+                              <button class="flex-none flex items-center justify-center w-9 h-9 rounded-md bg-white border dark:bg-black border text-gray-200 dark:text-black-200 hover:text-red-500 dark:hover:text-red-500" type="button" aria-label="Like">
+  <svg width="20" height="20" fill="currentColor" aria-hidden="true">
+    <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+  </svg>
+</button>
+                                </div>
                                 </div>
 
-                                <div className="p-6 group-hover:bg-gray-100 dark:group-hover:bg-slate-800">
+                                <div className="p-6 group-hover:bg-black-100 dark:group-hover:bg-black-100">
                                     <div className="pb-6 ">
                                     <p className="text-lg hover:text-green-600 font-medium ease-in-out duration-500">{edrone.name}</p>
 
@@ -359,37 +358,7 @@ export default function Grid() {
                             </nav>
                         </div>
                     </div>
-                    <div className="grid md:grid-cols-12 grid-cols-1 mt-8">
-                        <div className="md:col-span-12 text-center">
-                            <nav>
-                                <ul className="inline-flex items-center -space-x-px">
-                                    <li>
-                                        <Link href="#" className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 bg-white dark:bg-slate-900 hover:text-white shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">
-                                            <FiChevronLeft className="text-[20px]"/>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link href="#" aria-current="page" className="z-10 w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-white bg-green-600 shadow-sm dark:shadow-gray-700">1</Link>
-                                    </li>
-                                    <li>
-                                        <Link href="#" className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">2</Link>
-                                    </li>
-                                    <li>
-                                        <Link href="#" className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">3</Link>
-                                    </li>
-                                
-                                    <li>
-                                        <Link href="#" className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">3</Link>
-                                    </li>
-                                    <li>
-                                        <Link href="#" className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 bg-white dark:bg-slate-900 hover:text-white shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">
-                                            <FiChevronRight className="text-[20px]"/>
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
+                    
 
 
 

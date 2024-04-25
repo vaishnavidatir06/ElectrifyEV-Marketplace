@@ -150,7 +150,7 @@ export default function Grid() {
                   <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap">
                  {/* Type Filter */}
                  <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="type" className="font-semibold mb-1 mr-2">
+                            <label htmlFor="type" className="font-semibold mb-1 mr-2 text-black">
                                 Transmission Type:
                             </label>
                             <select
@@ -158,18 +158,18 @@ export default function Grid() {
                                 id="type"
                                 value={filterTransmissionType}
                                 onChange={handleTransmissionTypeChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black"
                             >
-                                <option value="">All</option>
-                                <option value="Manual">Manual</option>
-                                <option value="Automatic">Automatic</option>
+                                <option value="" className="text-black">All</option>
+                                <option value="Manual" className="text-black">Manual</option>
+                                <option value="Automatic" className="text-black">Automatic</option>
                                 {/* Add more options */}
                             </select>
                         </div>
 
                {/* Brand Filter */}
                <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="brand" className="font-semibold mb-1 mr-2">
+                            <label htmlFor="brand" className="font-semibold mb-1 mr-2 text-black">
                                 Brand:
                             </label>
                             <select
@@ -177,13 +177,13 @@ export default function Grid() {
                                 id="brand"
                                 value={filterBrand}
                                 onChange={handleBrandChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black"
                             >
-                               <option value="">All</option>
-                                    <option value="Ola">Ola</option>
-                                    <option value="Scooter">Scooter</option>
-                                    <option value="Honda">Honda</option>
-                                    <option value="li05-moped">li05-moped</option>
+                               <option value="" className="text-black">All</option>
+                                    <option value="Ola" className="text-black">Ola</option>
+                                    <option value="Scooter" className="text-black">Scooter</option>
+                                    <option value="Honda" className="text-black">Honda</option>
+                                    <option value="li05-moped" className="text-black">li05-moped</option>
                                 {/* Dynamically populate options based on fetched data */}
                                 {ebikes.map(ebike => (
                                     <option key={ebike._id} value={ebike.brand}>{ebike.brand}</option>
@@ -192,7 +192,7 @@ export default function Grid() {
                         </div>
                 {/* Location Filter */}
                 <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="location" className="font-semibold mb-1 mr-2">
+                            <label htmlFor="location" className="font-semibold mb-1 mr-2 text-black">
                                 Location:
                             </label>
                             <select
@@ -200,13 +200,13 @@ export default function Grid() {
                                 id="location"
                                 value={filterLocation}
                                 onChange={handleLocationChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black"
                             >
-                                <option value="">All</option>
-                                <option value="Mumbai">Mumbai</option>
-                                <option value="Pune">Pune</option>
-                                <option value="Delhi">Delhi</option>
-                                <option value="Bangalore">Bangalore</option>
+                                <option value="" className="text-black">All</option>
+                                <option value="Mumbai" className="text-black">Mumbai</option>
+                                <option value="Pune" className="text-black">Pune</option>
+                                <option value="Delhi" className="text-black">Delhi</option>
+                                <option value="Bangalore" className="text-black">Bangalore</option>
                                 {/* Dynamically populate options based on fetched data */}
                                 {ebikes.map(ebike => (
                                     <option key={ebike._id} value={ebike.location}>{ebike.location}</option>
@@ -215,7 +215,7 @@ export default function Grid() {
                         </div>
 
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="kilometresDriven" className="font-semibold mb-1 mr-2">
+                            <label htmlFor="kilometresDriven" className="font-semibold mb-1 mr-2 text-black">
                                 Kilometres Driven:
                             </label>
                             <input
@@ -225,12 +225,12 @@ export default function Grid() {
                                 max="100000"
                                 value={filterKilometresDriven}
                                 onChange={handleKilometresDrivenChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1" />
-                            <span className="ml-2">{filterKilometresDriven} km</span>
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black" />
+                            <span className="ml-2 text-black">{filterKilometresDriven} km</span>
                         </div>
 
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="price" className="font-semibold mb-1 mr-2">
+                            <label htmlFor="price" className="font-semibold mb-1 mr-2 text-black">
                                 Price:
                             </label>
                             <input
@@ -240,13 +240,13 @@ export default function Grid() {
                                 max="1000000"
                                 value={filterPrice}
                                 onChange={handlePriceChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1" />
-                            <span className="ml-2">${filterPrice}</span>
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black" />
+                            <span className="ml-2 text-black">${filterPrice}</span>
                         </div>
                 
                 {/* Colour Filter */}
                 <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="colour" className="font-semibold mb-1 mr-2">
+                            <label htmlFor="colour" className="font-semibold mb-1 mr-2 text-black">
                                 Colour:
                             </label>
                             <select
@@ -254,13 +254,13 @@ export default function Grid() {
                                 id="colour"
                                 value={filterColour}
                                 onChange={handleColourChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black"
                             >
-                                <option value="">All</option>
-                                <option value="Red">Red</option>
-                                <option value="Silver">Silver</option>
-                                <option value="Grey">Grey</option>
-                                <option value="Black">Black</option>
+                                <option value="" className="text-black">All</option>
+                                <option value="Red" className="text-black">Red</option>
+                                <option value="Silver" className="text-black">Silver</option>
+                                <option value="Grey" className="text-black">Grey</option>
+                                <option value="Black" className="text-black">Black</option>
                                 {/* Dynamically populate options based on fetched data */}
                                 {ebikes.map(ebike => (
                                     <option key={ebike._id} value={ebike.color}>{ebike.color}</option>
@@ -296,16 +296,17 @@ export default function Grid() {
                 <Image src={`data:image/jpeg;base64,${ebike.frontImagesBase64[0]}`} alt="Front View" className="h-40 w-auto" />
             )}
             </div>
-                                <div className="absolute top-4 end-4">
-                                <button class="flex-none flex items-center justify-center w-9 h-9 rounded-md bg-white border text-black-300 hover:text-red-500" type="button" aria-label="Like">
-        <svg width="20" height="20" fill="currentColor" aria-hidden="true">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-        </svg>
-      </button>
+            <div  onClick={() => handleAddToWishlist(vehicles)}
+                                                className="absolute top-4 end-4">
+                              <button class="flex-none flex items-center justify-center w-9 h-9 rounded-md bg-white border dark:bg-black border text-gray-200 dark:text-black-200 hover:text-red-500 dark:hover:text-red-500" type="button" aria-label="Like">
+  <svg width="20" height="20" fill="currentColor" aria-hidden="true">
+    <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+  </svg>
+</button>
                                 </div>
                                 </div>
                             </div>
-                            <div className="p-6 group-hover:bg-gray-100 dark:group-hover:bg-slate-800">
+                            <div className="p-6 group-hover:bg-black-100 dark:group-hover:bg-black-100">
                                 <div className="pb-6">
                                     <p className="text-lg hover:text-green-600 font-medium ease-in-out duration-500">{ebike.name}</p>
                                 </div>

@@ -61,7 +61,7 @@ import { useState } from 'react';
                         <div className="flex justify-center">
                             <div className="max-w-[400px] w-full m-auto p-6 bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-700 rounded-md">
                                 <Link href="/"><Image src="/images/logo.png" className="mx-auto" alt="" width={64} height={64} /></Link>
-                                <h5 className="my-6 text-xl font-semibold">Signup</h5>
+                                <h5 className="my-6 text-xl font-semibold">Sign Up</h5>
                                 <form className="text-start"onSubmit={handleSignup}>
                                     <div className="grid grid-cols-1">
                                         <div className="mb-4">
@@ -88,7 +88,7 @@ import { useState } from 'react';
 
                                         <div className="mb-4">
                                         
-                                        <button type="submit" className="btn bg-green-600 hover:bg-green-700 text-white rounded-md w-full">Register</button>
+                                        <button type="submit" className="btn bg-green-600 hover:bg-green-700 text-white rounded-md w-full">Sign Up</button>
                                         
                                         </div>
 

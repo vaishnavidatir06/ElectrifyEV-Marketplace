@@ -10,9 +10,9 @@ export default function TextAnimation(){
                 // Same substring at the start will only be typed out once, initially
                 'eCar',
                 1000, // wait 1s before replacing "Mice" with "Hamsters"
-                'eBike',
+                'eBicycle',
                 1000,
-                'eScooter',
+                'eBike',
                 1000,
                 'eAuto',
                 1000,

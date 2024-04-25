@@ -47,9 +47,11 @@ const BuyPopup = ({ isOpen, onClose }) => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center z-50">
-        <div className="wrapper" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <div className={`p-10 border border-green-400 rounded-lg shadow-md w-4/5 md:w-3/4 lg:w-2/3 xl:w-1/2 ${calculateHeight()} relative z-10`} style={{ backgroundImage: "url('/images/bg/whitebg.jfif')" }}>
+     <div className="fixed inset-0 overflow-y-auto bg-gray-800 bg-opacity-80">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="bg-white p-6 rounded-lg relative">
+       
+          
             <button
               className="absolute top-2 right-2 px-3 py-1 text-xl font-bold text-gray-600 hover:text-gray-800 btn-blue"
               onClick={onClose}
@@ -127,7 +129,7 @@ const BuyPopup = ({ isOpen, onClose }) => {
             </div>
           </div>
         </div>
-      </div>
+     </div>
     </>
   );
 };

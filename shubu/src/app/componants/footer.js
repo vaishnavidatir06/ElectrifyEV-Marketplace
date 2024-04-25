@@ -21,7 +21,7 @@ export default function Footer(){
 
                                         <div className="subcribe-form z-1">
                                             <form className="relative max-w-lg md:ms-auto">
-                                                <input type="email" id="subcribe" name="email" className="rounded-full bg-white dark:bg-slate-900 shadow dark:shadow-gray-700" placeholder="Enter your email :" />
+                                                <input type="email" id="subcribe" name="email" className="rounded-full bg-white dark:bg-slate-900 shadow dark:shadow-gray-700" placeholder="email" />
                                                 <button type="submit" className="btn bg-green-600 hover:bg-green-700 text-white rounded-full">Subscribe</button>
                                             </form>
                                         </div>
@@ -40,7 +40,7 @@ export default function Footer(){
                                     <div className="lg:col-span-4 md:col-span-12">
                                         <Link href="#" className="text-[22px] focus:outline-none">
                                             <Image src="/images/logo.png" alt="" width={98} height={28}/>
-                                            <span className="font-bold text-white dark:text-white">Electrify eV</span>
+                                            
                                         </Link> 
                                         <p className="mt-6 text-gray-300">A great platform to buy, sell and rent your eV vehicles.</p>
 
@@ -57,7 +57,7 @@ export default function Footer(){
                                     </div>
 
                                     <div className="lg:col-span-3 md:col-span-4">
-                                        <h5 className="tracking-[1px] text-gray-100 font-semibold">Usefull Links</h5>
+                                        <h5 className="tracking-[1px] text-gray-100 font-semibold">Useful Links</h5>
                                         <ul className="list-none footer-list mt-6">
                                               <li><Link href="/terms" className="text-slate-300 hover:text-slate-400 duration-500 ease-in-out flex items-center"><FiChevronRight width={18} className="me-1"/> <span>Terms of Services</span> </Link></li>
                                               <li className="mt-[10px]"><Link href="/privacy" className="text-slate-300 hover:text-slate-400 duration-500 ease-in-out flex items-center"><FiChevronRight width={18} className="me-1"/> <span>Privacy Policy</span> </Link></li>

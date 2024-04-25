@@ -19,13 +19,18 @@ export default function Rent() {
       </section>
       <div className="relative">
         <div className="shape overflow-hidden z-1 text-white  dark:text-gray-950 ">
-          <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
-          </svg>
+          
         </div>
       </div>
       <section className="relative md:pb-24 pb-16 pt-0 ">
-        
+      <div className="grid grid-cols-1 pt-10 text-center">
+     <h3 className="mb-4 md:text-4xl md:leading-normal text-2xl leading-normal font-semibold text-gray-800 dark:text-white">Unlock Endless Adventures with Our Rental Collection!</h3>
+      <div className="flex justify-center mt-8">
+            <Link href="/rentals">
+            <button className="btn  bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-full py-3 px-10 transition duration-300 ease-in-out">Rent Now</button>
+            </Link>
+          </div>
+          </div>
         <div className="container lg:mt-24 mt-16 flex flex-col items-center">
           <h3 className="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold text-green-600">How it works?</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -56,11 +61,7 @@ export default function Rent() {
               <p className="text-center text-slate-900 dark:text-slate-900">Book for now reserve for later..</p>
             </div>
           </div>
-          <div className="flex justify-center mt-8">
-            <Link href="/rentals">
-              <button className="btn bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-full py-3 px-6 transition duration-300 ease-in-out">Rent Now</button>
-            </Link>
-          </div>
+          
         </div>
         <GetInTouch/>
       </section>

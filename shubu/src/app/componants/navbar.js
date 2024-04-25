@@ -111,14 +111,14 @@ export default function Navbar(props) {
                         <Link className="logo" href="../">
                             <Image src="/images/logo.png" className="inline-block dark:hidden" alt="" width={98} height={24} />
                             <Image src="/images/logo.png" className="hidden dark:inline-block" alt="" width={98} height={24} />
-                            <span className="font-bold">Electrify eV</span>
+                            <span className="font-bold"style={{ fontFamily: 'YourCustomFont, Display' }}>Electrify eV</span>
                         </Link> :
                         <Link className="logo" href="../">
-                            <span className="inline-block dark:hidden">
+                           
                                 <Image src="/images/logo.png" className="l-dark" alt="" width={98} height={24} />
                                 <Image src="/images/logo.png" className="l-light" alt="" width={98} height={24} />
-                            </span>
-                            <Image src="/images/logo.png" className="hidden dark:inline-block" alt="" width={98} height={24} />
+                                <span className="font-bold"style={{ fontFamily: 'YourCustomFont, Display' }}>Electrify eV</span>
+                            
                         </Link>
                     }
                     <div className="menu-extras">
@@ -139,6 +139,8 @@ export default function Navbar(props) {
                                 <li className="inline mb-0">
                                     <Link href="/profile" className="btn btn-icon bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-full"><User className="h-4 w-4 stroke-[3]"></User></Link>
                                 </li>
+
+
                             </>
                         ) : (
                             <li className="inline mb-0">
@@ -185,51 +187,52 @@ export default function Navbar(props) {
                         </li>
                     </ul>
 
-                    <ul className="buy-button list-none mb-0">
-                        {session ? (
-                            <>
-                                <Link href="/api/auth/signout?callbackUrl=/" className="space-x-4">Logout</Link>
-                            </>
-                        ) : null}
-                    </ul>
-
 
                     <div id="navigation" className={`${isOpen === true ? 'hidden' : 'block'}`} >
                         <ul className={`navigation-menu  ${navClass === '' || navClass === undefined ? '' : 'nav-light'}   ${topnavClass !== '' && topnavClass !== undefined ? 'justify-center' : 'justify-end'}`}>
-                            <li className={manu === "../" ? 'active' : ''}><Link href="../" className="sub-menu-item">Home</Link></li>
-                            <li><Link href="" onClick={openPopup}>Buy</Link></li>
+                            
+                            <li><Link href="" onClick={openPopup} style={{ fontFamily: 'YourCustomFont, Display' }}>Buy</Link></li>
                             <BuyPopup isOpen={isOpen} onClose={closePopup} />
-                            <li className={manu === "/sell" ? 'active' : ''}><Link href="/sell" className="sub-menu-item">Sell</Link></li>
+                            <li className={manu === "/sell" ? 'active' : ''} style={{ fontFamily: 'YourCustomFont, Display' }}><Link href="/sell" className="sub-menu-item">Sell</Link></li>
                             <li className={`has-submenu parent-parent-menu-item ${["/grid", "/grid-sidebar", "/grid-map", "/list", "/list-sidebar", "/list-map", "/property-detail/1"].includes(manu) ? 'active' : ''}`}>
-                                <Link href="#" onClick={() => { setSubManu(subManu === "/list-item" ? "" : "/list-item") }}>Services</Link><span className="menu-arrow"></span>
+                                <Link href="#" onClick={() => { setSubManu(subManu === "/list-item" ? "" : "/list-item") }} style={{ fontFamily: 'YourCustomFont, Display' }}>Services</Link><span className="menu-arrow"></span>
                                 <ul className={`submenu ${["/grid", "/grid-sidebar", "/grid-map", "/list", "/list-sidebar", "/list-map", "/property-detail/1", "/list-item", "/grid-item", "/list-view-item", "/property-item"].includes(subManu) ? 'open' : ''}`}>
-                                    <li className="has-submenu parent-menu-item"><Link href="grid-map"> Rentals </Link></li>
-                                    <li className={`has-submenu parent-menu-item ${["/list", "/list-sidebar", "/list-map"].includes(manu) ? 'active' : ''}`}><Link href="/list" onClick={() => { setSubManu(subManu === "/list-view-item" ? "" : "/list-view-item") }}> Rent Your eV </Link></li>
-                                    <li className="has-submenu parent-menu-item"><Link href="services"> Emergency Assistance</Link></li>
-                                    <li className={`has-submenu parent-menu-item ${["/batteryswap"].includes(manu) ? 'active' : ''}`}><Link href="#" onClick={() => { setSubManu(subManu === "/property-item" ? "" : "/property-item") }}> eVServices </Link><span className="submenu-arrow"></span>
+                                    <li className="has-submenu parent-menu-item" style={{ fontFamily: 'YourCustomFont, Display' }}><Link href="grid-map"> Rentals </Link></li>
+                                    <li className={`has-submenu parent-menu-item ${["/list", "/list-sidebar", "/list-map"].includes(manu) ? 'active' : ''}`} style={{ fontFamily: 'YourCustomFont, Display' }}><Link href="/list" onClick={() => { setSubManu(subManu === "/list-view-item" ? "" : "/list-view-item") }}> Rent Your eV </Link></li>
+                                    <li className="has-submenu parent-menu-item" style={{ fontFamily: 'YourCustomFont, Display' }}><Link href="services"> Emergency Assistance</Link></li>
+                                    <li className={`has-submenu parent-menu-item ${["/batteryswap"].includes(manu) ? 'active' : ''}`} style={{ fontFamily: 'YourCustomFont, Display' }}><Link href="#" onClick={() => { setSubManu(subManu === "/property-item" ? "" : "/property-item") }}> eVServices </Link><span className="submenu-arrow"></span>
                                         <ul className={`submenu ${["/batteryswap", "/property-item", "/carwash", "/BatteryCharge", "/Emergencyassistance", "/Repair"].includes(subManu) ? 'open' : ''}`}>
-                                            <li className={manu === "/batteryswap" ? 'active' : ''}><Link href="/batteryswap" className="sub-menu-item">Battery Swap</Link></li>
-                                            <li className={manu === "/BatteryCharge" ? 'active' : ''}><Link href="/BatteryCharge" className="sub-menu-item">Battery Recharge</Link></li>
-                                            <li className={manu === "/carwash" ? 'active' : ''}><Link href="/carwash" className="sub-menu-item">Electrify Wash</Link></li>
+                                            <li className={manu === "/batteryswap" ? 'active' : ''} style={{ fontFamily: 'YourCustomFont, Display' }}><Link href="/batteryswap" className="sub-menu-item">Battery Swap</Link></li>
+                                            <li className={manu === "/BatteryCharge" ? 'active' : ''} style={{ fontFamily: 'YourCustomFont, Display' }}><Link href="/BatteryCharge" className="sub-menu-item">Battery Recharge</Link></li>
+                                            <li className={manu === "/carwash" ? 'active' : ''} style={{ fontFamily: 'YourCustomFont, Display' }}><Link href="/carwash" className="sub-menu-item">Electrify Wash</Link></li>
                                         </ul>
                                     </li>
                                 </ul>
                             </li>
-                            <li className={`has-submenu parent-parent-menu-item ${["/aboutus", "/features", "/pricing", "/faqs", "/auth-login", "/auth-signup", "/auth-reset-password", "/terms", "/privacy", "/blogs", "/blog-sidebar", "/blog-detail", "/comingsoon", "/maintenance", "/404"].includes(manu) ? 'active' : ''}`}>
-                                <Link href="#" onClick={() => { setSubManu(subManu === "/page-item" ? '' : "/page-item") }}>About</Link><span className="menu-arrow"></span>
-                                <ul className={`submenu ${["/aboutus", "/features", "/pricing", "/faqs", "/auth-login", "/auth-signup", "/auth-reset-password", "/terms", "/privacy", "/blogs", "/blog-sidebar", "/blog-detail", "/comingsoon", "/maintenance", "/404", "/page-item", "/auth-item", "/term-item", "/blog-item", "/special-item"].includes(subManu) ? 'open' : ''}`}>
-                                    <li className={manu === "/aboutus" ? "active" : ''}><Link href="/aboutus" className="sub-menu-item">About Us</Link></li>
-                                    
-                                    <li className={`has-submenu parent-menu-item ${["/terms", "/privacy"].includes(manu) ? 'active' : ''}`}><Link href="#" onClick={() => { setSubManu(subManu === "/term-item" ? '' : "/term-item") }}> Utility </Link><span className="submenu-arrow"></span>
-                                        <ul className={`submenu ${["/terms", "/privacy", "/term-item"].includes(subManu) ? 'open' : ''}`}>
-                                            <li className={manu === "/terms" ? "active" : ''}><Link href="/terms" className="sub-menu-item">Terms of Services</Link></li>
-                                            <li className={manu === "/privacy" ? "active" : ''}><Link href="/privacy" className="sub-menu-item">Privacy Policy</Link></li>
-                                        </ul>
+                            
+                            <li className={manu === "/contact" ? "active" : ''} style={{ fontFamily: 'YourCustomFont, Display' }}><Link href="/contact" className="sub-menu-item">Contact</Link></li>
+                            
+                            <li className={`has-submenu parent-parent-menu-item ${["/grid", "/grid-sidebar", "/grid-map", "/list", "/list-sidebar", "/list-map", "/property-detail/1"].includes(manu) ? 'active' : ''}`}>
+                                <Link href="#" onClick={() => { setSubManu(subManu === "/list-item" ? "" : "/list-item") }} style={{ fontFamily: 'YourCustomFont, Display' }}>Account</Link><span className="menu-arrow"></span>
+                                <ul className={`submenu ${["/grid", "/grid-sidebar", "/grid-map", "/list", "/list-sidebar", "/list-map", "/property-detail/1", "/list-item", "/grid-item", "/list-view-item", "/property-item"].includes(subManu) ? 'open' : ''}`}>
+                                    <li className="has-submenu parent-menu-item">
+                                     {session ? ( 
+                                         <> 
+                                    <Link href="profile1" className="has-submenu parent-menu-item"> Profile </Link>
+                                       </>
+                                       ) : null}
+                                     </li>
+                                    <li className="has-submenu parent-menu-item" style={{ fontFamily: 'YourCustomFont, Display' }}><Link href="Wishlist">Wishlist</Link></li>
+                                    <li className="has-submenu parent-menu-item">
+                                     {session ? (
+                                     <>
+                                     <Link href="/api/auth/signout?callbackUrl=/"  className="has-submenu parent-menu-item">Logout</Link>
+                                     </>
+                                      ) : null}
                                     </li>
                                 </ul>
+                            </li>
 
-                            </li>
-                            <li className={manu === "/contact" ? "active" : ''}><Link href="/contact" className="sub-menu-item">Contact</Link></li>
 
                         </ul>
                     </div>

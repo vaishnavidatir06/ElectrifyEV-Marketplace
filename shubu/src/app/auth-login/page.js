@@ -63,7 +63,7 @@ export default function AuthLogin() {
                     <div className="flex justify-center">
                         <div className="max-w-[400px] w-full m-auto p-6 bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-700 rounded-md">
                             <Link href="/"><Image src="/images/logo.png" className="mx-auto" alt="" width={64} height={64} /></Link>
-                            <h5 className="my-6 text-xl font-semibold">Login</h5>
+                            <h5 className="my-6 text-xl font-semibold">Sign In</h5>
                             <form className="text-start" onSubmit={handleSignin}>
                                 <div className="grid grid-cols-1">
                                     <div className="mb-4">
@@ -86,11 +86,11 @@ export default function AuthLogin() {
                                     </div>
 
                                     <div className="mb-4">
-                                        <button type="submit" className="btn bg-green-600 hover:bg-green-700 text-white rounded-md w-full">Login / Sign in</button>
+                                        <button type="submit" className="btn bg-green-600 hover:bg-green-700 text-white rounded-md w-full">Sign in</button>
                                     </div>
 
                                     <div className="text-center">
-                                        <span className="text-slate-400 me-2">Dont have an account?</span> <Link href="/auth-signup" className="text-black dark:text-white font-bold">Sign Up</Link>
+                                        <span className="text-slate-400 me-2">Don't have an account?</span> <Link href="/auth-signup" className="text-black dark:text-white font-bold">Sign Up</Link>
                                     </div>
 
                                 </div>

@@ -44,7 +44,7 @@ export default function FormThree() {
                             <div className="registration-form text-dark text-start">
                                 <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 lg:gap-0 gap-6">
                                     <div>
-                                        <label className="form-label text-slate-900 dark:text-white font-medium">Location:<span className="text-red-600">*</span></label>
+                                        <label className="form-label text-slate-900 dark:text-white font-medium">Location<span className="text-red-600">*</span></label>
                                         <div className="filter-search-form relative filter-border mt-2 ">
                                             <FaMapMarkerAlt className="icons" width={18}/>
                                             <input name="name" type="text" id="job-keyword" className="form-input filter-input-box bg-gray-50 dark:bg-slate-800 border-0" placeholder="Search your Keywords" />
@@ -52,7 +52,7 @@ export default function FormThree() {
                                     </div>
 
                                     <div>
-                                        <label htmlFor="buy-properties" className="form-label text-slate-900 dark:text-white font-medium">e-Vehicle Category:<span className="text-red-600">*</span></label>
+                                        <label htmlFor="buy-properties" className="form-label text-slate-900 dark:text-white font-medium">e-Vehicle Category<span className="text-red-600">*</span></label>
                                         <div className="filter-search-form relative filter-border mt-2">
                                             <MdDirectionsCar className="icons" width={18}/>
                                             <input className="form-input filter-input-box bg-gray-50 dark:bg-slate-800 border-0" />
@@ -60,7 +60,7 @@ export default function FormThree() {
                                     </div>
 
                                     <div>
-                                        <label htmlFor="buy-min-price" className="form-label text-slate-900 dark:text-white font-medium">Min Price:<span className="text-red-600">*</span></label>
+                                        <label htmlFor="buy-min-price" className="form-label text-slate-900 dark:text-white font-medium">Min Price<span className="text-red-600">*</span></label>
                                         <div className="filter-search-form relative filter-border mt-2">
                                             <LuCircleDollarSign  className="icons" width={18}/>
                                             <input type="text" id="buy-min-price" name="buy-min-price" className="form-input filter-input-box bg-gray-50 dark:bg-slate-800 border-0" placeholder="Enter Min Price" />
@@ -68,7 +68,7 @@ export default function FormThree() {
                                     </div>
 
                                     <div>
-                                        <label htmlFor="buy-max-price" className="form-label text-slate-900 dark:text-white font-medium">Max Price:<span className="text-red-600">*</span></label>
+                                        <label htmlFor="buy-max-price" className="form-label text-slate-900 dark:text-white font-medium">Max Price<span className="text-red-600">*</span></label>
                                         <div className="filter-search-form relative mt-2">
                                             <LuCircleDollarSign  className="icons" width={18}/>
                                             <input type="text" id="buy-max-price" name="buy-max-price" className="form-input filter-input-box bg-gray-50 dark:bg-slate-800 border-0" placeholder="Enter Max Price" />

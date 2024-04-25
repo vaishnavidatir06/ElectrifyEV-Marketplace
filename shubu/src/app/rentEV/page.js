@@ -103,13 +103,16 @@ export default function RentEV() {
 
     return (
         <>
-            <Navbar navClass="navbar-white" />
-            <div className="pt-16 flex justify-center items-center min-h-screen">
+            <Navbar/>
+            <section className="py-20 bg-gray-950"  style={{ backgroundImage: "url('/images/bg/b17.jpg')" }}>
+            <div className="container mx-auto px-2">
+        <div className="max-w-lg mx-auto bg-gray-200 rounded-lg shadow-lg p-2 mt-4">
+            <div className="pt-16 flex justify-center items-center min-h-screen mt-0">
                 <div className="w-full sm:max-w-md">
-                    <h1 className="text-center text-2xl mb-4">Enter Vehicle details you want to Rent</h1>
+                    <h1 className="text-center text-2xl mb-4 text-black">Enter Vehicle details you want to Rent</h1>
                     <form onSubmit={previewData ? handleSubmit : handlePreview} className="space-y-4">
                         <fieldset>
-                            <legend>Owner Details</legend>
+                            <legend className='text-black'>Owner Details</legend>
                             <label className="text-green-500">
                                 Owner Name:
                                 <input type="text" value={ownerName} onChange={(e) => setOwnerName(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
@@ -129,7 +132,7 @@ export default function RentEV() {
                         </fieldset>
 
                         <fieldset>
-                            <legend>Vehicle Details</legend>
+                            <legend className='text-black'>Vehicle Details</legend>
 
                             <label className="text-green-500">
                                 Body Type:
@@ -175,7 +178,7 @@ export default function RentEV() {
                             </label><br /><br />
                         </fieldset>
                         <div className="flex justify-center">
-                            <button type="button" onClick={handlePreview} className="btn bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-full">Preview</button>
+                           
                             <button type="submit" onClick={handleSubmit} className="btn bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-full">Confirm</button>
                         </div>
                     </form>
@@ -192,6 +195,9 @@ export default function RentEV() {
                     </div>
                 </div>
             )}
+            </div>
+            </div>
+             </section>
             <Footer />
             <Switcher />
             <ToastContainer />

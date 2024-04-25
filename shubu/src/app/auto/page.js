@@ -111,7 +111,7 @@ export default function Grid() {
                 <div className="absolute inset-0 bg-black opacity-80"></div>
                 <div className="container">
                     <div className="grid grid-cols-1 text-center mt-10">
-                        <h3 className="md:text-4xl text-3xl md:leading-normal leading-normal font-medium text-white">Find Your Dream e-Auto</h3>
+                        <h3 className="md:text-4xl text-3xl md:leading-normal leading-normal font-medium text-white">Find Your Dream eAuto</h3>
                     </div>
                 </div>
             </section>
@@ -140,7 +140,7 @@ export default function Grid() {
                   <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap">
                 {/* Transmission Type Filter */}
                 <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="transmissionType" className="font-semibold mb-1 mr-2">
+                            <label htmlFor="transmissionType" className="font-semibold mb-1 mr-2 text-black">
                                 Transmission Type:
                             </label>
                             <select
@@ -148,18 +148,18 @@ export default function Grid() {
                                 id="transmissionType"
                                 value={filterTransmissionType}
                                 onChange={handleTransmissionTypeChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black"
                             >
-                                <option value="">All</option>
-                                <option value="Automatic">Automatic</option>
-                                <option value="Manual">Manual</option>
+                                <option value="" className="text-black">All</option>
+                                <option value="Automatic" className="text-black">Automatic</option>
+                                <option value="Manual" className="text-black">Manual</option>
                                 {/* Add more options */}
                             </select>
                         </div>
 
                         {/* Brand Filter */}
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="brand" className="font-semibold mb-1 mr-2">
+                            <label htmlFor="brand" className="font-semibold mb-1 mr-2 text-black">
                                 Brand:
                             </label>
                             <select
@@ -167,21 +167,21 @@ export default function Grid() {
                                 id="brand"
                                 value={filterBrand}
                                 onChange={handleBrandChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black"
                             >
-                                <option value="">All</option>
-                                <option value="Piaggio">Piaggio</option>
-                        <option value="Azul">Azul</option>
-                        <option value="Greaves">Greaves</option>
-                        <option value="Kinetic Green">Kinetic Green</option>
-                        <option value="Altigreen">Altigreen</option>
+                                <option value="" className="text-black">All</option>
+                                <option value="Piaggio" className="text-black">Piaggio</option>
+                        <option value="Azul" className="text-black">Azul</option>
+                        <option value="Greaves" className="text-black">Greaves</option>
+                        <option value="Kinetic Green" className="text-black">Kinetic Green</option>
+                        <option value="Altigreen" className="text-black">Altigreen</option>
                                 {/* Add more options */}
                             </select>
                         </div>
 
                         {/* Location */}
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="Location" className="font-semibold mb-1 mr-2">
+                            <label htmlFor="Location" className="font-semibold mb-1 mr-2 text-black">
                                 Location:
                             </label>
                             <select
@@ -189,20 +189,20 @@ export default function Grid() {
                                 id="Location"
                                 value={filterLocation}
                                 onChange={handleLocationChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black"
                             >
-                                <option value="">All</option>
-                                <option value="Mumbai">Mumbai</option>
-                        <option value="Pune">Pune</option>
-                        <option value="Delhi">Delhi</option>
-                        <option value="Bangalore">Bangalore</option>
+                                <option value="" className="text-black">All</option>
+                                <option value="Mumbai" className="text-black">Mumbai</option>
+                        <option value="Pune" className="text-black">Pune</option>
+                        <option value="Delhi" className="text-black">Delhi</option>
+                        <option value="Bangalore" className="text-black">Bangalore</option>
                                 {/* Add more options */}
                             </select>
                         </div>
 
                         {/* Color */}
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="color" className="font-semibold mb-1 mr-2">
+                            <label htmlFor="color" className="font-semibold mb-1 mr-2 text-black">
                                 Color:
                             </label>
                             <select
@@ -210,20 +210,20 @@ export default function Grid() {
                                 id="color"
                                 value={filterColor}
                                 onChange={handleColorChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black"
                             >
-                                <option value="">All</option>
-                                <option value="Red">Red</option>
-                        <option value="Grey">Grey</option>
-                        <option value="Green">Green</option>
-                        <option value="Blue">Blue</option>
-                        <option value="White">White</option>
+                                <option value="" className="text-black">All</option>
+                                <option value="Red" className="text-black">Red</option>
+                        <option value="Grey" className="text-black">Grey</option>
+                        <option value="Green" className="text-black">Green</option>
+                        <option value="Blue" className="text-black">Blue</option>
+                        <option value="White" className="text-black">White</option>
                                 {/* Add more options */}
                             </select>
                         </div>
 
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="Battery" className="font-semibold mb-1 mr-2">
+                            <label htmlFor="Battery" className="font-semibold mb-1 mr-2 text-black">
                                 Battery:
                             </label>
                             <input
@@ -233,13 +233,13 @@ export default function Grid() {
                                 max="500"
                                 value={filterBatteryPower}
                                 onChange={handleBatteryPowerChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black"
                             />
                         </div>
 
                         {/* Kilometres Driven */}
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="kilometersDriven" className="font-semibold mb-1 mr-2">
+                            <label htmlFor="kilometersDriven" className="font-semibold mb-1 mr-2 text-black">
                                 Kilometres Driven:
                             </label>
                             <input
@@ -249,14 +249,14 @@ export default function Grid() {
                                 max="100000"
                                 value={filterKilometresDriven}
                                 onChange={handleKilometresDrivenChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black"
                             />
-                            <span className="ml-2">{filterKilometresDriven} km</span>
+                            <span className="ml-2 text-black">{filterKilometresDriven} km</span>
                         </div>
 
                         {/* Price */}
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="price" className="font-semibold mb-1 mr-2">
+                            <label htmlFor="price" className="font-semibold mb-1 mr-2 text-black">
                                 Price:
                             </label>
                             <input
@@ -266,9 +266,9 @@ export default function Grid() {
                                 max="1000000"
                                 value={filterPrice}
                                 onChange={handlePriceChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black"
                             />
-                            <span className="ml-2">${filterPrice}</span>
+                            <span className="ml-2 text-black">${filterPrice}</span>
                         </div>
                     </div>
                     {/* End of Filter Sidebar */}
@@ -292,15 +292,16 @@ export default function Grid() {
                                         <img src={`data:image/jpeg;base64,${auto.frontImagesBase64[0]}`} alt="Front View" className="h-40 w-auto" />
                                     )}
                                 </div>
-                                <div className="absolute top-4 end-4">
-                                <button class="flex-none flex items-center justify-center w-9 h-9 rounded-md bg-white border text-black-300 hover:text-red-500" type="button" aria-label="Like">
-        <svg width="20" height="20" fill="currentColor" aria-hidden="true">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-        </svg>
-      </button>
+                                <div  onClick={() => handleAddToWishlist(vehicles)}
+                                                className="absolute top-4 end-4">
+                              <button class="flex-none flex items-center justify-center w-9 h-9 rounded-md bg-white border dark:bg-black border text-gray-200 dark:text-black-200 hover:text-red-500 dark:hover:text-red-500" type="button" aria-label="Like">
+  <svg width="20" height="20" fill="currentColor" aria-hidden="true">
+    <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+  </svg>
+</button>
                                 </div>
                             </div>
-                            <div className="p-6 group-hover:bg-gray-100 dark:group-hover:bg-slate-800">
+                            <div className="p-6 group-hover:bg-black-100 dark:group-hover:bg-black-100">
                                 <div className="pb-6">
                                     <p className="text-lg hover:text-green-600 font-medium ease-in-out duration-500">{auto.name}</p>
                                 </div>
