@@ -40,8 +40,8 @@ export default function Footer(){
                                     <div className="lg:col-span-4 md:col-span-12">
                                         <Link href="#" className="text-[22px] focus:outline-none">
                                             <Image src="/images/logo.png" alt="" width={98} height={28}/>
-                                            <span className="font-bold text-white dark:text-white">Electrify eV</span>
-                                        </Link> 
+                                            <span className="font-bold">Electrify eV</span>
+                                        </Link>
                                         <p className="mt-6 text-gray-300">A great platform to buy, sell and rent your eV vehicles.</p>
 
                                     </div>

@@ -29,25 +29,14 @@ export default function Grid() {
 
     const session = useSession();
 
-
-    useEffect(() => {
-        fetchEcarVehicles().catch(error => console.error('Error fetching eCar vehicles:', error));
-    }, []);
-
     useEffect(() => {
         filterEcarVehicles();
-    }, [searchQuery, filterBrand, filterLocation, filterTransmissionType, filterColor, filterKilometresDriven, filterPrice, filterBodyType, ecarVehicles]); // Add filterBodyType here
+    }, [searchQuery, filterBrand, filterLocation, filterTransmissionType, filterColor, filterKilometresDriven, filterPrice, filterBodyType, ecarVehicles]);
 
-    const fetchEcarVehicles = async () => {
-        try {
-            const response = await fetch('http://51.79.225.217:5001/api/vehicles/ecar');
-            const data = await response.json();
-            setEcarVehicles(data);
-            setFilteredEcarVehicles(data);
-        } catch (error) {
-            console.error('Error fetching eCar vehicles:', error);
-        }
-    };
+
+
+
+
 
     const handleSearchInputChange = (e) => {
         setSearchQuery(e.target.value);
@@ -110,14 +99,14 @@ export default function Grid() {
             if (!session || !session.data || !session.data.user) {
                 throw new Error('User is not authenticated');
             }
-            
+
             const { name, email } = session.data.user;
-            
+
             // Fetch user ID from the /user endpoint
             const userResponse = await fetch(`http://51.79.225.217:5000/user?name=${name}`);
             const userData = await userResponse.json();
             const { _id: userId } = userData; // Extract user ID
-            
+
             // Use a different variable name for the wishlist response
             const wishlistResponse = await fetch('http://51.79.225.217:5000/wishlist', {
                 method: 'POST',
@@ -126,7 +115,7 @@ export default function Grid() {
                 },
                 body: JSON.stringify({ ...vehicle, name, email, userId }),
             });
-    
+
             if (wishlistResponse.ok) {
                 toast.success('Vehicle added to wishlist successfully!');
             } else {
@@ -137,9 +126,19 @@ export default function Grid() {
             toast.error(error.message || 'Failed to add vehicle to wishlist!');
         }
     };
-    
-    
 
+    const fetchEcarVehicles = async () => {
+        try {
+            const response = await fetch('http://51.79.225.217:5001/api/vehicles/ecar');
+            const data = await response.json();
+            setEcarVehicles(data);
+        } catch (error) {
+            console.error('Error fetching eCar vehicles:', error);
+        }
+    };
+    useEffect(() => {
+        fetchEcarVehicles();
+    }, []);
 
 
     return (
@@ -182,7 +181,7 @@ export default function Grid() {
                     <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap">
                         {/* Type Filter */}
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="brand" className="font-semibold mb-1 mr-2">
+                            <label htmlFor="brand" className="font-semibold mb-1 mr-2 text-black">
                                 Brand:
                             </label>
                             <select
@@ -190,20 +189,20 @@ export default function Grid() {
                                 id="brand"
                                 value={filterBrand}
                                 onChange={handleBrandChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black"
                             >
-                                <option value="">All</option>
-                                <option value="Audi">Audi</option>
-                                <option value="BMW">BMW</option>
-                                <option value="Honda">Honda</option>
-                                <option value="Toyota">Toyota</option>
-                                <option value="Nissan">Nissan</option>
+                                <option value="" className="text-black">All</option>
+                                <option value="Audi" className="text-black">Audi</option>
+                                <option value="BMW" className="text-black">BMW</option>
+                                <option value="Honda" className="text-black">Honda</option>
+                                <option value="Toyota" className="text-black">Toyota</option>
+                                <option value="Nissan" className="text-black">Nissan</option>
                             </select>
                         </div>
 
 
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="Location" className="font-semibold mb-1 mr-2">
+                            <label htmlFor="Location" className="font-semibold mb-1 mr-2 text-black">
                                 Location:
                             </label>
                             <select
@@ -211,18 +210,18 @@ export default function Grid() {
                                 id="Location"
                                 value={filterLocation}
                                 onChange={handleLocationChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black"
                             >
-                                <option value="">All</option>
-                                <option value="Mumbai">Mumbai</option>
-                                <option value="Pune">Pune</option>
-                                <option value="Delhi">Delhi</option>
-                                <option value="Bangalore">Bangalore</option>
+                                <option value="" className="text-black">All</option>
+                                <option value="Mumbai" className="text-black">Mumbai</option>
+                                <option value="Pune" className="text-black">Pune</option>
+                                <option value="Delhi" className="text-black">Delhi</option>
+                                <option value="Bangalore" className="text-black">Bangalore</option>
                             </select>
                         </div>
 
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="transmissionType" className="font-semibold mb-1 mr-2">
+                            <label htmlFor="transmissionType" className="font-semibold mb-1 mr-2 text-black">
                                 Transmission Type:
                             </label>
                             <select
@@ -230,16 +229,16 @@ export default function Grid() {
                                 id="transmissionType"
                                 value={filterTransmissionType}
                                 onChange={handleTransmissionTypeChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black"
                             >
-                                <option value="">All</option>
-                                <option value="Automatic">Automatic</option>
-                                <option value="Manual">Manual</option>
+                                <option value="" className="text-black">All</option>
+                                <option value="Automatic" className="text-black">Automatic</option>
+                                <option value="Manual" className="text-black">Manual</option>
                             </select>
                         </div>
 
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="colour" className="font-semibold mb-1 mr-2">
+                            <label htmlFor="colour" className="font-semibold mb-1 mr-2 text-black">
                                 Colour:
                             </label>
                             <select
@@ -247,18 +246,18 @@ export default function Grid() {
                                 id="colour"
                                 value={filterColor}
                                 onChange={handleColorChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black"
                             >
-                                <option value="">All</option>
-                                <option value="Red">Red</option>
-                                <option value="Silver">Silver</option>
-                                <option value="Gold">Gold</option>
-                                <option value="Blue">Blue</option>
-                                <option value="Black">Black</option>
+                                <option value="" className="text-black">All</option>
+                                <option value="Red" className="text-black">Red</option>
+                                <option value="Silver" className="text-black">Silver</option>
+                                <option value="Gold" className="text-black">Gold</option>
+                                <option value="Blue" className="text-black">Blue</option>
+                                <option value="Black" className="text-black">Black</option>
                             </select>
                         </div>
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="bodytype" className="font-semibold mb-1 mr-2">
+                            <label htmlFor="bodytype" className="font-semibold mb-1 mr-2 text-black">
                                 Body Type:
                             </label>
                             <select
@@ -266,20 +265,20 @@ export default function Grid() {
                                 id="bodytype"
                                 value={filterBodyType}
                                 onChange={handleBodyTypeChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black"
                             >
-                                <option value="">All</option>
-                                <option value="SUV">SUV</option>
-                                <option value="Hatchback">Hatchback</option>
-                                <option value="Sedan">Sedan</option>
-                                <option value="Coupe">Coupe</option>
-                                <option value="MUV">MUV</option>
+                                <option value="" className="text-black">All</option>
+                                <option value="SUV" className="text-black">SUV</option>
+                                <option value="Hatchback" className="text-black">Hatchback</option>
+                                <option value="Sedan" className="text-black">Sedan</option>
+                                <option value="Coupe" className="text-black">Coupe</option>
+                                <option value="MUV " className="text-black">MUV</option>
                             </select>
                         </div>
 
 
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="kilometresDriven" className="font-semibold mb-1 mr-2">
+                            <label htmlFor="kilometresDriven" className="font-semibold mb-1 mr-2 text-black">
                                 Kilometres Driven:
                             </label>
                             <input
@@ -289,12 +288,12 @@ export default function Grid() {
                                 max="100000"
                                 value={filterKilometresDriven}
                                 onChange={handleKilometresDrivenChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1" />
-                            <span className="ml-2">{filterKilometresDriven} km</span>
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black" />
+                            <span className="ml-2 text-black">{filterKilometresDriven} km</span>
                         </div>
 
                         <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                            <label htmlFor="price" className="font-semibold mb-1 mr-2">
+                            <label htmlFor="price" className="font-semibold mb-1 mr-2 text-black">
                                 Price:
                             </label>
                             <input
@@ -304,8 +303,8 @@ export default function Grid() {
                                 max="1000000"
                                 value={filterPrice}
                                 onChange={handlePriceChange}
-                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1" />
-                            <span className="ml-2">${filterPrice}</span>
+                                className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black" />
+                            <span className="ml-2 text-black">${filterPrice}</span>
                         </div>
 
 
@@ -328,56 +327,54 @@ export default function Grid() {
                     <div className="container">
                         <div className="lg:col-span-9 md:col-span-10 col-span-11">
                             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[30px]">
-                                {filteredEcarVehicles.map((vehicles, index) => (
-                                    <Link href={`/Car`} key=
-                                        {vehicles._id} >
-                                        <div className="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500">
-                                            <div className="group relative rounded-xl bg-white dark:bg-slate-900 overflow-hidden transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl">
-                                                <div className="relative">
-                                                    <div className="relative">
-                                                        {vehicles.frontImagesBase64 && vehicles.frontImagesBase64.length > 0 && (
-                                                            <img src={`data:image/jpeg;base64,${vehicles.frontImagesBase64[0]}`} alt="Front View" className="h-40 w-auto" />
-                                                        )}
-                                                    </div>
-                                                    <div className="absolute top-4 end-4">
-                                                        <button className="flex-none flex items-center justify-center w-9 h-9 rounded-md bg-white border text-black-300 hover:text-red-500" type="button" aria-label="Like">
-                                                            <svg width="20" height="20" fill="currentColor" aria-hidden="true">
-                                                                <path fillRule="evenodd" clipRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-                                                            </svg>
-                                                        </button>
-                                                    </div>
-                                                </div>
+
+
+                                {filteredEcarVehicles.map((vehicle) => (
+                                    <Link href={`/vehicle-detail?id=${vehicle._id}`} key={vehicle._id}>
+                                        <div className="group relative rounded-xl text-black dark:text-white overflow-hidden transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl">
+                                            <div className="relative">
+                                                {vehicle.frontImagesBase64 && vehicle.frontImagesBase64.length > 0 && (
+                                                    <img src={`data:image/jpeg;base64,${vehicle.frontImagesBase64[0]}`} alt="Front View" className="h-40 w-auto" />
+                                                )}
                                             </div>
-                                            <div className="p-6 group-hover:bg-gray-100 dark:group-hover:bg-slate-800">
+                                            <div className="absolute top-4 end-4">
+                                                <button className="flex-none flex items-center justify-center w-9 h-9 rounded-md bg-white border text-black-300 hover:text-red-500" type="button" aria-label="Like">
+                                                    <svg width="20" height="20" fill="currentColor" aria-hidden="true">
+                                                        <path fillRule="evenodd" clipRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                            <div className="absolute top-4 end-4">
+                                                <button onClick={() => handleAddToWishlist(vehicle)} className="flex-none flex items-center justify-center w-9 h-9 rounded-md bg-white border dark:bg-black border text-gray-200 dark:text-black-200 hover:text-red-500 dark:hover:text-red-500" type="button" aria-label="Like">
+                                                    <svg width="20" height="20" fill="currentColor" aria-hidden="true">
+                                                        <path fill="currentColor" fillRule="evenodd" clipRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                            <div className="p-6 group-hover:bg-black-100 dark:group-hover:bg-black-100">
                                                 <div className="pb-6">
-                                                    <p className="text-lg hover:text-green-600 font-medium ease-in-out duration-500">{vehicles.brand}</p>
+                                                    <p className="text-lg hover:text-green-600 font-medium ease-in-out duration-500">{vehicle.brand}</p>
                                                 </div>
                                                 <ul className="py-6 border-y border-slate-100 dark:border-gray-800 flex items-center list-none">
                                                     <li className="flex items-center me-4">
                                                         <MdDirectionsCar width={20} className="me-2 text-green-600" />
-                                                        <span>{vehicles.model}</span>
+                                                        <span>{vehicle.model}</span>
                                                     </li>
                                                     <li className="flex items-center me-4">
                                                         <MdSettingsInputComponent width={20} className="me-2 text-green-600" />
-                                                        <span>{vehicles.transmissionType}</span>
+                                                        <span>{vehicle.transmissionType}</span>
                                                     </li>
                                                     <li className="flex items-center">
                                                         <MdTune width={20} className="me-2 text-green-600" />
-                                                        <span>{vehicles.kilometresDriven}</span>
+                                                        <span>{vehicle.kilometresDriven}</span>
                                                     </li>
                                                 </ul>
                                                 <ul className="pt-6 flex justify-between items-center list-none">
                                                     <li>
                                                         <span className="text-slate-400">Price</span>
-                                                        <p className="text-lg font-medium">${vehicles.price && vehicles.price.value}</p>
+                                                        <p className="text-lg font-medium">${vehicle.price && vehicle.price.value}</p>
                                                     </li>
                                                 </ul>
-                                                <button
-                                                    onClick={() => handleAddToWishlist(vehicles)}
-                                                    className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
-                                                >
-                                                    Add to Wishlist
-                                                </button>
                                             </div>
                                         </div>
                                     </Link>

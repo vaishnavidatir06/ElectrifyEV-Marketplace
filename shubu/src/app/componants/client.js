@@ -27,7 +27,7 @@ export default function Client() {
         <>
             <div className="container lg:mt-24 mt-16">
                 <div className="grid grid-cols-1 pb-8 text-center">
-                    <h3 className="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold  text-white-900 dark:text-white">What Our Client Say?</h3>
+                    <h3 className="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold">What Our Client Say?</h3>
 
                     <p className="text-slate-400 max-w-xl mx-auto">A great platform to buy, sell and rent your eV</p>
                 </div>
@@ -35,11 +35,11 @@ export default function Client() {
                 <div className="flex justify-center relative mt-16">
                     <div className="relative lg:w-1/3 md:w-1/2 w-full">
                         <div className="absolute -top-20 md:-start-24 -start-0">
-                            <i className="mdi mdi-format-quote-open text-9xl opacity-5  text-white-900 dark:text-white"></i>
+                            <i className="mdi mdi-format-quote-open text-9xl opacity-5"></i>
                         </div>
 
                         <div className="absolute bottom-28 md:-end-24 -end-0">
-                            <i className="mdi mdi-format-quote-close text-9xl opacity-5  text-white-900 dark:text-white"></i>
+                            <i className="mdi mdi-format-quote-close text-9xl opacity-5"></i>
                         </div>
 
                         <div className="tiny-single-item">
@@ -59,8 +59,8 @@ export default function Client() {
                                                 </ul>
 
                                                 <Image src={el.profile} className="h-14 w-14 rounded-full shadow-md dark:shadow-gray-700 mx-auto" alt="" height={56} width={56} priority />
-                                                <h6 className="mt-2 fw-semibold  text-white-900 dark:text-white">{el.name}</h6>
-                                                <span className="text-slate-400 text-sm  text-white-900 dark:text-white">{el.designation}</span>
+                                                <h6 className="mt-2 fw-semibold">{el.name}</h6>
+                                                <span className="text-slate-400 text-sm">{el.designation}</span>
                                             </div>
                                         </div>
                                     </div>

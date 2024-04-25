@@ -1,12 +1,13 @@
 'use client';
 import { useSession } from 'next-auth/react';
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import 'react-toastify/dist/ReactToastify.css';
+import Footer from "../componants/footer";
 import Navbar from "../componants/navbar";
+import Switcher from "../componants/switcher";
 
-
-import { FiGift, FiGlobe, FiMail, FiMapPin, FiPhone } from '../assets/icons/vander';
+import { FiHome, FiMail, FiPhone, FiUser } from '../assets/icons/vander';
 
 
 
@@ -15,6 +16,27 @@ export default function Profile() {
 
     const { data: session, status } = useSession();
     const [wishlistItems, setWishlistItems] = useState([]);
+    const [uniqueWishlistItems, setUniqueWishlistItems] = useState([]);
+    const [userDetails, setUserDetails] = useState(null);
+
+
+    const fetchUserDetails = async () => {
+        try {
+            // Check if session data is available
+            if (session) {
+                // Fetch additional user details from your server
+                const response = await fetch(`http://51.79.225.217:5000/user?name=${session.user.name}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch user details');
+                }
+                const userData = await response.json();
+                setUserDetails(userData); // Set the fetched user details in the state
+            }
+        } catch (error) {
+            console.error('Error fetching user details:', error);
+            // Handle error (e.g., display an error message to the user)
+        }
+    };
 
     const fetchWishlist = async () => {
         try {
@@ -26,8 +48,10 @@ export default function Profile() {
                     throw new Error('Failed to fetch wishlist');
                 }
                 const wishlistData = await response.json();
-                // Set the fetched wishlist items in the state
-                setWishlistItems(wishlistData);
+                // Filter out duplicates based on a unique identifier (e.g., productId)
+                const uniqueItems = filterUniqueItems(wishlistData, 'productId');
+                // Set the filtered wishlist items in the state
+                setUniqueWishlistItems(uniqueItems);
             }
         } catch (error) {
             console.error('Error fetching wishlist:', error);
@@ -35,120 +59,131 @@ export default function Profile() {
         }
     };
 
+    // Function to filter out duplicate items based on a unique identifier
+    const filterUniqueItems = (items, uniqueIdentifier) => {
+        const uniqueSet = new Set();
+        return items.filter(item => {
+            if (!uniqueSet.has(item[uniqueIdentifier])) {
+                uniqueSet.add(item[uniqueIdentifier]);
+                return true;
+            }
+            return false;
+        });
+    };
+
     useEffect(() => {
         // Call fetchWishlist function when the component mounts or when needed
+        fetchUserDetails();
         fetchWishlist();
     }, [session]);
 
 
-        // If session status is loading, display loading indicator
-        if (status === 'loading') {
-            return <div>Loading...</div>;
-        }
-    
-        // If user is not logged in, redirect to login page
-        if (!session) {
-            return <div>Please log in to view this page</div>;
-        }
+    // If session status is loading, display loading indicator
+    if (status === 'loading') {
+        return <div>Loading...</div>;
+    }
+
+    // If user is not logged in, redirect to login page
+    if (!session) {
+        return <div>Please log in to view this page</div>;
+    }
 
 
-    return (
-        <>
-            <Navbar navClass="navbar-white" />
-            <div className="container-fluid relative px-3">
-                <div className="layout-specing">
-                    <div className="grid grid-cols-1">
-                        <div className="profile-banner relative text-transparent rounded-md shadow dark:shadow-gray-700 overflow-hidden">
-                            <input id="pro-banner" name="profile-banner" type="file" className="hidden" />
-                            <div className="relative shrink-0">
-                                <Image src='/images/bg/b17.jpg' width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto' }} className="h-80 w-full object-cover" id="profile-banner" alt="" />
-                                <div className="absolute inset-0 bg-black/70"></div>
-                                <label className="absolute inset-0 cursor-pointer" htmlFor="pro-banner"></label>
-                            </div>
-                        </div>
+
+    const renderPersonalDetails = () => {
+        return (
+            <div className="space-y-4">
+                <div className="flex items-start">
+                    <FiUser className="fea icon-ex-md text-slate-400 mt-1 me-3 w-6 h-6" />
+                    <div>
+                        <h6 className="text-green-600 dark:text-white font-medium">Name :</h6>
+                        <p className="text-slate-400">{userDetails.name}</p>
                     </div>
-
-                    <div className="grid md:grid-cols-12 grid-cols-1">
-                        <div className="xl:col-span-3 lg:col-span-4 md:col-span-4 mx-6">
-                            <div className="p-6 relative rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900 -mt-48">
-
-
-                                <div className="border-t border-gray-100 dark:border-gray-700">
-                                    <h5 className="text-xl font-semibold mt-4">Personal Details :</h5>
-                                    <div className="mt-4">
-                                        <div className="flex items-center">
-                                            <FiMail className="fea icon-ex-md text-slate-400 me-3 w-6 h-6" />
-                                            <div className="flex-1">
-                                                <h6 className="text-green-600 dark:text-white font-medium mb-0">Email :</h6>
-                                                <Link href="" className="text-slate-400">calvin@hotmail.com</Link>
-                                            </div>
-                                        </div>
-
-
-                                        <div className="flex items-center mt-3">
-                                            <FiGlobe className="fea icon-ex-md text-slate-400 me-3 w-6 h-6" />
-                                            <div className="flex-1">
-                                                <h6 className="text-green-600 dark:text-white font-medium mb-0">Website :</h6>
-                                                <Link href="" className="text-slate-400">www.cristina.com</Link>
-                                            </div>
-                                        </div>
-                                        <div className="flex items-center mt-3">
-                                            <FiGift className="fea icon-ex-md text-slate-400 me-3 w-6 h-6" />
-                                            <div className="flex-1">
-                                                <h6 className="text-green-600 dark:text-white font-medium mb-0">Birthday :</h6>
-                                                <p className="text-slate-400 mb-0">2nd March, 1996</p>
-                                            </div>
-                                        </div>
-                                        <div className="flex items-center mt-3">
-                                            <FiMapPin className="fea icon-ex-md text-slate-400 me-3 w-6 h-6" />
-                                            <div className="flex-1">
-                                                <h6 className="text-green-600 dark:text-white font-medium mb-0">Location :</h6>
-                                                <Link href="" className="text-slate-400">Beijing, China</Link>
-                                            </div>
-                                        </div>
-                                        <div className="flex items-center mt-3">
-                                            <FiPhone className="fea icon-ex-md text-slate-400 me-3 w-6 h-6" />
-                                            <div className="flex-1">
-                                                <h6 className="text-green-600 dark:text-white font-medium mb-0">Cell No :</h6>
-                                                <Link href="" className="text-slate-400">(+12) 1254-56-4896</Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="xl:col-span-9 lg:col-span-8 md:col-span-8 mt-6">
-                            <div className="grid grid-cols-1 gap-6">
-                                <div className="p-6 relative rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
-                                    <h5 className="text-xl font-semibold">Calvin Carlo</h5>
-
-                                    <p className="text-slate-400 mt-3">I have started my career as a trainee and prove my self and achieve all the milestone with good guidance and reach up to the project manager. In this journey, I understand all the procedure which make me a good developer, team leader, and a project manager.</p>
-                                </div>
-
-                                <div className="p-6 relative rounded-md shadow dark:shadow-gray-700 bg-white dark:bg-slate-900">
-                                    <h5 className="text-xl font-semibold">My EVs :</h5>
-
-                                    <ul className="mt-4">
-                                        {wishlistItems.map((item, index) => (
-                                            <li key={index} className="text-slate-400">
-                                                {item.brand} - {item.model} - {item.variant}
-                                            </li>
-                                        ))}
-                                    </ul>
-
-
-
-                                </div>
-                            </div>
-                            )
-
-
-                        </div>
+                </div>
+                <div className="flex items-start">
+                    <FiMail className="fea icon-ex-md text-slate-400 mt-1 me-3 w-6 h-6" />
+                    <div>
+                        <h6 className="text-green-600 dark:text-white font-medium">Email :</h6>
+                        <p className="text-slate-400">{userDetails.email}</p>
+                    </div>
+                </div>
+                <div className="flex items-start">
+                    <FiHome className="fea icon-ex-md text-slate-400 mt-1 me-3 w-6 h-6" />
+                    <div>
+                        <h6 className="text-green-600 dark:text-white font-medium">Address :</h6>
+                        {userDetails.address ? (
+                            <p className="text-slate-400">{userDetails.address}</p>
+                        ) : (
+                            <p className="text-red-500">Please add address</p>
+                        )}
+                    </div>
+                </div>
+                <div className="flex items-start">
+                    <FiPhone className="fea icon-ex-md text-slate-400 mt-1 me-3 w-6 h-6" />
+                    <div>
+                        <h6 className="text-green-600 dark:text-white font-medium">Mobile Number</h6>
+                        {userDetails.mobile ? (
+                            <p className="text-slate-400">{userDetails.mobile}</p>
+                        ) : (
+                            <p className="text-red-500">Please add mobile number</p>
+                        )}
+                    </div>
+                </div>
+                <div>
+                    <div className="flex items-start">
+                        {session ? (
+                            <>
+                                <Link href="/api/auth/signout?callbackUrl=/" className="btn bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-full">Logout</Link>
+                            </>
+                        ) : null}
                     </div>
                 </div>
             </div>
+        );
+    };
 
+    return (
+        <>
+            <Navbar />
+
+
+            <div className="container mx-auto px-10 py-20">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+                    {/* Personal Details */}
+                    <div className="md:col-span-3 shadow mt-8">
+                        {userDetails && (
+                            <div className="md:col-span-3 shadow mt-8">
+                                <h2 className="text-xl font-semibold mb-4">Personal Details</h2>
+                                {renderPersonalDetails()}
+                            </div>
+                        )}
+                    </div>
+
+
+                    <div className="md:col-span-9 ">
+                        <div className="p-10 mt-20 rounded-md shadow bg-white dark:bg-slate-900 shadow-md">
+                            <h5 className="text-xl font-semibold">Wishlist</h5>
+                            <ul className="mt-4 space-y-2 shadow-md">
+                                {uniqueWishlistItems.map((item, index) => (
+                                    <li key={index} className="bg-white rounded-md shadow-md p-4 mb-4">
+                                        <span className="text-slate-400 block">{item.brand} - {item.model} - {item.variant}</span>
+                                    </li>
+                                ))}
+                            </ul>
+
+
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+            <Footer />
+            <Switcher />
 
         </>
     )
