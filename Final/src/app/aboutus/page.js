@@ -28,53 +28,53 @@ export default function Aboutus() {
         </div>
       </section>
       <section className="flex flex-col items-center justify-center md:pb-24 pb-16">
-        <h2 className="text-2xl font-bold mb-4 mt-10 text-center text-white-900 dark:text-black">
+        <h2 className="text-2xl font-bold mb-4 mt-10 text-center text-white-900 dark:text-white">
           When you buy a car from Electrify eV, you get
         </h2>
         <ul className="list-disc pl-8 mb-8 max-w-3xl mx-auto">
-          <li className="mb-4 text-xl text-white-900 dark:text-black">
+          <li className="mb-4 text-xl text-white-900 dark:text-white" >
             Electrify eV ensures that every car is road-ready. Each vehicle
             undergoes 140 quality checks and is refurbished with care at our
             state-of-the-art Mega Refurbishment Labs (MRL).
           </li>
-          <li className="mb-4 text-xl text-white-900 dark:text-black">
+          <li className="mb-4 text-xl text-white-900 dark:text-white">
             Enjoy peace of mind with our 7 Day Returns policy: Love your car, or
             return it within 7 days for a full refund. No questions asked!
           </li>
-          <li className="mb-4 text-xl text-white-900 dark:text-black">
+          <li className="mb-4 text-xl text-white-900 dark:text-white">
             Finance your way with Electrify eV Opt for zero down payment and up
             to a 6-year loan tenure with the lowest interest rates, allowing you
             to save your savings for your next super-awesome road trip!
           </li>
         </ul>
-        <h2 className="text-2xl font-bold mb-4 text-center text-white-900 dark:text-black">
+        <h2 className="text-2xl font-bold mb-4 text-center text-white-900 dark:text-white">
           When you sell your car on Electrify eV, you benefit from
         </h2>
         <ul className="list-disc pl-8 mb-8 max-w-3xl mx-auto">
-          <li className="mb-4 text-xl text-white-900 dark:text-black">
+          <li className="mb-4 text-xl text-white-900 dark:text-white">
             Great Price Leveraging the largest dealer network and our Smart AI
             Pricing Engine, we ensure you get a great deal for your car.
           </li>
-          <li className="mb-4 text-xl text-white-900 dark:text-black">
+          <li className="mb-4 text-xl text-white-900 dark:text-white">
             Instant Payment Once you agree on the price, the amount is
             transferred to your bank account within minutes!
           </li>
-          <li className="mb-4 text-xl text-white-900 dark:text-black">
+          <li className="mb-4 text-xl text-white-900 dark:text-white">
             Sell From Anywhere From inspection to payment, right to your bank
             account—you don’t even have to leave your home.
           </li>
         </ul>
-        <h2 className="text-2xl font-bold mb-4 text-center text-white-900 dark:text-black">
+        <h2 className="text-2xl font-bold mb-4 text-center text-white-900 dark:text-white">
           When you rent your car on Electrify eV, you benefit from
         </h2>
         <ul className="list-disc pl-8 mb-8 max-w-3xl mx-auto">
-          <li className="mb-4 text-xl text-white-900 dark:text-black">
+          <li className="mb-4 text-xl text-white-900 dark:text-white">
           Choose from a variety of rental plans tailored to your needs, whether it is for a weekend getaway or a long-term commitment.
           </li>
-          <li className="mb-4 text-xl text-white-900 dark:text-black">
+          <li className="mb-4 text-xl text-white-900 dark:text-white">
           Our streamlined rental process ensures a smooth experience from booking to returning the vehicle, so you can focus on enjoying your trip.
           </li>
-          <li className="mb-4 text-xl text-white-900 dark:text-black">
+          <li className="mb-4 text-xl text-white-900 dark:text-white">
           Comprehensive Insurance Coverage Drive with peace of mind knowing that our rental cars come with comprehensive insurance coverage, keeping you protected on the road.
           </li>
         </ul>

@@ -97,13 +97,13 @@ export default function AuthLogin() {
                             <form className="text-start" onSubmit={handleSignin}>
                                 <div className="grid grid-cols-1">
                                     <div className="mb-4">
-                                        <label className="font-medium" htmlFor="LoginEmail">Email Address:</label>
+                                        <label className="font-medium" htmlFor="LoginEmail">Email Address</label>
                                         <input id="LoginEmail" type="email" className="form-input mt-3" placeholder="name@example.com" name="email" value={userData.email} onChange={handleInputChange} />
                                     </div>
 
                                     <div className="mb-4">
-                                        <label className="font-medium" htmlFor="LoginPassword">Password:</label>
-                                        <input id="LoginPassword" type="password" className="form-input mt-3" placeholder="Password:" name="password" value={userData.password} onChange={handleInputChange} />
+                                        <label className="font-medium" htmlFor="LoginPassword">Password</label>
+                                        <input id="LoginPassword" type="password" className="form-input mt-3" placeholder="Password" name="password" value={userData.password} onChange={handleInputChange} />
                                     </div>
 
                                     <div className="mb-4">

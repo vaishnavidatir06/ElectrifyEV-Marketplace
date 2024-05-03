@@ -70,7 +70,7 @@ export default function Property() {
                             </li>
                             <li className="flex items-center">
                                 <MdBatteryFull width={20} className="me-2 text-green-600" />
-                                <span>{item.Battery}</span>
+                                <span>{item.battery}</span>
                             </li>
                         </>
                         )}

@@ -15,6 +15,10 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+@media screen and (max-width: 767px) {
+  /* Your responsive styles here */
+  
+}
 
 .css-13cymwt-control{
   border-color: transparent !important;
@@ -134,3 +138,15 @@
     )
     rgb(var(--background-start-rgb));
 } */
+@dark {
+  html, body {
+    background-color: #111;
+    color: #fff;
+  }
+
+  .text-white {
+    color: #111 !important;
+  }
+
+  /* Other dark mode styles... */
+}

@@ -106,35 +106,17 @@ export default function RentEV() {
             <Navbar/>
             <section className="py-20 bg-gray-950"  style={{ backgroundImage: "url('/images/bg/b17.jpg')" }}>
             <div className="container mx-auto px-2">
-        <div className="max-w-lg mx-auto bg-gray-200 rounded-lg shadow-lg p-2 mt-4">
-            <div className="pt-16 flex justify-center items-center min-h-screen mt-0">
-                <div className="w-full sm:max-w-md">
-                    <h1 className="text-center text-2xl mb-4 text-black">Enter Vehicle details you want to Rent</h1>
+                <div className="mx-auto bg-gray-200 rounded-lg shadow-lg p-2 mt-4 mr-20 ml-20" style={{ maxWidth: '800px' }}>
+                    <div className="pt-10 flex justify-center items-center min-h-screen mt-0 flex-col">
+                        <h1 className="text-center text-2xl mb-4 mt-0 text-black" style={{ fontFamily: 'YourCustomFont, Display' }}><b>Enter Vehicle details you want to Rent</b></h1>
+                        <div className="flex w-full">
+                           
+                           <div className="w-full p-4">
                     <form onSubmit={previewData ? handleSubmit : handlePreview} className="space-y-4">
-                        <fieldset>
-                            <legend className='text-black'>Owner Details</legend>
-                            <label className="text-green-500">
-                                Owner Name
-                                <input type="text" value={ownerName} onChange={(e) => setOwnerName(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
-                            </label><br /><br />
-                            <label className="text-green-500">
-                                Owner Contact
-                                <input type="text" value={ownerContact} onChange={(e) => setOwnerContact(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
-                            </label><br /><br />
-                            <label className="text-green-500">
-                                Owner Email
-                                <input type="email" value={ownerEmail} onChange={(e) => setOwnerEmail(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
-                            </label><br /><br />
-                            <label className="text-green-500">
-                                Owner City
-                                <input type="text" value={ownerCity} onChange={(e) => setOwnerCity(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
-                            </label><br /><br />
-                        </fieldset>
+                    <fieldset>
+                            <legend className='text-black'style={{ fontFamily: 'YourCustomFont, Display' }}><b>Vehicle Details</b></legend>
 
-                        <fieldset>
-                            <legend className='text-black'>Vehicle Details</legend>
-
-                            <label className="text-green-500">
+                            <label className="text-black"style={{ fontFamily: 'YourCustomFont, Display' }}>
                                 Body Type
                                 <select value={bodyType} onChange={(e) => setBodyType(e.target.value)} required className="w-full sm:w-48 h-8 border bg-white rounded-sm py-1 px-2">
                                     <option value="">Select Body Type</option>
@@ -144,44 +126,76 @@ export default function RentEV() {
                                 </select>
                             </label><br /><br />
 
-                            <label className="text-green-500" >
+                            <label className="text-black" style={{ fontFamily: 'YourCustomFont, Display' }}>
                                 Vehicle Type
                                 <input type="text" value={vehicleType} onChange={(e) => setVehicleType(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
                             </label><br /><br />
-                            <label className="text-green-500">
+                            <label className="text-black"style={{ fontFamily: 'YourCustomFont, Display' }}>
                                 Brand
                                 <input type="text" value={brand} onChange={(e) => setBrand(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
                             </label><br /><br />
-                            <label className="text-green-500">
+                            <label className="text-black"style={{ fontFamily: 'YourCustomFont, Display' }}>
                                 Model
                                 <input type="text" value={model} onChange={(e) => setModel(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
                             </label><br /><br />
-                            <label className="text-green-500">
+                            <label className="text-black"style={{ fontFamily: 'YourCustomFont, Display' }}>
                                 Plate Number
                                 <input type="text" value={plateNo} onChange={(e) => setPlateNo(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
                             </label><br /><br />
-                            <label className="text-green-500">
+                            <label className="text-black"style={{ fontFamily: 'YourCustomFont, Display' }}>
                                 Battery Power(mAh)
                                 <input type="text" value={batteryPower} onChange={(e) => setBatteryPower(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
                             </label><br /><br />
-                            <label className="text-green-500">
+                            <label className="text-black"style={{ fontFamily: 'YourCustomFont, Display' }}>
                                 Kilometres Driven
                                 <input type="text" value={kilometresDriven} onChange={(e) => setKilometresDriven(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
                             </label><br /><br />
-                            <label className="text-green-500">
+                            <label className="text-black"style={{ fontFamily: 'YourCustomFont, Display' }}>
                                 Price
                                 <input type="text" value={price} onChange={(e) => setprice(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
                             </label><br /><br />
-                            <label className="text-green-500">
+                            <label className="text-black"style={{ fontFamily: 'YourCustomFont, Display' }}>
                                 Upload Image
                                 <input type="file" accept="image/*" onChange={handleImageChange} required className="w-full border rounded-sm py-1 px-2" />
                             </label><br /><br />
                         </fieldset>
+                        </form>
+                        </div>
+                        <div className="w-full p-4">
+                    <form onSubmit={previewData ? handleSubmit : handlePreview} className="space-y-4">
+
+                    <fieldset>
+                            <legend className='text-black'style={{ fontFamily: 'YourCustomFont, Display' }}><b>Owner Details</b></legend>
+                            <label className="text-black"style={{ fontFamily: 'YourCustomFont, Display' }}>
+                                Owner Name
+                                <input type="text" value={ownerName} onChange={(e) => setOwnerName(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
+                            </label><br /><br />
+                            <label className="text-black"style={{ fontFamily: 'YourCustomFont, Display' }}>
+                                Owner Contact
+                                <input type="text" value={ownerContact} onChange={(e) => setOwnerContact(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
+                            </label><br /><br />
+                            <label className="text-black"style={{ fontFamily: 'YourCustomFont, Display' }}>
+                                Owner Email
+                                <input type="email" value={ownerEmail} onChange={(e) => setOwnerEmail(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
+                            </label><br /><br />
+                            <label className="text-black"style={{ fontFamily: 'YourCustomFont, Display' }}>
+                                Owner City
+                                <input type="text" value={ownerCity} onChange={(e) => setOwnerCity(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
+                            </label><br /><br />
+                        </fieldset>
+
+
+
+
+                       
+                        </form>
+                        </div>
+                        </div>
                         <div className="flex justify-center">
                            
                             <button type="submit" onClick={handleSubmit} className="btn bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-full">Confirm</button>
                         </div>
-                    </form>
+                   
                 </div>
             </div>
             {/* Preview Popup */}
@@ -196,7 +210,7 @@ export default function RentEV() {
                 </div>
             )}
             </div>
-            </div>
+            
              </section>
             <Footer />
             <Switcher />

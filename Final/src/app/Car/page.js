@@ -323,7 +323,7 @@ export default function Grid() {
 
 
             <section className="relative lg:py-24 py-16">
-                <div className="container">
+               
                     <div className="container">
                         <div className="lg:col-span-9 md:col-span-10 col-span-11">
                             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[30px]">
@@ -334,7 +334,7 @@ export default function Grid() {
                                         <div className="group relative rounded-xl text-black dark:text-white overflow-hidden transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl">
                                             <div className="relative">
                                                 {vehicle.frontImagesBase64 && vehicle.frontImagesBase64.length > 0 && (
-                                                    <img src={`data:image/jpeg;base64,${vehicle.frontImagesBase64[0]}`} alt="Front View" className="h-40 w-auto" />
+                                                    <img src={`data:image/jpeg;base64,${vehicle.frontImagesBase64[0]}`} alt="Front View" className="h-45 w-full" />
                                                 )}
                                             </div>
                                             <div className="absolute top-4 end-4">
@@ -364,7 +364,7 @@ export default function Grid() {
                                                         <MdSettingsInputComponent width={20} className="me-2 text-green-600" />
                                                         <span>{vehicle.transmissionType}</span>
                                                     </li>
-                                                    <li className="flex items-center">
+                                                    <li className="flex items-center me-4">
                                                         <MdTune width={20} className="me-2 text-green-600" />
                                                         <span>{vehicle.kilometresDriven}</span>
                                                     </li>
@@ -424,7 +424,7 @@ export default function Grid() {
 
 
 
-                </div>
+                
             </section>
 
             <Footer />

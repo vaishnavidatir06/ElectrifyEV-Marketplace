@@ -259,17 +259,22 @@ export default function ListSidebar() {
 
     return (
         <>
-            <Navbar navClass="navbar-white" />
-            <section className="py-20 bg-gray-950"  style={{ backgroundImage: "url('/images/bg/b17.jpg')" }}>
-        <div className="container mx-auto px-2">
-        <div className="max-w-lg mx-auto bg-gray-200 rounded-lg shadow-lg p-2 mt-4">
-            <div className="pt-16 flex justify-center items-center min-h-screen mt-0">
-                <div className="w-full sm:max-w-md mt-0">
-                    <h1 className="text-center text-2xl mb-4 mt-0 text-black"><b>Enter Vehicle details you want to sell</b></h1>
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                        <fieldset>
-                            <legend className="text-black"><b>Vehicle Details</b></legend>
-                            <label className="text-gray-950">
+             <Navbar navClass="navbar-white" />
+            <section className="py-20 bg-gray-950" style={{ backgroundImage: "url('/images/bg/b17.jpg')" }}>
+                <div className="container mx-auto px-2">
+                <div className="mx-auto bg-gray-200 rounded-lg shadow-lg p-2 mt-4 mr-20 ml-20" style={{ maxWidth: '800px' }}>
+                    <div className="pt-10 flex justify-center items-center min-h-screen mt-0 flex-col">
+                        <h1 className="text-center text-2xl mb-4 mt-0 text-black" style={{ fontFamily: 'YourCustomFont, Display' }}><b>Enter Vehicle details you want to sell</b></h1>
+                            <div className="flex w-full">
+                            <form onSubmit={handleSubmit} className="space-y-4">
+                            <div className="flex justify-between">
+                            <div className="w-1/2 pr-4 ml-10">
+                                    
+                                   
+                                        {/* Your first half of the form content */}
+                                        <fieldset>
+                            <legend className="text-black "style={{ fontFamily: 'YourCustomFont, Display' }} ><b>Vehicle Details</b></legend>
+                            <label className="text-gray-950"style={{ fontFamily: 'YourCustomFont, Display' }}>
                                 <b>Vehicle Type</b>
                                 <select value={vehicleType} onChange={(e) => setVehicleType(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2">
                                     <option value="">Select Vehicle Type</option>
@@ -282,75 +287,103 @@ export default function ListSidebar() {
                                 </select>
                             </label><br/><br/>
                             {renderRtoCodeAndKilometresDriven()}
-                            <label className="text-gray-950">
+                            <label className="text-gray-950"style={{ fontFamily: 'YourCustomFont, Display' }}>
                                 <b>Brand</b>
                                 <input type="text" value={brand} onChange={(e) => setBrand(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
                             </label><br/><br/>
-                            <label className="text-gray-950">
+                            <label className="text-gray-950"style={{ fontFamily: 'YourCustomFont, Display' }}>
                                 <b>Model</b>
                                 <input type="text" value={model} onChange={(e) => setModel(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
                             </label><br/><br/>
-                            <label className="text-gray-950">
+                            <label className="text-gray-950"style={{ fontFamily: 'YourCustomFont, Display' }}>
                                 <b>Variant</b>
                                 <input type="text" value={variant} onChange={(e) => setVariant(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
                             </label><br/><br/>
-                            <label className="text-gray-950">
+                            <label className="text-gray-950"style={{ fontFamily: 'YourCustomFont, Display' }}>
                                 <b>Location</b>
                                 <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2"  />
                             </label><br/><br/>
-                            <label className="text-gray-950">
+                            <label className="text-gray-950"style={{ fontFamily: 'YourCustomFont, Display' }}>
                                 <b>Battery Power(mAh)</b>
                                 <input type="text" value={batteryPower} onChange={(e) => setBatteryPower(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" placeholder="63.5kW" />
                             </label><br/><br/>
-                            <label className="text-gray-950">
+                            <label className="text-gray-950"style={{ fontFamily: 'YourCustomFont, Display' }}>
                                 <b>Color</b>
                                 <input type="text" value={color} onChange={(e) => setColor(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2"/>
                             </label><br/><br/>
                             {renderTransmissionTypeField()}
                             {renderBodyTypeField()}
-                            <label className="text-gray-950">
+                            <label className="text-gray-950"style={{ fontFamily: 'YourCustomFont, Display' }}>
                                 <b>Registration Year</b>
                                 <select value={registrationYear} onChange={(e) => setRegistrationYear(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2">
                                     <option value="">Select Registration Year</option>
                                     {renderRegistrationYears()}
                                 </select>
                             </label><br/><br/>
+
+                            
                             
 
-                        <label className="text-gray-950">
-    <b>Price</b>
-    <input 
-        type="text" // Change input type to text to allow manual entry
-        value={price.value} // Use price.value instead of price
-        onChange={(e) => handlePriceChange(e.target.value)} // Call handlePriceChange function
-        required 
-        className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" 
-    />
+<label className="text-gray-950"style={{ fontFamily: 'YourCustomFont, Display' }}>
+<b>Price</b>
+<input 
+type="text" // Change input type to text to allow manual entry
+value={price.value} // Use price.value instead of price
+onChange={(e) => handlePriceChange(e.target.value)} // Call handlePriceChange function
+required 
+className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" 
+/>
 </label>
 <select 
-    value={price.currency} // Use price.currency instead of price
-    onChange={(e) => setPrice({ ...price, currency: e.target.value })} // Update the currency field of price
-    required 
-    className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2 text-black"
+value={price.currency} // Use price.currency instead of price
+onChange={(e) => setPrice({ ...price, currency: e.target.value })} // Update the currency field of price
+required 
+className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2 text-black "
 >
-                                        <option value="" className="text-black">Select Currency</option>
-                                        <option value="USD" className="text-black">USD</option>
-                                        <option value="EUR" className="text-black">EUR</option>
-                                        <option value="SGD" className="text-black">SGD</option> {/* Singapore Dollar */}
-                                        <option value="INR" className="text-black">INR</option> {/* Indian Rupee */}
-                                        <option value="SAR" className="text-black">SAR</option> 
-                                        </select>
+<option value="" className="text-black">Select Currency</option>
+<option value="USD" className="text-black">USD</option>
+<option value="EUR" className="text-black">EUR</option>
+<option value="SGD" className="text-black">SGD</option> {/* Singapore Dollar */}
+<option value="INR" className="text-black">INR</option> {/* Indian Rupee */}
+<option value="SAR" className="text-black">SAR</option> 
+</select>
 
-                                <label className="text-gray-950">
-                                <b>Vehicle Description</b>
-                                <textarea value={vehicleDescription} onChange={(e) => setVehicleDescription(e.target.value)} className="w-full sm:w-48 h-32 border rounded-sm py-1 px-2" />
-                            </label><br/><br/>
-                        </fieldset>
+<label className="text-gray-950"style={{ fontFamily: 'YourCustomFont, Display' }}>
+<b>Vehicle Description</b>
+<textarea value={vehicleDescription} onChange={(e) => setVehicleDescription(e.target.value)} className="w-full sm:w-48 h-32 border rounded-sm py-1 px-2" />
+</label><br/>                     
+                        </fieldset>     
+                                </div>
 
 
+
+                                <div className="w-1/2 pl-4 mr-10">
+                                   
+                                        {/* Your second half of the form content */}
+
+                                        
                         <fieldset>
-                            <legend className="text-black">Upload Images</legend>
-                            <label className="text-gray-950">
+                            <legend className="text-black"style={{ fontFamily: 'YourCustomFont, Display' }}><b>Enter your Details</b></legend>
+                            <label className="text-gray-950"style={{ fontFamily: 'YourCustomFont, Display' }}>
+                                <b>Owner Name</b>
+                                <input type="text" value={ownerName} onChange={(e) => setOwnerName(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
+                            </label><br/><br/>
+                            <label className="text-gray-950"style={{ fontFamily: 'YourCustomFont, Display' }}>
+                                <b>Your Contact Number</b>
+                                <input type="text" value={ownerContact} onChange={(e) => setOwnerContact(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
+                            </label><br/><br/>
+                            <label className="text-gray-950"style={{ fontFamily: 'YourCustomFont, Display' }}>
+                                <b>Your Email</b>
+                                <input type="email" value={ownerEmail} onChange={(e) => setOwnerEmail(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
+                            </label><br/><br/>
+                            <label className="text-gray-950"style={{ fontFamily: 'YourCustomFont, Display' }}>
+                                <b>Your City</b>
+                                <input type="text" value={ownerCity} onChange={(e) => setOwnerCity(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
+                            </label><br/><br/>
+
+
+                            <legend className="text-black"style={{ fontFamily: 'YourCustomFont, Display' }}><b>Upload Images</b></legend>
+                            <label className="text-gray-950"style={{ fontFamily: 'YourCustomFont, Display' }}>
                             <b>Add Image Of Front-side</b>
                             <input type="file" name="image" accept="image/*" onChange={(e) => handleImageChange(e, 'front')} multiple required className="w-full border rounded-sm py-1 px-2" />
                             </label>
@@ -363,7 +396,7 @@ export default function ListSidebar() {
                                 </div>
                             )}
                             <br/><br/>
-                            <label className="text-gray-950">
+                            <label className="text-gray-950"style={{ fontFamily: 'YourCustomFont, Display' }}>
                                 <b>Add Image of left/right sides</b>
                                 <input type="file" accept="image/*" onChange={(e) => handleImageChange(e, 'side')} multiple required className="w-full border rounded-sm py-1 px-2" />
                             </label>
@@ -376,7 +409,7 @@ export default function ListSidebar() {
                                 </div>
                             )}
                             <br/><br/>
-                            <label className="text-gray-950">
+                            <label className="text-gray-950"style={{ fontFamily: 'YourCustomFont, Display' }}>
                                 <b>Add Image of Back-Side</b>
                                 <input type="file" accept="image/*" onChange={(e) => handleImageChange(e, 'back')} multiple required className="w-full border rounded-sm py-1 px-2" />
                             </label>
@@ -389,7 +422,7 @@ export default function ListSidebar() {
                                 </div>
                             )}
                             <br/><br/>
-                            <label className="text-gray-950">
+                            <label className="text-gray-950"style={{ fontFamily: 'YourCustomFont, Display' }}>
                                 <b>Add Image of Interior</b>
                                 <input type="file" accept="image/*" onChange={(e) => handleImageChange(e, 'interior')} multiple required className="w-full border rounded-sm py-1 px-2" />
                             </label>
@@ -402,33 +435,20 @@ export default function ListSidebar() {
                                 </div>
                             )}
                             <br/>
+
                         </fieldset>
-                        <fieldset>
-                            <legend className="text-black">Enter your Details</legend>
-                            <label className="text-gray-950">
-                                <b>Owner Name</b>
-                                <input type="text" value={ownerName} onChange={(e) => setOwnerName(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
-                            </label><br/><br/>
-                            <label className="text-gray-950">
-                                <b>Your Contact Number</b>
-                                <input type="text" value={ownerContact} onChange={(e) => setOwnerContact(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
-                            </label><br/><br/>
-                            <label className="text-gray-950">
-                                <b>Your Email</b>
-                                <input type="email" value={ownerEmail} onChange={(e) => setOwnerEmail(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
-                            </label><br/><br/>
-                            <label className="text-gray-950">
-                                <b>Your City</b>
-                                <input type="text" value={ownerCity} onChange={(e) => setOwnerCity(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
-                            </label><br/><br/>
-                        </fieldset>
-                        <div className="flex justify-center">
+                    
+
+                                </div>
+                            </div>
+
+                            <div className="flex justify-center">
                             <button type="submit" className="btn bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-full">Submit</button>
                         </div>
-                    </form>
-                </div>
-            </div>
-            {showPopup && (
+
+</form>
+</div>
+                            {showPopup && (
                 <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
                     <div className="bg-white p-6 rounded-lg">
                         <h2 className="text-2xl mb-4">Vehicle Registered Successfully!</h2>
@@ -436,9 +456,12 @@ export default function ListSidebar() {
                     </div>
                 </div>
             )}
-            </div>
-            </div>
-      </section>
+                          
+
+                        </div>
+                    </div>
+                </div>
+            </section>
             <Footer />
             <Switcher />
         </>

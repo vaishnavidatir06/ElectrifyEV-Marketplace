@@ -3,6 +3,7 @@ import AuthProvider from "../app/componants/AuthProvider"; // GIves access to da
 import './assets/css/materialdesignicons.min.css';
 import './assets/css/tailwind.css';
 import './globals.css';
+import Head from 'next/head';
 
 const league_Spartan = League_Spartan({ 
   subsets: ['latin'] ,
@@ -19,7 +20,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
+    
     <html lang="en" dir="LTR">
+       <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
      <AuthProvider>
      <body className={`${league_Spartan.className} dark:bg-slate-900`}>{children}</body>
      </AuthProvider>

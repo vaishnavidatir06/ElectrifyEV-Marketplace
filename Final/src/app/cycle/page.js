@@ -229,34 +229,22 @@ export default function Grid() {
                 </div>
             </div>
             <section className="relative lg:py-24 py-16">
-                <div className="container">
+               
                     <div className="container">
                         <div className="lg:col-span-9 md:col-span-10 col-span-11">
                             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[30px]">
 
 
                                 {filtered.map((vehicle) => (
+                                    <div className="group relative rounded-xl text-black dark:text-white overflow-hidden transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl" key={vehicle._id}>
                                     <Link href={`/vehicle-detail?id=${vehicle._id}`} key={vehicle._id}>
-                                        <div className="group relative rounded-xl text-black dark:text-white overflow-hidden transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl">
+                                        
                                             <div className="relative">
                                                 {vehicle.frontImagesBase64 && vehicle.frontImagesBase64.length > 0 && (
-                                                    <img src={`data:image/jpeg;base64,${vehicle.frontImagesBase64[0]}`} alt="Front View" className="h-40 w-auto" />
+                                                    <img src={`data:image/jpeg;base64,${vehicle.frontImagesBase64[0]}`} alt="Front View" className="h-40 w-full" />
                                                 )}
                                             </div>
-                                            <div className="absolute top-4 end-4">
-                                                <button className="flex-none flex items-center justify-center w-9 h-9 rounded-md bg-white border text-black-300 hover:text-red-500" type="button" aria-label="Like">
-                                                    <svg width="20" height="20" fill="currentColor" aria-hidden="true">
-                                                        <path fillRule="evenodd" clipRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                            <div className="absolute top-4 end-4">
-                                                <button onClick={() => handleAddToWishlist(vehicle)} className="flex-none flex items-center justify-center w-9 h-9 rounded-md bg-white border dark:bg-black border text-gray-200 dark:text-black-200 hover:text-red-500 dark:hover:text-red-500" type="button" aria-label="Like">
-                                                    <svg width="20" height="20" fill="currentColor" aria-hidden="true">
-                                                        <path fill="currentColor" fillRule="evenodd" clipRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-                                                    </svg>
-                                                </button>
-                                            </div>
+                                        
                                             <div className="p-6 group-hover:bg-black-100 dark:group-hover:bg-black-100">
                                                 <div className="pb-6">
                                                     <p className="text-lg hover:text-green-600 font-medium ease-in-out duration-500">{vehicle.brand}</p>
@@ -270,7 +258,7 @@ export default function Grid() {
                                                         <MdSettingsInputComponent width={20} className="me-2 text-green-600" />
                                                         <span>{vehicle.vehicleType}</span>
                                                     </li>
-                                                    <li className="flex items-center">
+                                                    <li className="flex items-center me-4">
                                                         <MdTune width={20} className="me-2 text-green-600" />
                                                         <span>{vehicle.batteryPower}</span>
                                                     </li>
@@ -285,8 +273,23 @@ export default function Grid() {
                                                     </li>
                                                 </ul>
                                             </div>
+                                            </Link>
+                                            <div className="absolute top-4 end-4">
+                                                <button className="flex-none flex items-center justify-center w-9 h-9 rounded-md bg-white border text-black-300 hover:text-red-500" type="button" aria-label="Like">
+                                                    <svg width="20" height="20" fill="currentColor" aria-hidden="true">
+                                                        <path fillRule="evenodd" clipRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                            <div className="absolute top-4 end-4">
+                                                <button onClick={() => handleAddToWishlist(vehicle)} className="flex-none flex items-center justify-center w-9 h-9 rounded-md bg-white border dark:bg-black border text-gray-200 dark:text-black-200 hover:text-red-500 dark:hover:text-red-500" type="button" aria-label="Like">
+                                                    <svg width="20" height="20" fill="currentColor" aria-hidden="true">
+                                                        <path fill="currentColor" fillRule="evenodd" clipRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                                                    </svg>
+                                                </button>
+                                            </div>
                                         </div>
-                                    </Link>
+                                    
                                 ))}
                             </div>
                         </div>
@@ -330,7 +333,7 @@ export default function Grid() {
 
 
 
-                </div>
+              
             </section>
 
             <Footer />

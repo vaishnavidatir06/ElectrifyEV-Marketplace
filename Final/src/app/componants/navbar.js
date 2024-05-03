@@ -127,20 +127,7 @@ export default function Navbar(props) {
                         </div>
                     </div>
                     <ul className="buy-button list-none mb-0 space-x-4">
-                        {session ? (
-                            <>
-
-                                <li className="inline mb-0">
-                                    <Link href="/profile" className="btn btn-icon bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-full"><User className="h-4 w-4 stroke-[3]"></User></Link>
-                                </li>
-
-
-                            </>
-                        ) : (
-                            <li className="inline mb-0">
-                                <Link href="/auth-login" className="btn btn-icon bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-full"><User className="h-4 w-4 stroke-[3]"></User></Link>
-                            </li>
-                        )}
+                        
                         <li className="dropdown inline-block relative" id="notificationDropdown">
                             <button className="dropdown-toggle h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-100 dark:border-gray-800 text-slate-900 dark:text-white rounded-md" type="button" onClick={() => setNotifications(true)}>
                                 <FiBell className="h-4 w-4"></FiBell>
@@ -209,7 +196,7 @@ export default function Navbar(props) {
                             
                             <li className={manu === "/contact" ? "active" : ''} style={{ fontFamily: 'YourCustomFont, Display' }}><Link href="/contact" className="sub-menu-item">Contact</Link></li>
                             
-                            <li className={`has-submenu parent-parent-menu-item ${["/Wishlist", "/settings"].includes(manu) ? 'active' : ''}`}>
+                            {/*<li className={`has-submenu parent-parent-menu-item ${["/Wishlist", "/settings"].includes(manu) ? 'active' : ''}`}>
                                 <Link href="#" onClick={() => { setSubManu(subManu === "/list-item" ? "" : "/list-item") }} style={{ fontFamily: 'YourCustomFont, Display' }}>Account</Link><span className="menu-arrow"></span>
                                 <ul className={`submenu ${["/Wishlist", "/settings" ].includes(subManu) ? 'open' : ''}`}>
                                     <li className="has-submenu parent-menu-item">
@@ -228,7 +215,46 @@ export default function Navbar(props) {
                                       ) : null}
                                     </li>
                                 </ul>
-                            </li>
+                            </li>*/}
+                         {session ? (
+    <>
+        <li className={`has-submenu parent-parent-menu-item ${["/Wishlist", "/settings","/profile"].includes(manu) ? 'active' : ''}`}>
+            <Link href="#" onClick={() => { setSubManu(subManu === "/list-item" ? "" : "/list-item") }} style={{ fontFamily: 'YourCustomFont, Display' }} className="btn btn-icon  border-green-600 dark:border-green-600 text-green-600 dark:text-white rounded-full">
+                <User className="h-6 w-6" />
+            </Link>
+            <ul className={`submenu ${["/Wishlist", "/settings" ].includes(subManu) ? 'open' : ''}`}>
+                <li className="has-submenu parent-menu-item">
+                    {session ? ( 
+                        <> 
+                            <Link href="profile" className="has-submenu parent-menu-item"> My Account </Link>
+                        </>
+                    ) : null}
+                </li>
+                <li className="has-submenu parent-menu-item">
+                    {session ? ( 
+                        <> 
+                            <Link href="settings" className="has-submenu parent-menu-item"> Settings </Link>
+                        </>
+                    ) : null}
+                </li>
+                <li className="has-submenu parent-menu-item" style={{ fontFamily: 'YourCustomFont, Display' }}><Link href="Wishlist">Wishlist</Link></li>
+                <li className="has-submenu parent-menu-item">
+                    {session ? (
+                        <>
+                            <Link href="/api/auth/signout?callbackUrl=/"  className="has-submenu parent-menu-item">Logout</Link>
+                        </>
+                    ) : null}
+                </li>
+            </ul>
+        </li>
+    </>
+) : (
+    <li className="inline mb-0">
+        <Link href="/auth-login"  className="btn btn-icon  border-green-600 dark:border-green-600 text-green-600 dark:text-white rounded-full">
+            <User className="h-6 w-6" />
+        </Link>
+    </li>
+)}
 
 
                         </ul>

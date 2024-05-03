@@ -11,6 +11,7 @@ var scroll = Scroll.animateScroll;
 
 export default function Switcher() {
     let [scrollToTops, setScrollToTops] = useState(false); 
+    const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(()=>{
     if (typeof window !== "undefined") {
@@ -49,20 +50,34 @@ const changeMode = (mode, event) => {
     }
 }
 
+const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    document.documentElement.classList.toggle('dark');
+  };
+
 
     return (
         <>
             {/* <!-- Switcher --> */}
             <div className="fixed top-1/4 -left-2 z-3">
-                <span className="relative inline-block rotate-90">
-                    <input type="checkbox" className="checkbox opacity-0 absolute" id="chk" onClick={(event) => changeMode('mode', event)} />
-                    <label className="label bg-slate-900 dark:bg-white shadow dark:shadow-gray-700 cursor-pointer rounded-full flex justify-between items-center p-1 w-14 h-8" htmlFor="chk">
-                        <FiMoon className="text-yellow-500" width={18}/>
-                        <FiSun className="text-yellow-500" width={18}/>
-                        <span className="ball bg-white dark:bg-slate-900 rounded-full absolute top-[2px] start-[2px] w-7 h-7"></span>
-                    </label>
-                </span>
-            </div>
+        <span className="relative inline-block rotate-90">
+          <input
+            type="checkbox"
+            className="checkbox opacity-0 absolute"
+            id="chk"
+            checked={isDarkMode}
+            onChange={toggleDarkMode}
+          />
+          <label
+            className={`label bg-slate-900 dark:bg-white shadow dark:shadow-gray-700 cursor-pointer rounded-full flex justify-between items-center p-1 w-14 h-8 dark-mode`}
+            htmlFor="chk"
+          >
+            <FiMoon className="text-yellow-500" width={18} />
+            <FiSun className="text-yellow-500" width={18} />
+            <span className="ball bg-white dark:bg-slate-900 rounded-full absolute top-[2px] start-[2px] w-7 h-7" />
+          </label>
+        </span>
+      </div>
 
             {/* <!-- Switcher --> */}
 

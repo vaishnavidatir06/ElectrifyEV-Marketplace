@@ -9,7 +9,7 @@ import Switcher from "../componants/switcher";
 
 
 
-import { FiChevronLeft, FiChevronRight, MdDirectionsCar, MdSettingsInputComponent, MdTune } from '../assets/icons/vander';
+import { FiChevronLeft, FiChevronRight, MdDirectionsCar, MdSettingsInputComponent, MdTune, MdFlight, MdBatteryFull} from '../assets/icons/vander';
 
 
 export default function Grid() {
@@ -309,20 +309,50 @@ export default function Grid() {
 
 
             <section className="relative lg:py-24 py-16">
-                <div className="container">
+                
                     <div className="container">
                         <div className="lg:col-span-9 md:col-span-10 col-span-11">
                             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[30px]">
 
 
                                 {currentDrones.map((vehicle) => (
+                                    <div className="group relative rounded-xl text-black dark:text-white overflow-hidden transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl"  key={vehicle._id}>
                                     <Link href={`/vehicle-detail?id=${vehicle._id}`} key={vehicle._id}>
-                                        <div className="group relative rounded-xl text-black dark:text-white overflow-hidden transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl">
                                             <div className="relative">
                                                 {vehicle.frontImagesBase64 && vehicle.frontImagesBase64.length > 0 && (
-                                                    <img src={`data:image/jpeg;base64,${vehicle.frontImagesBase64[0]}`} alt="Front View" className="h-40 w-auto" />
+                                                    <img src={`data:image/jpeg;base64,${vehicle.frontImagesBase64[0]}`} alt="Front View" className="h-45 w-full" />
                                                 )}
                                             </div>
+                                            
+                                            <div className="p-6 group-hover:bg-black-100 dark:group-hover:bg-black-100">
+                                                <div className="pb-6">
+                                                    <p className="text-lg hover:text-green-600 font-medium ease-in-out duration-500">{vehicle.brand}</p>
+                                                </div>
+                                                <ul className="py-6 border-y border-slate-100 dark:border-gray-800 flex items-center list-none">
+                                                    <li className="flex items-center me-4">
+                                                        <MdFlight width={20} className="me-2 text-green-600" />
+                                                        <span>{vehicle.model}</span>
+                                                    </li>
+                                                    <li className="flex items-center me-4">
+                                                        <MdSettingsInputComponent width={20} className="me-2 text-green-600" />
+                                                        <span>{vehicle.variant}</span>
+                                                    </li>
+                                                    <li className="flex items-center me-4">
+                                                        <MdBatteryFull width={20} className="me-2 text-green-600" />
+                                                        <span>{vehicle.batteryPower}</span>
+                                                    </li>
+                                                </ul>
+                                                <ul className="pt-6 flex justify-between items-center list-none">
+                                                    <li>
+                                                        <span className="text-slate-400">Price</span>
+                                                        {/* Add price separators using toLocaleString() */}
+                                                        <p className="text-lg font-medium">
+                                                            ${vehicle.price && vehicle.price.value.toLocaleString()}
+                                                        </p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            </Link>
                                             <div className="absolute top-4 end-4">
                                                 <button className="flex-none flex items-center justify-center w-9 h-9 rounded-md bg-white border text-black-300 hover:text-red-500" type="button" aria-label="Like">
                                                     <svg width="20" height="20" fill="currentColor" aria-hidden="true">
@@ -337,41 +367,13 @@ export default function Grid() {
                                                     </svg>
                                                 </button>
                                             </div>
-                                            <div className="p-6 group-hover:bg-black-100 dark:group-hover:bg-black-100">
-                                                <div className="pb-6">
-                                                    <p className="text-lg hover:text-green-600 font-medium ease-in-out duration-500">{vehicle.brand}</p>
-                                                </div>
-                                                <ul className="py-6 border-y border-slate-100 dark:border-gray-800 flex items-center list-none">
-                                                    <li className="flex items-center me-4">
-                                                        <MdDirectionsCar width={20} className="me-2 text-green-600" />
-                                                        <span>{vehicle.model}</span>
-                                                    </li>
-                                                    <li className="flex items-center me-4">
-                                                        <MdSettingsInputComponent width={20} className="me-2 text-green-600" />
-                                                        <span>{vehicle.transmissionType}</span>
-                                                    </li>
-                                                    <li className="flex items-center">
-                                                        <MdTune width={20} className="me-2 text-green-600" />
-                                                        <span>{vehicle.kilometresDriven}</span>
-                                                    </li>
-                                                </ul>
-                                                <ul className="pt-6 flex justify-between items-center list-none">
-                                                    <li>
-                                                        <span className="text-slate-400">Price</span>
-                                                        {/* Add price separators using toLocaleString() */}
-                                                        <p className="text-lg font-medium">
-                                                            ${vehicle.price && vehicle.price.value.toLocaleString()}
-                                                        </p>
-                                                    </li>
-                                                </ul>
-                                            </div>
                                         </div>
-                                    </Link>
+                    
                                 ))}
                             </div>
                         </div>
                     </div>
-
+                    
 
                     <div className="grid md:grid-cols-12 grid-cols-1 mt-8">
                         <div className="md:col-span-12 text-center">
@@ -404,11 +406,7 @@ export default function Grid() {
                             </nav>
                         </div>
                     </div>
-
-
-
-
-                </div>
+              
             </section>
             <Footer />
             <Switcher />

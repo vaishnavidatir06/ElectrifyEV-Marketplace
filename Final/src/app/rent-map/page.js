@@ -129,13 +129,14 @@ export default function IndexThree() {
             </section>
             <section className="relative lg:py-24 py-16">
                 <div className="container">
-                    <div className="grid lg:grid-cols-2 grid-cols-1 gap-[30px]">
+                <div className="lg:col-span-9 md:col-span-10 col-span-11">
+                <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-8 gap-[30px]">
                         {filteredRentals.map((item, index) => (
-                            <div key={index} className="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500 w-full mx-auto lg:max-w-2xl">
+                            <div key={index} className="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500 w-full mx-auto lg:max-w-2xl cursor-pointer" onClick={() => setShowPopup(true)}>
                                 <div className="md:flex">
                                     <div className="p-6">
                                         <div className="pb-6">
-                                            <div className="cursor-pointer" onClick={() => setShowPopup(true)}>
+                                            <div >
                                                 <p className="text-lg hover:text-green-600 font-medium ease-in-out duration-500">{item.brand} - {item.model}</p>
                                             </div>
                                         </div>
@@ -171,8 +172,20 @@ export default function IndexThree() {
                                             </li>
                                         </ul>
                                         {/* Popup/modal */}
-                                        {showPopup && (
-                                            <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    </div>
+                    </div>
+                <GetInTuch />
+            </section>
+            <Footer />
+            <Switcher />
+                    {showPopup && (
+                                             <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-90">
                                                 <div className="bg-white p-6 rounded-lg relative">
                                                     <button
                                                         className="absolute top-0 end-0 text-red-500 hover:text-red-700 p-2"
@@ -198,17 +211,7 @@ export default function IndexThree() {
                                                 </div>
                                             </div>
                                         )}
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                   
-                </div>
-                <GetInTuch />
-            </section>
-            <Footer />
-            <Switcher />
+                
         </>
     )
 }

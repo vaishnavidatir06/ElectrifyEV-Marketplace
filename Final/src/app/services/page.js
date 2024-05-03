@@ -1,5 +1,5 @@
-'use client'
-import React, { useState } from 'react';
+"use client";
+import React, { useState, useEffect } from 'react';
 import Navbar from "../componants/navbar";
 import Switcher from "../componants/switcher";
 import Footer from "../componants/footer";
@@ -75,11 +75,17 @@ const EmergencyPage = () => {
 
   const handleVerifyOTP = () => {
     console.log('OTP verified');
-    setShowOTP(false);
+    setShowOTP(false)
   };
 
   const handleFormSubmit = () => {
+    console.log("Form submitted");
     setShowPopup(true);
+    // Automatically hide the popup after 5 seconds
+    setTimeout(() => {
+      console.log("Timeout function called");
+      setShowPopup(false);
+    }, 5000);
   };
 
   return (
@@ -154,7 +160,7 @@ const EmergencyPage = () => {
                 </svg>
               </button>
             </div>
-            <h2 className="text-lg font-bold mb-4">Contacting our management team , we will reachout to you</h2>
+            <h2 className="text-lg font-bold mb-4">Contacting our management team, we will reach out to you</h2>
           </div>
         </div>
       )}
