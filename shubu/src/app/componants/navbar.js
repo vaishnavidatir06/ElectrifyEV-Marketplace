@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
 import { User } from 'react-feather';
 import { FiBell, FiShoppingCart } from 'react-icons/fi';
-import BuyPopup from '/src/app/buy/page.js';
+
 
 export default function Navbar(props) {
     let { navClass, topnavClass } = props;
@@ -14,7 +14,7 @@ export default function Navbar(props) {
     let [topNavbar, setTopNavBar] = useState(false);
     let [manu, setManu] = useState('');
     let [subManu, setSubManu] = useState('');
-    const [isOpen, setIsOpen] = useState(false);
+    let [isOpen, setIsOpen] = useState(true);
     const [notifications, setNotifications] = useState(false);
     const { data: session, status } = useSession(); // useSession hook to access session
 
@@ -32,30 +32,26 @@ export default function Navbar(props) {
 
             window.addEventListener('scroll', windowScroll);
             window.scrollTo(0, 0);
-
             // Call the asynchronous function inside useEffect
             await checkSession();
-        }
+            return () => {
+                window.removeEventListener('scroll', windowScroll)
+                };
+           
 
-        // Call the asynchronous function immediately
+            
+        }
         fetchData();
 
-        //        return () => {
-        //            window.removeEventListener('scroll', windowScroll)
-        //        };
+        // Call the asynchronous function immediately
+        
 
-
-
-        const closeNotification = () => {
-            setNotifications(false);
-        };
-
-
-
+         
     }, [current]);
 
     const toggleMenu = () => {
-        setIsOpen(!isOpen);
+        setIsOpen(!isOpen)
+        if (document.getElementById("navigation")) {
         const anchorArray = Array.from(document.getElementById("navigation").getElementsByTagName("a"));
         anchorArray.forEach(element => {
             element.addEventListener('click', (elem) => {
@@ -69,18 +65,17 @@ export default function Navbar(props) {
             });
         });
     };
+}
 
     async function checkSession() {
         const session = await getSession(); // Fetch session data from the server
     }
 
 
-    const openPopup = () => {
-        setIsOpen(true);
-    };
+    
 
-    const closePopup = () => {
-        setIsOpen(false);
+    const closeNotification = () => {
+        setNotifications(false);
     };
 
 
@@ -106,17 +101,17 @@ export default function Navbar(props) {
             <nav id="topnav" className={`${topNavbar ? 'nav-sticky' : ''} ${topnavClass ? topnavClass : ''} defaultscroll is-sticky`} >
                 <div className={`${topnavClass !== '' && topnavClass !== undefined ? 'container-fluid md:px-8 px-3' : 'container'}`}>
                     {navClass === '' || navClass === undefined ?
-                        <Link className="logo" href="">
-                            <Image src="/images/logo.png" className="inline-block dark:hidden" alt="" width={98} height={24} />
-                            <Image src="/images/logo.png" className="hidden dark:inline-block" alt="" width={98} height={24} />
-                            <span className="font-bold">Electrify eV</span>
+                        <Link className="logo" href="../">
+                            <Image src="/images/ev logo.png" className="inline-block dark:hidden" alt="" width={70} height={10} />
+                            <Image src="/images/ev logo.png" className="hidden dark:inline-block" alt="" width={70} height={10} />
+                            <span className="font-bold"style={{ fontFamily: 'YourCustomFont, Display',color:'green-400' }}>Electrify eV</span>
                         </Link> :
-                        <Link className="logo" href="/">
-                            <span className="inline-block dark:hidden">
-                                <Image src="/images/logo.png" className="l-dark" alt="" width={98} height={24} />
-                                <Image src="/images/logo.png" className="l-light" alt="" width={98} height={24} />
-                            </span>
-                            <Image src="/images/logo.png" className="hidden dark:inline-block" alt="" width={98} height={24} />
+                        <Link className="logo" href="../">
+                           
+                                <Image src="/images/ev logo.png" className="l-dark" alt="" width={70} height={10} />
+                                <Image src="/images/ev logo.png" className="l-light" alt="" width={70} height={10} />
+                                <span className="font-bold"style={{ fontFamily: 'YourCustomFont, Display' ,color:'green-400'}}>Electrify eV</span>
+                            
                         </Link>
                     }
                     <div className="menu-extras">
@@ -131,18 +126,7 @@ export default function Navbar(props) {
                         </div>
                     </div>
                     <ul className="buy-button list-none mb-0 space-x-4">
-                        {session ? (
-                            <>
-
-                                <li className="inline mb-0">
-                                    <Link href="/profile" className="btn btn-icon bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-full"><User className="h-4 w-4 stroke-[3]"></User></Link>
-                                </li>
-                            </>
-                        ) : (
-                            <li className="inline mb-0">
-                                <Link href="/auth-login" className="btn btn-icon bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-full"><User className="h-4 w-4 stroke-[3]"></User></Link>
-                            </li>
-                        )}
+                        
                         <li className="dropdown inline-block relative" id="notificationDropdown">
                             <button className="dropdown-toggle h-8 w-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-100 dark:border-gray-800 text-slate-900 dark:text-white rounded-md" type="button" onClick={() => setNotifications(true)}>
                                 <FiBell className="h-4 w-4"></FiBell>
@@ -183,55 +167,90 @@ export default function Navbar(props) {
                         </li>
                     </ul>
 
-                    <ul className="buy-button list-none mb-0">
-                        {session ? (
-                            <>
-                                <Link href="/api/auth/signout?callbackUrl=/" className="space-x-4">Logout</Link>
-                            </>
-                        ) : null}
-                    </ul>
-
 
                     <div id="navigation" className={`${isOpen === true ? 'hidden' : 'block'}`} >
                         <ul className={`navigation-menu  ${navClass === '' || navClass === undefined ? '' : 'nav-light'}   ${topnavClass !== '' && topnavClass !== undefined ? 'justify-center' : 'justify-end'}`}>
-                            <li className={manu === "../" ? 'active' : ''}><Link href="../" className="sub-menu-item">Home</Link></li>
-                            <li><Link href="" onClick={openPopup}>Buy</Link></li>
-                            <BuyPopup isOpen={isOpen} onClose={closePopup} />
-                            <li className={manu === "/sell" ? 'active' : ''}><Link href="/sell" className="sub-menu-item">Sell</Link></li>
-                            <li className={`has-submenu parent-parent-menu-item ${["/grid", "/grid-sidebar", "/grid-map", "/list", "/list-sidebar", "/list-map", "/property-detail/1"].includes(manu) ? 'active' : ''}`}>
-                                <Link href="#" onClick={() => { setSubManu(subManu === "/list-item" ? "" : "/list-item") }}>Services</Link><span className="menu-arrow"></span>
-                                <ul className={`submenu ${["/grid", "/grid-sidebar", "/grid-map", "/list", "/list-sidebar", "/list-map", "/property-detail/1", "/list-item", "/grid-item", "/list-view-item", "/property-item"].includes(subManu) ? 'open' : ''}`}>
-                                    <li className="has-submenu parent-menu-item"><Link href="grid-map"> Rentals </Link></li>
-                                    <li className={`has-submenu parent-menu-item ${["/list", "/list-sidebar", "/list-map"].includes(manu) ? 'active' : ''}`}><Link href="/list" onClick={() => { setSubManu(subManu === "/list-view-item" ? "" : "/list-view-item") }}> Rent Your eV </Link></li>
-                                    <li className={`has-submenu parent-menu-item ${["/batteryswap"].includes(manu) ? 'active' : ''}`}><Link href="#" onClick={() => { setSubManu(subManu === "/property-item" ? "" : "/property-item") }}> eVServices </Link><span className="submenu-arrow"></span>
-                                        <ul className={`submenu ${["/batteryswap", "/property-item", "/carwash", "/BatteryCharge", "/Emergencyassistance", "/Repair"].includes(subManu) ? 'open' : ''}`}>
-                                            <li className={manu === "/batteryswap" ? 'active' : ''}><Link href="/batteryswap" className="sub-menu-item">Battery Swap</Link></li>
-                                            <li className={manu === "/BatteryCharge" ? 'active' : ''}><Link href="/BatteryCharge" className="sub-menu-item">Battery Charge</Link></li>
-                                            <li className={manu === "/Emergencyassistance" ? 'active' : ''}><Link href="/Emergencyassistance" className="sub-menu-item">Emergency Assistence</Link></li>
-                                            <li className={manu === "/carwash" ? 'active' : ''}><Link href="/carwash" className="sub-menu-item">Vehicle Wash</Link></li>
+                            
+                        < li className={["/buy", "/Car", "/cycle", "/scooter", "/auto", "/drone", "/tractor","/vehicle-detail"].includes(manu) ? 'active' : ''} style={{ fontFamily: 'YourCustomFont, Display' }}>
+    < Link href="/buy" className="sub-menu-item"style={{ fontFamily: 'YourCustomFont, Display',fontWeight: 'bold' }}>Buy</Link>
+</li>
+< li className={["/sell", "/sell-form"].includes(manu) ? 'active' : '' } style={{ fontFamily: 'YourCustomFont, Display' }}>
+    <Link href="/sell" className="sub-menu-item" style={{ fontFamily: 'YourCustomFont, Display',fontWeight: 'bold' }} >Sell</Link>
+</li>
+                            < li className={`has-submenu parent-parent-menu-item ${["/grid", "/grid-sidebar", "/rent", "/list", "/list-sidebar", "/list-map", "/services", "/batteryswap", "/BatteryCharge", "/carwash","/rentals","/rent-map","/car-service","/scooter-service","/drone-service","/tractor-service","/auto-service","/station1"].includes(manu) ? 'active' : ''}`}>
+                                <Link href="#" onClick={() => { setSubManu(subManu === "/list-item" ? "" : "/list-item "? 'active' : '') }}style={{ fontFamily: 'YourCustomFont, Display',fontWeight: 'bold' }}>Services</Link><span className="menu-arrow"></span>
+                                < ul className={`submenu ${["/grid", "/grid-sidebar", "/rent", "/list", "/services", "/batteryswap", "/BatteryCharge", "/carwash", "/grid-item", "/list-view-item", "/property-item"].includes(subManu) ? 'open' : ''}`}>
+                                <li className={`has-submenu parent-menu-item ${["/rent"].includes(manu) ? 'active' : ''}`} style={{ fontFamily: 'YourCustomFont, Display' }}><Link href="/rent" style={{ fontFamily: 'YourCustomFont, Display',fontWeight: 'bold' }} onClick={() => { setSubManu(subManu === "/list-view-item" ? "" : "/list-view-item") }}> Rentals</Link></li>
+                                   
+                                    <li className={`has-submenu parent-menu-item ${["/list", "/list-sidebar", "/list-map"].includes(manu) ? 'active' : ''}`} style={{ fontFamily: 'YourCustomFont, Display' }}><Link href="/list" style={{ fontFamily: 'YourCustomFont, Display',fontWeight: 'bold' }} onClick={() => { setSubManu(subManu === "/list-view-item" ? "" : "/list-view-item") }}> Rent Your eV </Link></li>
+                                    <li className={`has-submenu parent-menu-item ${["/services"].includes(manu) ? 'active' : ''}`} style={{ fontFamily: 'YourCustomFont, Display' }}><Link href="/services" style={{ fontFamily: 'YourCustomFont, Display',fontWeight: 'bold' }} onClick={() => { setSubManu(subManu === "/list-view-item" ? "" : "/list-view-item") }}> Emergency Assistance</Link></li>
+                                    
+                                    <li className={`has-submenu parent-menu-item ${["/batteryswap"].includes(manu) ? 'active' : ''}`} style={{ fontFamily: 'YourCustomFont, Display' }}><Link href="#"style={{ fontFamily: 'YourCustomFont, Display',fontWeight: 'bold' }} onClick={() => { setSubManu(subManu === "/property-item" ? "" : "/property-item") }}> eVServices </Link><span className="submenu-arrow"></span>
+                                        <ul className={`submenu ${["/batteryswap", "/services", "/carwash", "/BatteryCharge", "/Emergencyassistance", "/Repair"].includes(subManu) ? 'open' : ''}`}>
+                                            <li className={manu === "/batteryswap" ? 'active' : ''} style={{ fontFamily: 'YourCustomFont, Display' }}><Link href="/batteryswap" className="sub-menu-item"style={{ fontFamily: 'YourCustomFont, Display',fontWeight: 'bold' }}>Battery Swap</Link></li>
+                                            <li className={manu === "/BatteryCharge" ? 'active' : ''} style={{ fontFamily: 'YourCustomFont, Display' }}><Link href="/BatteryCharge" className="sub-menu-item"style={{ fontFamily: 'YourCustomFont, Display',fontWeight: 'bold' }}>Battery Recharge</Link></li>
+                                            <li className={manu === "/carwash" ? 'active' : ''} style={{ fontFamily: 'YourCustomFont, Display' }}><Link href="/carwash" className="sub-menu-item"style={{ fontFamily: 'YourCustomFont, Display',fontWeight: 'bold' }}>Electrify Wash</Link></li>
                                         </ul>
                                     </li>
                                 </ul>
                             </li>
-                            <li className={`has-submenu parent-parent-menu-item ${["/aboutus", "/features", "/pricing", "/faqs", "/auth-login", "/auth-signup", "/auth-reset-password", "/terms", "/privacy", "/blogs", "/blog-sidebar", "/blog-detail", "/comingsoon", "/maintenance", "/404"].includes(manu) ? 'active' : ''}`}>
-                                <Link href="#" onClick={() => { setSubManu(subManu === "/page-item" ? '' : "/page-item") }}>Pages</Link><span className="menu-arrow"></span>
-                                <ul className={`submenu ${["/aboutus", "/features", "/pricing", "/faqs", "/auth-login", "/auth-signup", "/auth-reset-password", "/terms", "/privacy", "/blogs", "/blog-sidebar", "/blog-detail", "/comingsoon", "/maintenance", "/404", "/page-item", "/auth-item", "/term-item", "/blog-item", "/special-item"].includes(subManu) ? 'open' : ''}`}>
-                                    <li className={manu === "/aboutus" ? "active" : ''}><Link href="/aboutus" className="sub-menu-item">About Us</Link></li>
-                                    <li className={`has-submenu parent-menu-item ${["/auth-login", "/auth-signup", "/auth-reset-password"].includes(manu) ? 'active' : ''}`}><Link href="#" onClick={() => { setSubManu(subManu === "/auth-item" ? '' : "/auth-item") }}> Auth Pages </Link><span className="submenu-arrow"></span>
-                                        <ul className={`submenu ${["/auth-reset-password", "/auth-item"].includes(subManu) ? 'open' : ''}`}>
-                                            <li className={manu === "/auth-reset-password" ? "active" : ''}><Link href="/auth-reset-password" className="sub-menu-item">Reset Password</Link></li>
-                                        </ul>
-                                    </li>
-                                    <li className={`has-submenu parent-menu-item ${["/terms", "/privacy"].includes(manu) ? 'active' : ''}`}><Link href="#" onClick={() => { setSubManu(subManu === "/term-item" ? '' : "/term-item") }}> Utility </Link><span className="submenu-arrow"></span>
-                                        <ul className={`submenu ${["/terms", "/privacy", "/term-item"].includes(subManu) ? 'open' : ''}`}>
-                                            <li className={manu === "/terms" ? "active" : ''}><Link href="/terms" className="sub-menu-item">Terms of Services</Link></li>
-                                            <li className={manu === "/privacy" ? "active" : ''}><Link href="/privacy" className="sub-menu-item">Privacy Policy</Link></li>
-                                        </ul>
+                            
+                            <li className={manu === "/contact" ? "active" : ''} style={{ fontFamily: 'YourCustomFont, Display' }}><Link href="/contact" className="sub-menu-item" style={{ fontFamily: 'YourCustomFont, Display',fontWeight: 'bold' }}>Contact</Link></li>
+                            
+                            {/*<li className={`has-submenu parent-parent-menu-item ${["/Wishlist", "/settings"].includes(manu) ? 'active' : ''}`}>
+                                <Link href="#" onClick={() => { setSubManu(subManu === "/list-item" ? "" : "/list-item") }} style={{ fontFamily: 'YourCustomFont, Display' }}>Account</Link><span className="menu-arrow"></span>
+                                <ul className={`submenu ${["/Wishlist", "/settings" ].includes(subManu) ? 'open' : ''}`}>
+                                    <li className="has-submenu parent-menu-item">
+                                     {session ? ( 
+                                         <> 
+                                    <Link href="settings" className="has-submenu parent-menu-item"> Settings </Link>
+                                       </>
+                                       ) : null}
+                                     </li>
+                                    <li className="has-submenu parent-menu-item" style={{ fontFamily: 'YourCustomFont, Display' }}><Link href="Wishlist">Wishlist</Link></li>
+                                    <li className="has-submenu parent-menu-item">
+                                     {session ? (
+                                     <>
+                                     <Link href="/api/auth/signout?callbackUrl=/"  className="has-submenu parent-menu-item">Logout</Link>
+                                     </>
+                                      ) : null}
                                     </li>
                                 </ul>
+                            </li>*/}
+                         {session ? (
+    <>
 
-                            </li>
-                            <li className={manu === "/contact" ? "active" : ''}><Link href="/contact" className="sub-menu-item">Contact</Link></li>
+
+        <li className={`has-submenu parent-parent-menu-item ${["/Wishlist", "/settings","/profile"].includes(manu) ? 'active' : ''}`}>
+            <Link href="#" onClick={() => { setSubManu(subManu === "/list-item" ? "" : "/list-item") }}style={{ fontFamily: 'YourCustomFont, Display',fontWeight: 'bold' }}> Account </Link> <span className="menu-arrow"></span>
+            <ul className={`submenu ${["/Wishlist", "/settings" ].includes(subManu) ? 'open' : ''}`}>
+                <li className="has-submenu parent-menu-item" >
+                    {session ? ( 
+                        <> 
+                           <li className={`has-submenu parent-menu-item ${["/profile"].includes(manu) ? 'active' : ''}`} style={{ fontFamily: 'YourCustomFont, Display' }}><Link href="/profile" style={{ fontFamily: 'YourCustomFont, Display',fontWeight: 'bold' }} onClick={() => { setSubManu(subManu === "/list-view-item" ? "" : "/list-view-item") }}> My Account</Link></li>
+                        </>
+                    ) : null}
+                </li>
+                <li className={`has-submenu parent-menu-item ${["/Wishlist"].includes(manu) ? 'active' : ''}`} style={{ fontFamily: 'YourCustomFont, Display' }}><Link href="/Wishlist" style={{ fontFamily: 'YourCustomFont, Display',fontWeight: 'bold' }} onClick={() => { setSubManu(subManu === "/list-view-item" ? "" : "/list-view-item") }}> Wishlist</Link></li>
+              
+                <li className="has-submenu parent-menu-item">
+                    {session ? (
+                        <>
+                            <Link href="/api/auth/signout?callbackUrl=/"  className="has-submenu parent-menu-item" style={{ fontFamily: 'YourCustomFont, Display',fontWeight: 'bold' }}>Logout</Link>
+                        </>
+                    ) : null}
+                </li>
+            </ul>
+        </li>
+    </>
+) : (
+    <li className="inline mb-0">
+        <Link href="/auth-login"  className="btn btn-icon  border-green-600 dark:border-green-600 text-green-600 dark:text-white rounded-full">
+            <User className="h-6 w-6" />
+        </Link>
+    </li>
+)}
+
 
                         </ul>
                     </div>

@@ -134,3 +134,15 @@
     )
     rgb(var(--background-start-rgb));
 } */
+@dark {
+  html, body {
+    background-color: #111;
+    color: #fff;
+  }
+
+  .text-white {
+    color: #111 !important;
+  }
+
+  /* Other dark mode styles... */
+}

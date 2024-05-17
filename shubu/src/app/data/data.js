@@ -17,26 +17,26 @@ export const counterData = [
 export const featureData =[
     {
         title:'Evaluate Your EV',
-        description:'If the distribution of letters and words is random, the reader will not be distracted from making.',
+        description:'Before meeting the agent, charging infrastructure, and budget to narrow down your options.',
         icon: MdDirectionsCar
     },
     {
         title:'Meeting with Agent',
-        description:'If the distribution of letters and words is random, the reader will not be distracted from making.',
+        description:'When meeting the agent, ask about the EV features, charging capabilities, and available incentives.',
         icon: FiBriefcase 
     },
     {
         title:'Close the Deal',
-        description:'If the distribution of letters and words is random, the reader will not be distracted from making.',
+        description:'Review the terms of the purchase with the agent, ensuring transparency regarding pricing and warranties.',
         icon: FiKey
     }
 ]
 
 export const teamData = [
     {
-        images:'/images/client/ev.jfif',
-        name:'ElectrifyeV',
-        designation:'Developer',
+        images:'/images/client/evm.jpeg',
+        name:'Electrify eV',
+        designation:'Our Team',
     }
     
 ]
@@ -77,7 +77,7 @@ export const properties = [
         Model: "E-Tron",
         Type: 'Automatic',
         Range: '436km',
-        price: 400000,
+        price: '4,00,000',
         detail: ['/images/property/single/s1.jpeg', '/images/property/single/2', '/images/property/single/3', '/images/property/single/4.jpg', '/images/property/single/5.jpg']
     },
     {
@@ -87,7 +87,7 @@ export const properties = [
         Model: 'Solace',
         Type: 'Manual',
         Range: '70km',
-        price: 47999,
+        price: '47,999',
         detail: ['/images/property/single/s1.jpeg', '/images/property/single/2', '/images/property/single/3', '/images/property/single/4.jpg', '/images/property/single/5.jpg']
     },
     {
@@ -97,37 +97,37 @@ export const properties = [
         Model: 'EM050',
         Type: 'Automatic',
         Range: '100km',
-        price: 50000,
+        price: '50,000',
         detail: ['/images/property/single/s1.jpeg', '/images/property/single/2', '/images/property/single/3', '/images/property/single/4.jpg', '/images/property/single/5.jpg']
     },
     {
         id: 4,
         image: "/images/property/Autonext.jpeg",
         name: 'Autonxt',
-        Model: "Autonxt X45H2",
+        Model: "X45H2",
         Type: 'Automatic',
         Range: '45HP',
-        price: 2000000
+        price: '2,000,000'
     },
     {
         id: 5,
         image: "/images/property/paigo.jpeg",
         name: 'Piaggio',
-        Model: "Piaggio Ape E-City FX",
+        Model: "E-City FX",
         Type: 'Automatic',
         Range: '150km',
         Battery: '7.5kwh',
-        price: 326000
+        price: '3,26,000'
         
     },
     {
         id: 6,
-        image: "/images/property/marut.png",
+        image: "/images/property/tsaw.jpg",
         name: 'Marut',
         Model: 'AG 365',
         Camera: "Digital",
         Battery: "4V",
-        price: 500000,
+        price: '5,00,000',
     }
 ];
 
@@ -843,37 +843,37 @@ export const conatctDetails = [
     {
         title:'Phone',
         description:'The phrasal sequence of the is now so that many campaign and benefit',
-        contact:'+152 534-468-854',
+        contact:'+1 (408)-493-2090',
         Icon:FiPhone
     },
     {
         title:'Email',
         description:'The phrasal sequence of the is now so that many campaign and benefit',
-        contact:'contact@example.com',
+        contact:'info@trailique.com',
         Icon:FiMail
     },
     {
         title:'Location',
         description:'The phrasal sequence of the is now so that many campaign and benefit',
-        contact:'Hinjewadi Phase1 ,Pune',
+        contact:'Suratwala Mark Plazzo, Office No.517, Hinjewadi phase 1, Pune-411057.',
         Icon:FiMapPin
     },
 ]
 export const accordion = [
     {
-        title: 'How does it work ?',
+        title: 'How does ElectrifyEV work?',
         content: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.'
     },
     {
-        title: 'Do I need a designer to use Hously ?',
+        title: 'Can I navigate ElectrifyEV without a designer?',
         content: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.'
     },
     {
-        title: 'What do I need to do to start selling ?',
+        title: 'What steps do I take to start selling with ElectrifyEV?',
         content: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.'
     },
     {
-        title: 'What happens when I receive an order ?',
+        title: ' What should I expect upon receiving an order from ElectrifyEV?',
         content: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.'
     }
 ]

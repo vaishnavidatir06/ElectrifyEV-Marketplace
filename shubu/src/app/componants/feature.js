@@ -10,9 +10,9 @@ export default function Feature() {
         <>
             <div className="container lg:mt-24 mt-16">
                 <div className="grid grid-cols-1 pb-8 text-center">
-                    <h3 className="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold text-white">How It Works?</h3>
+                    <h3 className="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold text-gray-800 dark:text-white">How It Works?</h3>
 
-                    <p className="text-slate-400 max-w-xl mx-auto">A great platform to buy, sell and rent your eV vehicles.</p>
+                    
                 </div>
 
                 <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-8 gap-[30px]">
@@ -28,7 +28,7 @@ export default function Feature() {
                             </div>
     
                             <div className="mt-6">
-                                <h5 className="text-xl font-medium">{item.title}</h5>
+                                <h5 className="text-xl text-white-900 dark:text-white font-medium">{item.title}</h5>
                                 <p className="text-slate-400 mt-3">{item.description}</p>
                             </div>
                         </div>

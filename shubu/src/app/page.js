@@ -27,7 +27,7 @@ export default function Home() {
                             <div className="md:text-start text-center">
                             <TextAnimation/>
                                 
-                                <p className="text-white/70 text-xl max-w-xl">Drive eV Drive Evolution Drive the Change</p>
+                                <p className="text-white/70 text-xl max-w-xl">Drive eV. Drive Evolution. Drive the Change.</p>
                             </div>
                           </div>
                     </div>

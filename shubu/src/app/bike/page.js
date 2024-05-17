@@ -144,7 +144,7 @@ export default function Grid() {
                                 <option value="Mumbai">Mumbai</option>
                                 <option value="Pune">Pune</option>
                                 <option value="Delhi">Delhi</option>
-                                <option value="Bangalore">Bangalore</option>
+                                <option value="Banglore">Banglore</option>
                             </select>
                         </div>
 
@@ -247,14 +247,15 @@ export default function Grid() {
                                         
                                     </ul>
 
-                                    <ul className="pt-6 flex justify-between items-center list-none">
-                                        <li>
-                                            <span className="text-slate-400">Price</span>
-                                            <p className="text-lg font-medium">${ecycle.price && ecycle.price.value}</p>
-                                        </li>
-
-                                        
-                                    </ul>
+                                                <ul className="pt-6 flex justify-between items-center list-none">
+                                                    <li>
+                                                        <span className="text-slate-400">Price</span>
+                                                        {/* Add price separators using toLocaleString() */}
+                                                        <p className="text-lg font-medium">
+                                                            ${vehicle.price && vehicle.price.value.toLocaleString()}
+                                                        </p>
+                                                    </li>
+                                                </ul>
                                 </div>
                             </div>
                            </div>

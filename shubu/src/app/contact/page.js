@@ -12,6 +12,8 @@ import Switcher from '../componants/navbar';
 import Footer from '../componants/footer';
 import { FiHexagon } from '../assets/icons/vander';
 import { conatctDetails } from '../data/data';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Contact() {
     const [formData, setFormData] = useState({
@@ -43,8 +45,10 @@ export default function Contact() {
                     comments: ''
                 });
                 setErrors({});
+                toast.success(response.data.message);
             } catch (error) {
                 setMessage('An error occurred. Please try again later.');
+                toast.error('An error occurred. Please try again later.');
             }
             setIsSubmitting(false); // Submission process completed
         }
@@ -84,19 +88,7 @@ export default function Contact() {
     return (
         <>
             <Navbar />
-            <div className="container-fluid relative mt-20">
-                <div className="grid grid-cols-1">
-                    <div className="w-full leading-[0] border-0">
-                        <iframe
-                            title="contact-iframe"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d39206.002432144705!2d-95.4973981212445!3d29.709510002925988!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640c16de81f3ca5%3A0xf43e0b60ae539ac9!2sGerald+D.+Hines+Waterwall+Park!5e0!3m2!1sen!2sin!4v1566305861440!5m2!1sen!2sin"
-                            style={{ border: '0' }}
-                            className="w-full h-[500px]"
-                            allowFullScreen
-                        ></iframe>
-                    </div>
-                </div>
-            </div>
+            <ToastContainer />
             <section className="relative lg:py-24 py-16">
                 <div className="container">
                     <div className="grid md:grid-cols-12 grid-cols-1 items-center gap-[30px]">
@@ -120,14 +112,14 @@ export default function Contact() {
                                         <div className="grid lg:grid-cols-12 lg:gap-6">
                                             <div className="lg:col-span-6 mb-5">
                                                 <label htmlFor="name" className="font-medium">
-                                                    Your Name:
+                                                    Your Name
                                                 </label>
                                                 <input
                                                     name="name"
                                                     id="name"
                                                     type="text"
                                                     className="form-input mt-2"
-                                                    placeholder="Name :"
+                                                    placeholder="Name "
                                                     value={formData.name}
                                                     onChange={handleChange}
                                                 />
@@ -136,14 +128,14 @@ export default function Contact() {
 
                                             <div className="lg:col-span-6 mb-5">
                                                 <label htmlFor="email" className="font-medium">
-                                                    Your Email:
+                                                    Your Email
                                                 </label>
                                                 <input
                                                     name="email"
                                                     id="email"
                                                     type="email"
                                                     className="form-input mt-2"
-                                                    placeholder="Email :"
+                                                    placeholder="Email "
                                                     value={formData.email}
                                                     onChange={handleChange}
                                                 />
@@ -154,13 +146,13 @@ export default function Contact() {
                                         <div className="grid grid-cols-1">
                                             <div className="mb-5">
                                                 <label htmlFor="subject" className="font-medium">
-                                                    Your Question:
+                                                    Your Question
                                                 </label>
                                                 <input
                                                     name="subject"
                                                     id="subject"
                                                     className="form-input mt-2"
-                                                    placeholder="Subject :"
+                                                    placeholder="Subject "
                                                     value={formData.subject}
                                                     onChange={handleChange}
                                                 />
@@ -169,13 +161,13 @@ export default function Contact() {
 
                                             <div className="mb-5">
                                                 <label htmlFor="comments" className="font-medium">
-                                                    Your Comment:
+                                                    Your Comment
                                                 </label>
                                                 <textarea
                                                     name="comments"
                                                     id="comments"
                                                     className="form-input mt-2 textarea"
-                                                    placeholder="Message :"
+                                                    placeholder="Message "
                                                     value={formData.comments}
                                                     onChange={handleChange}
                                                 ></textarea>
@@ -212,12 +204,10 @@ export default function Contact() {
 
                                     <div className="content mt-7">
                                         <h5 className="title h5 text-xl font-medium">{item.title}</h5>
-                                        <p className="text-slate-400 mt-3">{item.description}</p>
-
                                         <div className="mt-5">
                                             <Link
                                                 href="tel:+152534-468-854"
-                                                className="btn btn-link text-green-600 hover:text-green-600 after:bg-green-600 transition duration-500"
+                                                className="btn btn-link text-green-600 hover:text-green-600 "
                                             >
                                                 {item.contact}
                                             </Link>
@@ -231,19 +221,6 @@ export default function Contact() {
             </section>
             <Footer />
             <Switcher />
-            {message && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                    <div className="bg-white p-6 rounded-md shadow-lg">
-                        <p className="text-xl font-medium">{message}</p>
-                        <button
-                            onClick={() => setMessage('')}
-                            className="mt-4 bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
-                        >
-                            OK
-                        </button>
-                    </div>
-                </div>
-            )}
         </>
     );
 }

@@ -36,13 +36,13 @@ export default function Rent() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Cards for disclaimer */}
             <div className="bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg p-6 flex flex-col items-center justify-center">
-              <p className="text-center text-slate-900 dark:text-slate-900">Just click on rent now..</p>
+              <p className="text-center text-slate-900 dark:text-slate-900">Just click on rent now...</p>
             </div>
             <div className="bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg p-6 flex flex-col items-center justify-center">
-              <p className="text-center text-slate-900 dark:text-slate-900">Enter your desired date and number of hours..</p>
+              <p className="text-center text-slate-900 dark:text-slate-900">Enter your desired date and number of hours...</p>
             </div>
             <div className="bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg p-6 flex flex-col items-center justify-center">
-              <p className="text-center text-slate-900 dark:text-slate-900">Select your favorite vehicle and enjoy your ride..</p>
+              <p className="text-center text-slate-900 dark:text-slate-900">Select your favorite vehicle and enjoy your ride...</p>
             </div>
           </div>
         </div>
@@ -52,13 +52,13 @@ export default function Rent() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg p-6 flex flex-col items-center justify-center">
-              <p className="text-center text-slate-900 dark:text-slate-900">Keep a car and drive up to 24hrs...</p>
+              <p className="text-center text-slate-900 dark:text-slate-900">Keep a car and drive...</p>
             </div>
             <div className="bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg p-6 flex flex-col items-center justify-center">
-              <p className="text-center text-slate-900 dark:text-slate-900">Ideal for meetings, tourist travels and short trips..</p>
+              <p className="text-center text-slate-900 dark:text-slate-900">Ideal for meetings, tourist travels and short trips...</p>
             </div>
             <div className="bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg p-6 flex flex-col items-center justify-center">
-              <p className="text-center text-slate-900 dark:text-slate-900">Book for now reserve for later..</p>
+              <p className="text-center text-slate-900 dark:text-slate-900">Book for now reserve for later...</p>
             </div>
           </div>
           

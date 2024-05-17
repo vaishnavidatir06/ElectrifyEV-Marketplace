@@ -26,7 +26,8 @@ export default function RentEV() {
     const [price, setprice] = useState('');
     const [previewData, setPreviewData] = useState(null);
     const [showPreview, setShowPreview] = useState(false);
-
+    const [contactError, setContactError] = useState(false);
+    const [isNameValid, setIsNameValid] = useState(true);
     const handlePreview = (event) => {
         event.preventDefault();
         const previewData = {
@@ -95,6 +96,9 @@ export default function RentEV() {
         setImage(file);
     };
 
+   
+    
+
 
     // onSubmit={previewData ? handleSubmit : handlePreview}
 
@@ -103,37 +107,22 @@ export default function RentEV() {
 
     return (
         <>
-            <Navbar navClass="navbar-white" />
-            <div className="pt-16 flex justify-center items-center min-h-screen">
-                <div className="w-full sm:max-w-md">
-                    <h1 className="text-center text-2xl mb-4">Enter Vehicle details you want to Rent</h1>
+            <Navbar/>
+            <section className="py-20 bg-gray-950"  style={{ backgroundImage: "url('/images/bg/b17.jpg')" }}>
+            <div className="container mx-auto px-2">
+                <div className="mx-auto bg-gray-200 rounded-lg shadow-lg p-2 mt-4 mr-20 ml-20" style={{ maxWidth: '800px' }}>
+                    <div className="pt-10 flex justify-center items-center min-h-screen mt-0 flex-col">
+                        <h1 className="text-center text-2xl mb-4 mt-0 text-black" ><b>Enter Vehicle details you want to Rent</b></h1>
+                        <div className="flex w-full">
+                           
+                           <div className="w-full p-4">
                     <form onSubmit={previewData ? handleSubmit : handlePreview} className="space-y-4">
-                        <fieldset>
-                            <legend>Owner Details</legend>
-                            <label className="text-green-500">
-                                Owner Name:
-                                <input type="text" value={ownerName} onChange={(e) => setOwnerName(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
-                            </label><br /><br />
-                            <label className="text-green-500">
-                                Owner Contact:
-                                <input type="text" value={ownerContact} onChange={(e) => setOwnerContact(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
-                            </label><br /><br />
-                            <label className="text-green-500">
-                                Owner Email:
-                                <input type="email" value={ownerEmail} onChange={(e) => setOwnerEmail(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
-                            </label><br /><br />
-                            <label className="text-green-500">
-                                Owner City:
-                                <input type="text" value={ownerCity} onChange={(e) => setOwnerCity(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
-                            </label><br /><br />
-                        </fieldset>
+                    <fieldset>
+                            <legend className='text-black'><b>Vehicle Details</b></legend>
 
-                        <fieldset>
-                            <legend>Vehicle Details</legend>
-
-                            <label className="text-green-500">
-                                Body Type:
-                                <select value={bodyType} onChange={(e) => setBodyType(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2">
+                            <label className="text-black">
+                                Body Type
+                                <select value={bodyType} onChange={(e) => setBodyType(e.target.value)} required className="w-full sm:w-48 h-8 border bg-white rounded-sm py-1 px-2">
                                     <option value="">Select Body Type</option>
                                     <option value="sedan">Sedan</option>
                                     <option value="SUV">SUV</option>
@@ -141,44 +130,114 @@ export default function RentEV() {
                                 </select>
                             </label><br /><br />
 
-                            <label className="text-green-500" >
-                                Vehicle Type:
+                            <label className="text-black" >
+                                Vehicle Type
                                 <input type="text" value={vehicleType} onChange={(e) => setVehicleType(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
                             </label><br /><br />
-                            <label className="text-green-500">
-                                Brand:
+                            <label className="text-black">
+                                Brand
                                 <input type="text" value={brand} onChange={(e) => setBrand(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
                             </label><br /><br />
-                            <label className="text-green-500">
-                                Model:
+                            <label className="text-black">
+                                Model
                                 <input type="text" value={model} onChange={(e) => setModel(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
                             </label><br /><br />
-                            <label className="text-green-500">
-                                Plate Number:
+                            <label className="text-black">
+                                Plate Number
                                 <input type="text" value={plateNo} onChange={(e) => setPlateNo(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
                             </label><br /><br />
-                            <label className="text-green-500">
-                                Battery Power(mAh):
+                            <label className="text-black">
+                                Battery Power(mAh)
                                 <input type="text" value={batteryPower} onChange={(e) => setBatteryPower(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
                             </label><br /><br />
-                            <label className="text-green-500">
-                                Kilometres Driven:
+                            <label className="text-black">
+                                Kilometres Driven
                                 <input type="text" value={kilometresDriven} onChange={(e) => setKilometresDriven(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
                             </label><br /><br />
-                            <label className="text-green-500">
-                                Price:
+                            <label className="text-black">
+                                Price
                                 <input type="text" value={price} onChange={(e) => setprice(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
                             </label><br /><br />
-                            <label className="text-green-500">
-                                Upload Image:
+                            <label className="text-black">
+                                Upload Image
                                 <input type="file" accept="image/*" onChange={handleImageChange} required className="w-full border rounded-sm py-1 px-2" />
                             </label><br /><br />
                         </fieldset>
+                        </form>
+                        </div>
+                        <div className="w-full p-4">
+                    <form onSubmit={previewData ? handleSubmit : handlePreview} className="space-y-4">
+
+                    <fieldset>
+                            <legend className='text-black'><b>Owner Details</b></legend>
+                            <label className="text-black">
+    Owner Name
+    <input
+        type="text"
+        value={ownerName}
+        onChange={(e) => {
+            const inputValue = e.target.value;
+            const isValid = /^[a-zA-Z]*$/.test(inputValue);
+            setOwnerName(inputValue);
+            setIsNameValid(isValid); // Track name validity
+        }}
+        required
+        className={`w-full sm:w-48 h-8 border rounded-sm py-1 px-2 ${!isNameValid && 'border-red-500'}`}
+    />
+    {!isNameValid && ownerName.length > 0 && <p className="text-red-500">Add only characters</p>}
+</label>
+
+<label className="text-black">
+    Owner Contact
+    <input
+        type="tel"
+        value={ownerContact}
+        onChange={(e) => {
+            // Remove all non-numeric characters from the input value
+            const numericValue = e.target.value.replace(/[^0-9]/g, '');
+            // Set the state with the cleaned numeric value
+            setOwnerContact(numericValue);
+            // Check if the cleaned value is a valid numeric contact
+            const isValid = /^\d{10}$/.test(numericValue);
+            // Display error message if input is not a valid numeric contact
+            setContactError(!isValid && numericValue.length > 0);
+        }}
+        required
+        className={`w-full sm:w-48 h-8 border rounded-sm py-1 px-2 ${contactError && 'border-red-500'}`}
+    />
+    {contactError && <p className="text-red-500">Please enter a valid 10-digit numeric contact.</p>}
+</label>
+
+<label className="text-black">
+    Owner Email
+    <input 
+        type="email" 
+        value={ownerEmail} 
+        onChange={(e) => setOwnerEmail(e.target.value)} 
+        required 
+        className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" 
+    />
+    {ownerEmail.length > 0 && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ownerEmail) && <p style={{ color: 'red' }}>Please enter a valid email address.</p>}
+</label>
+
+                            <label className="text-black">
+                                Owner City
+                                <input type="text" value={ownerCity} onChange={(e) => setOwnerCity(e.target.value)} required className="w-full sm:w-48 h-8 border rounded-sm py-1 px-2" />
+                            </label><br /><br />
+                        </fieldset>
+
+
+
+
+                       
+                        </form>
+                        </div>
+                        </div>
                         <div className="flex justify-center">
-                            <button type="button" onClick={handlePreview} className="btn bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-full">Preview</button>
+                           
                             <button type="submit" onClick={handleSubmit} className="btn bg-green-600 hover:bg-green-700 border-green-600 dark:border-green-600 text-white rounded-full">Confirm</button>
                         </div>
-                    </form>
+                   
                 </div>
             </div>
             {/* Preview Popup */}
@@ -192,6 +251,9 @@ export default function RentEV() {
                     </div>
                 </div>
             )}
+            </div>
+            
+             </section>
             <Footer />
             <Switcher />
             <ToastContainer />

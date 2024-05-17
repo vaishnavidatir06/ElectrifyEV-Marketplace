@@ -22,7 +22,7 @@ export default function Profile() {
         const fetchUserDetails = async () => {
             try {
                 if (session) {
-                    const response = await fetch(`https://localhost:5000/user?name=${session.user.name}`);
+                    const response = await fetch(`http://51.79.225.217:5000/user?name=${session.user.name}`);
                     if (response.ok) {
                         const userData = await response.json();
                         setName(userData.name || '');
@@ -47,7 +47,7 @@ export default function Profile() {
         try {
             // Check if editedUserId is defined
             if (editedUserId !== null) {
-                const response = await fetch(`https://localhost:5000/api/user/${editedUserId}`, {
+                const response = await fetch(`http://51.79.225.217:5000/api/user/${editedUserId}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
@@ -80,11 +80,11 @@ export default function Profile() {
     return (
         <>
             <Navbar /> {/* Assuming you have a Navbar component */}
-            <div className="container mx-auto px-10 py-20">
+            <div className="container mx-auto px-10 py-20 flex justify-center ">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
                     {/* Personal Details */}
                     <div className="md:col-span-12 shadow mt-8">
-                        <h2 className="text-xl font-semibold mb-4 flex items-center">
+                        <h2 className="text-xl font-semibold mb-4 flex justify-center">
                             Personal Details
                         </h2>
                         <div className="space-y-4">

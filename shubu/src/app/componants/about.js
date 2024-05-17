@@ -27,7 +27,7 @@ export default function About() {
 
                     <div className="md:col-span-7">
                         <div className="lg:ms-4">
-                            <h4 className="mb-6 md:text-3xl text-2xl lg:leading-normal leading-normal font-semibold">Efficiency. Transparency. <br /> Control.</h4>
+                            <h4 className="mb-6 md:text-3xl text-2xl lg:leading-normal leading-normal font-semibold  text-white-900 dark:text-white">Efficiency. Transparency. <br /> Control.</h4>
                             <p className="text-slate-400 max-w-xl">Electrify eV developed a platform for the Electric Vehicles marketplace that allows buyers and sellers to easily execute a transaction on their own. The platform drives efficiency, cost transparency and control into the hands of the consumers. Electrify EV is Electric Vehicles Redefined.</p>
 
                             <div className="mt-4">

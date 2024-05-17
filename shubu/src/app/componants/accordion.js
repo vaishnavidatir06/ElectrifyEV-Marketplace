@@ -32,7 +32,7 @@ export default function Accordion(){
                     {activeIndex === index && (
                         <div id="accordion-collapse-body-1" aria-labelledby="accordion-collapse-heading-1">
                             <div className="p-5">
-                                <p className="text-slate-400 dark:text-gray-400"> {section.content}</p>
+                                <p className="text-slate-900 dark:text-gray-900"> {section.content}</p>
                             </div>
                         </div>
                     )}

@@ -8,16 +8,16 @@ import Footer from "../componants/footer";
 import Navbar from "../componants/navbar";
 import Switcher from "../componants/switcher";
 
+import Cookies from 'js-cookie';
 
 
 
-
-import { FiChevronLeft, FiChevronRight, MdDirectionsCar, MdSettingsInputComponent, MdTune } from '../assets/icons/vander';
+import { FiChevronLeft, FiChevronRight, MdDirectionsCar, MdSettingsInputComponent, MdTune,MdBatteryFull  } from '../assets/icons/vander';
 
 
 export default function Grid() {
-    const [ecarVehicles, setEcarVehicles] = useState([]);
-    const [filteredEcarVehicles, setFilteredEcarVehicles] = useState([]);
+    const [ecars, setEcars] = useState([]);
+    const [filteredEcars, setFilteredEcars] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [filterBrand, setFilterBrand] = useState("");
     const [filterLocation, setFilterLocation] = useState("");
@@ -26,12 +26,14 @@ export default function Grid() {
     const [filterKilometresDriven, setFilterKilometresDriven] = useState("");
     const [filterPrice, setFilterPrice] = useState("");
     const [filterBodyType, setFilterBodyType] = useState(""); // Add this state
-
-    const session = useSession();
+    const [userDetails, setUserDetails] = useState(null);
+    const [buttonColor, setButtonColor] = useState('');
+    const { data: session, status } = useSession();
+    const [userId, setUserId] = useState(null);
 
     useEffect(() => {
-        filterEcarVehicles();
-    }, [searchQuery, filterBrand, filterLocation, filterTransmissionType, filterColor, filterKilometresDriven, filterPrice, filterBodyType, ecarVehicles]);
+        filterEcars();
+    }, [searchQuery, filterBrand, filterLocation, filterTransmissionType, filterColor, filterKilometresDriven, filterPrice, filterBodyType, ecars]);
 
 
 
@@ -71,73 +73,177 @@ export default function Grid() {
     };
 
 
-    // Declare filterEcarVehicles function here
-    const filterEcarVehicles = () => {
-        const filtered = ecarVehicles.filter((vehicle) => {
-            const matchesSearchQuery = vehicle.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                vehicle.model.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                vehicle.variant.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                vehicle.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                vehicle.color.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                vehicle.kilometresDriven.toString().includes(searchQuery);
+    // Declare filterEcars function here
+    const filterEcars = () => {
+        const filtered = ecars.filter((ecar) => {
+            const matchesSearchQuery = ecar.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                ecar.model.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                ecar.variant.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                ecar.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                ecar.color.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                ecar.kilometresDriven.toString().includes(searchQuery);
 
-            const matchesFilters = (!filterBrand || vehicle.brand.toLowerCase() === filterBrand.toLowerCase()) &&
-                (!filterLocation || vehicle.location.toLowerCase() === filterLocation.toLowerCase()) &&
-                (!filterTransmissionType || (vehicle.transmissionType && vehicle.transmissionType.toLowerCase() === filterTransmissionType.toLowerCase())) &&
-                (!filterColor || vehicle.color.toLowerCase() === filterColor.toLowerCase()) &&
-                (!filterKilometresDriven || vehicle.kilometresDriven <= parseInt(filterKilometresDriven)) &&
-                (!filterPrice || vehicle.price.value <= parseInt(filterPrice)); // Access the value property of price
+            const matchesFilters = (!filterBrand || ecar.brand.toLowerCase() === filterBrand.toLowerCase()) &&
+                (!filterLocation || ecar.location.toLowerCase() === filterLocation.toLowerCase()) &&
+                (!filterTransmissionType || (ecar.transmissionType && ecar.transmissionType.toLowerCase() === filterTransmissionType.toLowerCase())) &&
+                (!filterColor || ecar.color.toLowerCase() === filterColor.toLowerCase()) &&
+                (!filterKilometresDriven || ecar.kilometresDriven <= parseInt(filterKilometresDriven)) &&
+                (!filterPrice || ecar.price.value <= parseInt(filterPrice)); // Access the value property of price
 
             return matchesSearchQuery && matchesFilters;
         });
-        setFilteredEcarVehicles(filtered);
+        setFilteredEcars(filtered);
     };
 
 
-    const handleAddToWishlist = async (vehicle) => {
+    const handleAddToWishlist = async (ecar) => {
         try {
-            if (!session || !session.data || !session.data.user) {
-                throw new Error('User is not authenticated');
-            }
+            // Fetch userId using the provided name
+            const fetchUserId = async () => {
+                try {
+                    const response = await fetch(`http://51.79.225.217:5000/user?name=${session.user.name}`);
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch user details');
+                    }
+                    const userData = await response.json();
+                    return userData._id;
+                } catch (error) {
+                    console.error('Error fetching user ID:', error);
+                    throw new Error('Failed to fetch user ID');
+                }
+            };
 
-            const { name, email } = session.data.user;
+            const userId = await fetchUserId();
+            // Set user ID in the cookie
+            // Set user ID in the cookie
+            const setUserIdInCookie = async () => {
+                try {
+                    const userId = await fetchUserId();
+                    //Cookies.set('userId', userId);
+                    Cookies.set('userId', userId, { sameSite: 'None', secure: true });
+                } catch (error) {
+                    console.error('Error setting user ID in cookie:', error);
+                }
+            };
 
-            // Fetch user ID from the /user endpoint
-            const userResponse = await fetch(`http://51.79.225.217:5000/user?name=${name}`);
-            const userData = await userResponse.json();
-            const { _id: userId } = userData; // Extract user ID
+            // Call setUserIdInCookie when needed, such as during session initialization or login
+            setUserIdInCookie();
 
-            // Use a different variable name for the wishlist response
+
+            // Use the obtained userId
+
             const wishlistResponse = await fetch('http://51.79.225.217:5000/wishlist', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ ...vehicle, name, email, userId }),
+                body: JSON.stringify({ userId, ...ecar, vehicleId: ecar._id }), // Assuming vehicle contains a _id property
             });
 
             if (wishlistResponse.ok) {
                 toast.success('Vehicle added to wishlist successfully!');
             } else {
-                throw new Error('Failed to add vehicle to wishlist!');
+                const errorData = await wishlistResponse.json();
+                if (wishlistResponse.status === 400 && errorData.error === "Duplicate car information for the user") {
+                    throw new Error('Duplicate car information for the user');
+                } else {
+                    throw new Error('Failed to add vehicle to wishlist!');
+                }
             }
         } catch (error) {
             console.error('Error adding vehicle to wishlist:', error);
-            toast.error(error.message || 'Failed to add vehicle to wishlist!');
+            if (error.message === 'Duplicate car information for the user') {
+                toast.error('Duplicate car information for the user');
+            } else {
+                toast.error(error.message || 'Failed to add vehicle to wishlist!');
+            }
         }
     };
 
-    const fetchEcarVehicles = async () => {
+    const isCarInWishlist = async (userId, vehicleId) => {
         try {
-            const response = await fetch('http://51.79.225.217:5001/api/vehicles/ecar');
-            const data = await response.json();
-            setEcarVehicles(data);
+            const response = await fetch(`http://51.79.225.217:5000/wishlist/${userId}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch wishlist items');
+            }
+            const wishlistItems = await response.json();
+
+            // Check if the vehicleId exists in the wishlist items
+            const isInWishlist = wishlistItems.some(item => item.vehicleId === vehicleId);
+            return isInWishlist;
         } catch (error) {
-            console.error('Error fetching eCar vehicles:', error);
+            console.error('Error checking if car is in wishlist:', error);
+            throw new Error('Failed to check if car is in wishlist');
         }
     };
+
+
+
+
+// Define getButtonColor function first
+const getButtonColor = async (userId, vehicleId) => {
+    try {
+        const isInWishlist = await isCarInWishlist(userId, vehicleId);
+        const color = isInWishlist ? 'text-red-500 dark:text-red-500' : '';
+        console.log('Button Color:', color); // Log the button color
+        return color;
+    } catch (error) {
+        console.error('Error getting button color:', error);
+        return ''; // Return a default value or handle the error as needed
+    }
+};
+
+// Now define fetchButtonColor function
+useEffect(() => {
+    const fetchButtonColor = async () => {
+        try {
+            const userId = Cookies.get('userId');
+            if (!userId) {
+                throw new Error('User ID not found in cookies');
+            }
+            // Fetch wishlist items
+            const response = await fetch(`http://51.79.225.217:5000/wishlist/${userId}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch wishlist items');
+            }
+            const wishlistItems = await response.json();
+
+            if (wishlistItems.length === 0) {
+                // No items in wishlist, button color should not be red
+                setButtonColor('');
+                return;
+            }
+
+            // Assuming you want to check the first vehicleId from the list
+            const vehicleId = wishlistItems[0].vehicleId;
+
+            const color = await getButtonColor(userId, vehicleId);
+            setButtonColor(color);
+        } catch (error) {
+            console.error('Error fetching button color:', error);
+            // Handle error as needed
+        }
+    };
+
+    fetchButtonColor();
+}, []);
+
+    const fetchApprovedEcars = async () => {
+        try {
+            const response = await fetch('http://51.79.225.217:5001/api/vehicles/approved/ecar');
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
+            const data = await response.json();
+            setEcars(data);
+            setFilteredEcars(data);
+        } catch (error) {
+            console.error('Error fetching approved vehicles:', error);
+        }
+    };
+
     useEffect(() => {
-        fetchEcarVehicles();
+        fetchApprovedEcars();
     }, []);
 
 
@@ -216,7 +322,7 @@ export default function Grid() {
                                 <option value="Mumbai" className="text-black">Mumbai</option>
                                 <option value="Pune" className="text-black">Pune</option>
                                 <option value="Delhi" className="text-black">Delhi</option>
-                                <option value="Bangalore" className="text-black">Bangalore</option>
+                                <option value="Banglore" className="text-black">Banglore</option>
                             </select>
                         </div>
 
@@ -251,7 +357,7 @@ export default function Grid() {
                                 <option value="" className="text-black">All</option>
                                 <option value="Red" className="text-black">Red</option>
                                 <option value="Silver" className="text-black">Silver</option>
-                                <option value="Gold" className="text-black">Gold</option>
+                               
                                 <option value="Blue" className="text-black">Blue</option>
                                 <option value="Black" className="text-black">Black</option>
                             </select>
@@ -324,64 +430,77 @@ export default function Grid() {
 
             <section className="relative lg:py-24 py-16">
                 <div className="container">
-                    <div className="container">
-                        <div className="lg:col-span-9 md:col-span-10 col-span-11">
-                            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[30px]">
+
+                    <div className="lg:col-span-9 md:col-span-10 col-span-11">
+                        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[30px]">
 
 
-                                {filteredEcarVehicles.map((vehicle) => (
-                                    <Link href={`/vehicle-detail?id=${vehicle._id}`} key={vehicle._id}>
-                                        <div className="group relative rounded-xl text-black dark:text-white overflow-hidden transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl">
-                                            <div className="relative">
-                                                {vehicle.frontImagesBase64 && vehicle.frontImagesBase64.length > 0 && (
-                                                    <img src={`data:image/jpeg;base64,${vehicle.frontImagesBase64[0]}`} alt="Front View" className="h-40 w-auto" />
-                                                )}
+                            {filteredEcars.filter(ecar => ecar.status === 'Approved').map((ecar, index) => (
+                                <div className="group relative rounded-xl text-black dark:text-white overflow-hidden transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl" key={ecar._id}>
+                                    <Link href={`/vehicle-detail?id=${ecar._id}`} key={ecar._id}>
+
+                                        <div className="relative">
+                                            {ecar.frontImagesBase64 && ecar.frontImagesBase64.length > 0 && (
+                                                <img src={`data:image/jpeg;base64,${ecar.frontImagesBase64[0]}`} alt="Front View" className="h-40 w-full" />
+                                            )}
+                                        </div>
+
+
+                                        <div className="p-6 group-hover:bg-black-100 dark:group-hover:bg-black-100">
+                                            <div className="pb-6">
+                                                <p className="text-lg hover:text-green-600 font-medium ease-in-out duration-500">{ecar.brand}</p>
                                             </div>
-                                            <div className="absolute top-4 end-4">
-                                                <button className="flex-none flex items-center justify-center w-9 h-9 rounded-md bg-white border text-black-300 hover:text-red-500" type="button" aria-label="Like">
-                                                    <svg width="20" height="20" fill="currentColor" aria-hidden="true">
-                                                        <path fillRule="evenodd" clipRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                            <div className="absolute top-4 end-4">
-                                                <button onClick={() => handleAddToWishlist(vehicle)} className="flex-none flex items-center justify-center w-9 h-9 rounded-md bg-white border dark:bg-black border text-gray-200 dark:text-black-200 hover:text-red-500 dark:hover:text-red-500" type="button" aria-label="Like">
-                                                    <svg width="20" height="20" fill="currentColor" aria-hidden="true">
-                                                        <path fill="currentColor" fillRule="evenodd" clipRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                            <div className="p-6 group-hover:bg-black-100 dark:group-hover:bg-black-100">
-                                                <div className="pb-6">
-                                                    <p className="text-lg hover:text-green-600 font-medium ease-in-out duration-500">{vehicle.brand}</p>
-                                                </div>
-                                                <ul className="py-6 border-y border-slate-100 dark:border-gray-800 flex items-center list-none">
-                                                    <li className="flex items-center me-4">
-                                                        <MdDirectionsCar width={20} className="me-2 text-green-600" />
-                                                        <span>{vehicle.model}</span>
-                                                    </li>
-                                                    <li className="flex items-center me-4">
-                                                        <MdSettingsInputComponent width={20} className="me-2 text-green-600" />
-                                                        <span>{vehicle.transmissionType}</span>
-                                                    </li>
-                                                    <li className="flex items-center">
-                                                        <MdTune width={20} className="me-2 text-green-600" />
-                                                        <span>{vehicle.kilometresDriven}</span>
-                                                    </li>
-                                                </ul>
-                                                <ul className="pt-6 flex justify-between items-center list-none">
-                                                    <li>
-                                                        <span className="text-slate-400">Price</span>
-                                                        <p className="text-lg font-medium">${vehicle.price && vehicle.price.value}</p>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                            <ul className="py-6 border-y border-slate-100 dark:border-gray-800 flex items-center list-none">
+                                                <li className="flex items-center me-4">
+                                                    <MdDirectionsCar width={20} className="me-2 text-green-600" />
+                                                    <span>{ecar.brand}</span>
+                                                </li>
+                                                <li className="flex items-center me-4">
+                                                    <MdSettingsInputComponent width={20} className="me-2 text-green-600" />
+                                                    <span>{ecar.model}</span>
+                                                </li>
+                                                <li className="flex items-center me-4">
+                                                    <MdBatteryFull width={20} className="me-2 text-green-600" />
+                                                    <span>{ecar.batteryPower}Ah</span>
+                                                </li>
+                                            </ul>
+                                            <ul className="pt-6 flex justify-between items-center list-none">
+                                                <li>
+                                                    <span className="text-slate-400">Price</span>
+                                                    {/* Add price separators using toLocaleString() */}
+                                                    <p className="text-lg font-medium">
+                                                        ${ecar.price && ecar.price.value.toLocaleString()}
+                                                    </p>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </Link>
-                                ))}
-                            </div>
+                                    <div className="absolute top-4 end-4">
+                                        <button className="flex-none flex items-center justify-center w-9 h-9 rounded-md bg-white border text-black-300 hover:text-red-500" type="button" aria-label="Like">
+                                            <svg width="20" height="20" fill="currentColor" aria-hidden="true">
+                                                <path fillRule="evenodd" clipRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div className="absolute top-4 end-4">
+                                        <button
+                                            onClick={() => handleAddToWishlist(ecar)}
+                                            className={`flex-none flex items-center justify-center w-9 h-9 rounded-md bg-white border dark:bg-black border text-gray-200 dark:text-black-200 hover:text-red-500 dark:hover:text-red-500 ${buttonColor}`}
+                                            type="button"
+                                            aria-label="Like"
+                                        >
+                                            <svg width="20" height="20" fill="currentColor" aria-hidden="true">
+                                                <path fill="currentColor" fillRule="evenodd" clipRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                                            </svg>
+                                        </button>
+
+                                    </div>
+                                </div>
+
+                            ))}
                         </div>
                     </div>
+
 
                     <div className="grid md:grid-cols-12 grid-cols-1 mt-8">
                         <div className="md:col-span-12 text-center">
@@ -403,7 +522,7 @@ export default function Grid() {
                                     </li>
 
                                     <li>
-                                        <Link href="#" className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">3</Link>
+                                        <Link href="#" className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">4</Link>
                                     </li>
                                     <li>
                                         <Link href="#" className="w-10 h-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 bg-white dark:bg-slate-900 hover:text-white shadow-sm dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">
@@ -414,13 +533,6 @@ export default function Grid() {
                             </nav>
                         </div>
                     </div>
-
-
-
-
-
-
-
                 </div>
             </section>
 

@@ -25,13 +25,15 @@ const ServiceCard = ({ title, description, onHelpUsClick,imageUrl }) => {
   };
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-6 relative">
-      <img src={imageUrl} alt={title} className="w-full h-48 object-cover"/>
-      <h2 className="text-xl font-bold mb-2">{title}</h2>
-      <p>{description}</p>
-      <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" onClick={handleBookServiceClick}>
-        Book a Service
-      </button>
+    <div className="bg-white dark:bg-gray-950 shadow-md rounded-lg p-6 relative">
+      <img src={imageUrl} alt={title} className="w-full h-48 object-cover "/>
+      <h2 className="text-2xl font-bold py-4 text-gray-950 dark:text-gray-950 text-center ">{title}</h2>
+      <p className="text-gray-950 dark:text-gary-950 text-center ">{description}</p>
+      <div className="text-center">
+  <button className="mt-4 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-600" onClick={handleBookServiceClick}>
+    Book a Service
+  </button>
+</div>
 
       {/* Help Us Popup */}
       {showHelpUsPopup && (
@@ -49,7 +51,7 @@ const ServiceCard = ({ title, description, onHelpUsClick,imageUrl }) => {
               placeholder="Enter your mobile number"
               className="w-full border border-gray-300 rounded px-3 py-2 mb-4"
             />
-            <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" onClick={handleProceedClick}>
+            <button className="  bg-green-600 text-white py-2 px-4 rounded hover: hover:bg-green-700" onClick={handleProceedClick}>
               Proceed
             </button>
           </div>
@@ -72,7 +74,7 @@ const ServiceCard = ({ title, description, onHelpUsClick,imageUrl }) => {
               placeholder="Enter OTP"
               className="w-full border border-gray-300 rounded px-3 py-2 mb-4"
             />
-            <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" onClick={handleClosePopup}>
+            <button className=" bg-green-600 text-white py-2 px-4 rounded  hover:bg-green-700" onClick={handleClosePopup}>
               Verify OTP
             </button>
           </div>

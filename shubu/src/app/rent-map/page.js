@@ -74,7 +74,7 @@ export default function IndexThree() {
                 <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap">
                     {/* bodytype */}
                     <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                        <label htmlFor="bodyType" className="font-semibold mb-1 mr-2">
+                        <label htmlFor="bodyType" className="font-semibold mb-1 mr-2 text-black">
                             Body Type:
                         </label>
                         <select
@@ -82,7 +82,7 @@ export default function IndexThree() {
                             id="bodyType"
                             value={filterBodyType}
                             onChange={handleBodyTypeChange}
-                            className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                            className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black"
                         >
                             <option value="">All</option>
                             <option value="SUV">SUV</option>
@@ -93,23 +93,23 @@ export default function IndexThree() {
                     </div>
                     {/* price */}
                     <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                        <label htmlFor="price" className="font-semibold mb-1 mr-2">
+                        <label htmlFor="price" className="font-semibold mb-1 mr-2 text-black">
                             Price:
                         </label>
                         <input
                             type="range"
                             id="price"
                             min="0"
-                            max="300" // Adjust the max value according to your maximum price
+                            max="2000" // Adjust the max value according to your maximum price
                             value={filterprice} // Make sure you have a state variable named filterPrice
                             onChange={handlepriceChange} // Make sure you have a corresponding handlePriceChange function
-                            className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                            className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black"
                         />
-                        <span className="ml-2">${filterprice}</span>
+                        <span className="ml-2 text-black">${filterprice}</span>
                     </div>
                     {/* Brand */}
                     <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-lg flex flex-wrap items-center">
-                        <label htmlFor="brand" className="font-semibold mb-1 mr-2">
+                        <label htmlFor="brand" className="font-semibold mb-1 mr-2 text-black">
                             Brand:
                         </label>
                         <input
@@ -118,7 +118,7 @@ export default function IndexThree() {
                             value={filterBrand}
                             onChange={handleBrandChange}
                             placeholder="Enter brand"
-                            className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1"
+                            className="border-gray-300 dark:border-gray-600 focus:border-green-500 dark:focus:border-green-500 focus:ring focus:ring-green-200 dark:focus:ring-green-700 rounded-md p-1 text-black"
                         />
                     </div>
                 </div>
@@ -129,13 +129,14 @@ export default function IndexThree() {
             </section>
             <section className="relative lg:py-24 py-16">
                 <div className="container">
-                    <div className="grid lg:grid-cols-2 grid-cols-1 gap-[30px]">
+                <div className="lg:col-span-9 md:col-span-10 col-span-11">
+                <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-8 gap-[30px]">
                         {filteredRentals.map((item, index) => (
-                            <div key={index} className="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500 w-full mx-auto lg:max-w-2xl">
+                            <div key={index} className="group rounded-xl bg-white dark:bg-slate-900 shadow hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500 w-full mx-auto lg:max-w-2xl cursor-pointer" onClick={() => setShowPopup(true)}>
                                 <div className="md:flex">
                                     <div className="p-6">
                                         <div className="pb-6">
-                                            <div className="cursor-pointer" onClick={() => setShowPopup(true)}>
+                                            <div >
                                                 <p className="text-lg hover:text-green-600 font-medium ease-in-out duration-500">{item.brand} - {item.model}</p>
                                             </div>
                                         </div>
@@ -150,7 +151,7 @@ export default function IndexThree() {
                                             </li>
                                         </ul>
                                         <ul>
-                                            <img src={`https://localhost:5000/${item.image}`} alt={`Vehicle Image ${index}`} />
+                                            <img src={`http://51.79.225.217:5000/${item.image}`} alt={`Vehicle Image ${index}`} />
                                         </ul>
                                         <ul className="md:pt-4 pt-6 flex justify-between items-center list-none">
                                             <li>
@@ -171,8 +172,20 @@ export default function IndexThree() {
                                             </li>
                                         </ul>
                                         {/* Popup/modal */}
-                                        {showPopup && (
-                                            <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    </div>
+                    </div>
+                <GetInTuch />
+            </section>
+            <Footer />
+            <Switcher />
+                    {showPopup && (
+                                             <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-90">
                                                 <div className="bg-white p-6 rounded-lg relative">
                                                     <button
                                                         className="absolute top-0 end-0 text-red-500 hover:text-red-700 p-2"
@@ -180,15 +193,15 @@ export default function IndexThree() {
                                                     >
                                                         X
                                                     </button>
-                                                    <h2 className="text-xl font-semibold mb-4">Review your trip</h2>
+                                                    <h2 className="text-xl font-semibold mb-4 text-black">Review your trip</h2>
                                                     {/* Add popup content here */}
 
-                                                    <p><strong>Pickup Location: Pune</strong></p>
-                                                    <p><strong>Dropoff Location: Pune</strong> </p>
-                                                    <p><strong>Date: 12-04-2024</strong></p>
-                                                    <p><strong>Total Fare:120 X 10 = 1200</strong></p>
-                                                    <p>Taxes: 100</p>
-                                                    <p>Promo Code</p>
+                                                    <p className="text-black"><strong>Pickup Location: Pune</strong></p>
+                                                    <p className="text-black"><strong>Dropoff Location: Pune</strong> </p>
+                                                    <p className="text-black"><strong>Date: 12-04-2024</strong></p>
+                                                    <p className="text-black"><strong>Total Fare:120 X 10 = 1200</strong></p>
+                                                    <p className="text-black">Taxes: 100</p>
+                                                    <p className="text-black">Promo Code</p>
 
                                                     <button className="block w-full bg-green-500 text-white py-3 rounded hover:bg-green-600">
                                                         <Link href="/payment">Confirm</Link>
@@ -198,24 +211,7 @@ export default function IndexThree() {
                                                 </div>
                                             </div>
                                         )}
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                    <div className="md:flex justify-center text-center mt-6">
-                        <div className="md:w-full">
-                            <Link href="/" className="btn btn-link text-green-600 hover:text-green-600 after:bg-green-600 transition duration-500">View More eVs <FiArrowRight width={18} className="ms-1" /></Link>
-                            {/* Confirm button */}
-                            <button className="btn btn-link text-green-600 hover:text-green-600 after:bg-green-600 transition duration-500">
-                                <Link href="/payment">Confirm</Link></button>
-                        </div>
-                    </div>
-                </div>
-                <GetInTuch />
-            </section>
-            <Footer />
-            <Switcher />
+                
         </>
     )
 }
